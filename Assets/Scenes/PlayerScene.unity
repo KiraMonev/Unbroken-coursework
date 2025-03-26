@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 122039660}
   - component: {fileID: 122039659}
   - component: {fileID: 122039658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6233,6 +6233,9 @@ MonoBehaviour:
   _acceleration: 30
   _deceleration: 60
   _velocityPower: 0.4
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!61 &1863088751
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8242047194464855022}
   - component: {fileID: 7340388113391341969}
   - component: {fileID: 4662615340547155997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enviroment_33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,6 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4476978178503655077}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -117,7 +116,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Radius: 0.8324629

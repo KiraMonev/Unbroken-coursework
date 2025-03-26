@@ -11,7 +11,7 @@ public class SmoothCameraFolow : MonoBehaviour
     private Vector3 _velocity = Vector3.zero;
     private float _currentRotation = 0f;
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (_target == null)
         {
@@ -25,9 +25,26 @@ public class SmoothCameraFolow : MonoBehaviour
 
     private void FollowTarget()
     {
+        // ѕолучаем цель и добавл€ем смещение
         Vector3 targetPosition = _target.position + _offset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _smoothTime);
+
+        // —глаживаем движение камеры, чтобы избежать резких колебаний
+        Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _smoothTime);
+
+        // ≈сли игрок не двигаетс€, то уменьшить смещение камеры
+        if (_target.GetComponent<Rigidbody2D>().velocity.magnitude < 0.1f)
+        {
+            smoothedPosition = Vector3.Lerp(transform.position, smoothedPosition, 0.1f); // ƒополнительное сглаживание, когда игрок не двигаетс€
+        }
+
+        // ѕозиционируем камеру с ограничени€ми на оси X и Y
+        smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, -10f, 10f);  // ѕример ограничений, подстройте по своему
+        smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, -10f, 10f);
+
+        // ѕримен€ем позицию к камере
+        transform.position = smoothedPosition;
     }
+
 
     private void RotateCamera()
     {
