@@ -14,18 +14,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _velocity;
 
+    private Animator _anim;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         Move();
+        UpdateAnimation();
     }
 
     private void Move()
     {
+        if (_velocity.magnitude < 0.01f) // Порог для предотвращения остаточной скорости
+        {
+            _velocity = Vector2.zero; // Полностью сбрасываем скорость
+        }
         // Если есть ввод и путь заблокирован в направлении движения
         if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
         {
@@ -45,6 +53,12 @@ public class PlayerController : MonoBehaviour
         _velocity *= Mathf.Pow(1f - _velocityPower, Time.fixedDeltaTime);
 
         _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
+    }
+
+    private void UpdateAnimation()
+    {
+        float speed = _velocity.magnitude; // Вычисляем текущую скорость
+        _anim.SetFloat("Speed", speed);   // Передаем скорость в аниматор
     }
 
     public void OnMove(InputAction.CallbackContext context)

@@ -10,6 +10,20 @@ public class SmoothCameraFolow : MonoBehaviour
 
     private Vector3 _velocity = Vector3.zero;
     private float _currentRotation = 0f;
+    private GameObject _player; //----------
+
+    private void Start()
+    {
+        _player = GameObject.FindWithTag("Player");
+        if (_player != null)
+        {
+            _target = _player.transform;
+        }
+        else
+        {
+            Debug.LogError("Не найден объект с тегом 'Player' в сцене!");
+        }
+    }
 
     private void FixedUpdate()
     {
