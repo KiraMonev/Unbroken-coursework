@@ -8,6 +8,7 @@
 [Mm]emoryCaptures/
 [Aa]ssets/StreamingAssets/**/*.bin
 [Uu]ser[Ss]ettings/*.dwlt
+[Uu]ser[Ss]ettings/EditorUserSettings.asset
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # [Aa]ssets/AssetStoreTools*
