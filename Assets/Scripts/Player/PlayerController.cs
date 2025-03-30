@@ -74,19 +74,38 @@ public class PlayerController : MonoBehaviour
     // ЛКМ: если оружия нет – подбираем, иначе – атакуем
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        
-        if (context.performed)
-        {           
+        if (context.started)
+        {
             if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
             {
                 _weaponManager.TryPickUpWeapon();
-                Debug.Log("Пробую взять оружие");
+                Debug.Log("Пробуем подобрать оружие");
             }
             else
             {
-                // Иначе атака
-                //_animator.SetTrigger("Attack");
-                Debug.Log("Atack");
+                WeaponType current = _weaponManager.GetCurrentWeaponType();
+                // Если оружие имеет автоматический огонь (Uzi или Rifle), запускаем автострельбу
+                if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+                {
+                    _weaponManager.StartAutoFire();
+                    Debug.Log("Запуск автострельбы");
+                }
+                else
+                {
+                    // Для остальных оружий запускаем одиночный выстрел через анимацию
+                    _animator.SetTrigger("Attack");
+                    Debug.Log("Запуск анимации атаки");
+                }
+            }
+        }
+
+        if (context.canceled)
+        {
+            WeaponType current = _weaponManager.GetCurrentWeaponType();
+            if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+            {
+                _weaponManager.StopAutoFire();
+                Debug.Log("Остановка автострельбы");
             }
         }
     }
