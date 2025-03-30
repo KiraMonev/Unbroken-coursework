@@ -37,12 +37,12 @@ public class PlayerController : MonoBehaviour
     {
         if (_velocity.magnitude < 0.01f) // Порог для предотвращения остаточной скорости
         {
-            _velocity = Vector2.zero; // Полностью сбрасываем скорость
+            _velocity = Vector2.zero;
         }
         // Если есть ввод и путь заблокирован в направлении движения
         if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
         {
-            _velocity = Vector2.zero; // Останавливаем только если путь заблокирован
+            _velocity = Vector2.zero;
             Debug.Log("Wall hit in move direction");
             return;
         }
@@ -88,13 +88,13 @@ public class PlayerController : MonoBehaviour
                 if (current == WeaponType.Uzi || current == WeaponType.Rifle)
                 {
                     _weaponManager.StartAutoFire();
-                    Debug.Log("Запуск автострельбы");
+                    //Debug.Log("Запуск автострельбы");
                 }
                 else
                 {
                     // Для остальных оружий запускаем одиночный выстрел через анимацию
                     _animator.SetTrigger("Attack");
-                    Debug.Log("Запуск анимации атаки");
+                    //Debug.Log("Запуск анимации атаки");
                 }
             }
         }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             if (current == WeaponType.Uzi || current == WeaponType.Rifle)
             {
                 _weaponManager.StopAutoFire();
-                Debug.Log("Остановка автострельбы");
+                //Debug.Log("Остановка автострельбы");
             }
         }
     }

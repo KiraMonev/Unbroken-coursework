@@ -129,7 +129,7 @@ public class WeaponManager : MonoBehaviour
         ChangeWeaponAnimator(_currentWeaponType);
         ActivateFirePoint(_currentWeaponType);
         Destroy(pickup.gameObject);
-        Debug.Log($"Подобрали оружие: {_currentWeaponType}");
+        //Debug.Log($"Подобрали оружие: {_currentWeaponType}");
 
         // Если оружие стрелковое (ammoCapacity > 0), устанавливаем текущий запас патрон
         if (_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
@@ -242,13 +242,12 @@ public class WeaponManager : MonoBehaviour
                     yield break;
                 }
                 _currentAmmo--;
-                Debug.Log($"Осталось патронов: {_currentAmmo}");
+                //Debug.Log($"Осталось патронов: {_currentAmmo}");
             }
 
-            // Можно запустить анимацию атаки для автоогня, если она предусмотрена:
             _animator.SetTrigger("Attack");
 
-            // Вызываем выстрел напрямую (вместо ожидания Animation Event) – чтобы пуля создавалась сразу
+            // Вызываем выстрел напрямую (вместо ожидания Animation Event)
             RangeAttackSingle(data);
 
             // Ждём задержку между выстрелами
@@ -277,7 +276,7 @@ public class WeaponManager : MonoBehaviour
             if (_currentAmmo <= 0)
             {
                 Debug.Log("Нет патронов!");
-                // Здесь можно вызвать звук пустого магазина и т.п.
+                // Здесь можно вызвать звук пустого магазина
                 return;
             }
         }
@@ -294,10 +293,6 @@ public class WeaponManager : MonoBehaviour
             case WeaponType.Pistol:
                 RangeAttackSingle(data);
                 break;
-            //case WeaponType.Uzi:
-            //case WeaponType.Rifle:
-                //RangeAttackSingle(data);
-                //break;
 
             case WeaponType.Shotgun:
                 RangeAttackShotgun(data);
@@ -310,20 +305,75 @@ public class WeaponManager : MonoBehaviour
     }
 
     // ==== Ближний бой ====
-    private void MeleeAttack(WeaponData data)
+    // Временная функция для дебага
+    private void DrawAttackRectangle(Vector2 center, Vector2 size, float angle, Color color, float duration = 0.5f)
     {
-        // Пример: бьём в радиусе вокруг игрока (или можно использовать FirePoint).
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, data.meleeRadius);
-        foreach (Collider2D hit in hits)
+        // Вычисляем половины размеров
+        Vector2 halfSize = size * 0.5f;
+
+        // Локальные координаты углов прямоугольника
+        Vector2 topRight = new Vector2(halfSize.x, halfSize.y);
+        Vector2 topLeft = new Vector2(-halfSize.x, halfSize.y);
+        Vector2 bottomLeft = new Vector2(-halfSize.x, -halfSize.y);
+        Vector2 bottomRight = new Vector2(halfSize.x, -halfSize.y);
+
+        // Преобразуем угол из градусов в радианы
+        float rad = angle * Mathf.Deg2Rad;
+
+        // Функция поворота локальной точки вокруг (0,0)
+        Vector2 Rotate(Vector2 v)
         {
-            // Здесь проверяем, попали ли во врага
-            // hit.CompareTag("Enemy") - если враги помечены тегом "Enemy"
-            Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона.");
+            return new Vector2(
+                v.x * Mathf.Cos(rad) - v.y * Mathf.Sin(rad),
+                v.x * Mathf.Sin(rad) + v.y * Mathf.Cos(rad)
+            );
         }
-        // Здесь можно вызвать звук удара или эффект
+
+        // Вычисляем мировые координаты углов, поворачивая их и прибавляя центр
+        topRight = Rotate(topRight) + center;
+        topLeft = Rotate(topLeft) + center;
+        bottomLeft = Rotate(bottomLeft) + center;
+        bottomRight = Rotate(bottomRight) + center;
+
+        // Отрисовываем линии между углами
+        Debug.DrawLine(topRight, topLeft, color, duration);
+        Debug.DrawLine(topLeft, bottomLeft, color, duration);
+        Debug.DrawLine(bottomLeft, bottomRight, color, duration);
+        Debug.DrawLine(bottomRight, topRight, color, duration);
     }
 
-    // ==== Одиночный выстрел (Pistol, Uzi, Rifle) ====
+    private void MeleeAttack(WeaponData data)
+    {
+        // Определяем направление атаки (вперёд от игрока)
+        Vector2 attackDirection = transform.right;
+        // Задаём смещение центра атаки: немного спереди от игрока
+        float offsetDistance = data.meleeRadius * 1f;
+        Vector2 attackCenter = (Vector2)transform.position + attackDirection * offsetDistance;
+
+        // Определяем размеры прямоугольной области атаки
+        Vector2 boxSize = new Vector2(data.meleeRadius, data.meleeRadius * 1f);
+
+        // Рассчитываем угол поворота области (в градусах)
+        float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
+        // Отрисовываем прямоугольник для отладки
+        DrawAttackRectangle(attackCenter, boxSize, angle, Color.green, 0.5f);
+
+        // Получаем все коллайдеры, попадающие в прямоугольную область
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackCenter, boxSize, angle);
+
+        foreach (Collider2D hit in hits)
+        {
+
+            Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона.");
+                // Здесь можно вызвать метод TakeDamage
+                // hit.GetComponent<Enemy>()?.TakeDamage(data.damage);
+
+        }
+        // добавить звук удара
+    }
+
+
+    // ==== Одиночный выстрел (Pistol) ====
     private void RangeAttackSingle(WeaponData data)
     {
         _currentAmmo--;
@@ -334,7 +384,7 @@ public class WeaponManager : MonoBehaviour
             Bullet bullet = proj.GetComponent<Bullet>();
             if (bullet != null)
             {
-                bullet.SetParameters(data.damage, data.projectileSpeed);
+                bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
             }
             Debug.Log($"Выстрел из {_currentWeaponType}, урон: {data.damage}");
         }
@@ -356,15 +406,30 @@ public class WeaponManager : MonoBehaviour
             float startAngle = -spread / 2f;
             float step = (count > 1) ? spread / (count - 1) : 0;
 
+            // Базовое направление выстрела (от fire point)
+            Vector2 attackDir = fp.transform.right;
+            // Перпендикулярное направление (в плоскости XY)
+            Vector2 perpendicular = new Vector2(-attackDir.y, attackDir.x);
+
+            // Коэффициент смещения (подберите экспериментально)
+            float offsetFactor = 0.1f;
+
             for (int i = 0; i < count; i++)
             {
                 float angleOffset = startAngle + step * i;
                 Quaternion rotation = fp.transform.rotation * Quaternion.Euler(0, 0, angleOffset);
-                GameObject proj = Instantiate(data.projectilePrefab, fp.transform.position, rotation);
+
+                // Вычисляем смещение для этой пули:
+                // Вычисляем смещение так, чтобы пули равномерно расходились по перпендикулярной оси.
+                float indexOffset = ((float)i - (count - 1) / 2f) * offsetFactor;
+                Vector2 spawnPos = (Vector2)fp.transform.position + perpendicular * indexOffset;
+
+
+                GameObject proj = Instantiate(data.projectilePrefab, spawnPos, rotation);
                 Bullet bullet = proj.GetComponent<Bullet>();
                 if (bullet != null)
                 {
-                    bullet.SetParameters(data.damage, data.projectileSpeed);
+                    bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
                 }
             }
             Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}");
@@ -374,4 +439,5 @@ public class WeaponManager : MonoBehaviour
             Debug.LogError($"Fire point или префаб снаряда не назначен для {_currentWeaponType}");
         }
     }
+
 }

@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: NewWeaponDataKatana
   m_EditorClassIdentifier: 
   weaponType: 2
-  damage: 5
+  damage: 20
   attackSpeed: 0
   attackDelay: 0
   ammoCapacity: 0
-  meleeRadius: 1
+  meleeRadius: 0.5
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileCount: 1
   spreadAngle: 0
+  bulletScale: {x: 0, y: 0, z: 0}
+  bulletColor: {r: 0, g: 0, b: 0, a: 0}

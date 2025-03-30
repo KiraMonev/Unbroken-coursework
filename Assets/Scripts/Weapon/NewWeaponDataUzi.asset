@@ -16,9 +16,11 @@ MonoBehaviour:
   damage: 5
   attackSpeed: 0
   attackDelay: 0.1
-  ammoCapacity: 30
+  ammoCapacity: 50
   meleeRadius: 0
-  projectilePrefab: {fileID: 2153161418542527170, guid: b25180dddefb7f247a198f9338b017d2, type: 3}
-  projectileSpeed: 8
+  projectilePrefab: {fileID: 2153161418542527170, guid: e3ebdb2c1d73e49498bd675591606ec9, type: 3}
+  projectileSpeed: 10
   projectileCount: 1
   spreadAngle: 0
+  bulletScale: {x: 0.05, y: 0.05, z: 0.05}
+  bulletColor: {r: 0.23127867, g: 0.8301887, b: 0, a: 1}

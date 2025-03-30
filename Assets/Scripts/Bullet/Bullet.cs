@@ -5,17 +5,22 @@ public class Bullet : MonoBehaviour
     private float _damage;
     private float _speed;
     private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Метод для установки параметров снаряда (урон, скорость)
-    public void SetParameters(float damage, float speed)
+    // Метод для установки параметров пули (урон, скорость, а также можно добавить цвет и масштаб)
+    public void SetParameters(float damage, float speed, Vector3 scale, Color color)
     {
         _damage = damage;
         _speed = speed;
+        transform.localScale = scale;
+        if (_spriteRenderer != null)
+            _spriteRenderer.color = color;
     }
 
     private void Start()
@@ -26,11 +31,22 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Enemy"))
+    //    {
+    //        Debug.Log($"Снаряд попал в {collision.name}. Урон: {_damage}");
+    //        collision.GetComponent<Enemy>()?.TakeDamage(_damage);
+    //        Destroy(gameObject); // Уничтожение пули
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Здесь можно проверить тег врага и нанести урон
-        Debug.Log($"Снаряд попал в {collision.name}. Урон: {_damage}");
-        // Уничтожаем снаряд при столкновении
-        Destroy(gameObject);
+        if (!collision.gameObject.CompareTag("Bullet") && !collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            Debug.Log($"Пуля уничтожена при столкновении с {collision.gameObject.name}");
+        }
     }
 }

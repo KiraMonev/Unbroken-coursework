@@ -19,4 +19,9 @@ public class WeaponData : ScriptableObject
     public float projectileSpeed;       // Скорость снаряда
     public int projectileCount = 1;     // Количество снарядов (дробовик = 3+)
     public float spreadAngle;           // Угол разброса для дробовика (в градусах)
+
+    [Header("Параметры пули")]
+    public Vector3 bulletScale; // размер пули (например, (1,1,1))
+    public Color bulletColor;
+
 }
