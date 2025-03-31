@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4819601031981766935}
   - component: {fileID: 4294318072835287438}
   - component: {fileID: 2637666896510839860}
+  - component: {fileID: 1844395281738160549}
   m_Layer: 0
   m_Name: PlayerWithUzi
   m_TagString: Player
@@ -293,3 +294,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1844395281738160549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848268819529807099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ddd066068bdfc4cb5e76925b5a86cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickupRadius: 1
+  _throwForce: 10
+  _playerPrefabs:
+  - type: 0
+    prefab: {fileID: 0}
+  - type: 1
+    prefab: {fileID: 5811951263421585260, guid: 33c25a2895f8ffb478b92c1c50d019b7, type: 3}
+  - type: 3
+    prefab: {fileID: 2541580689382112827, guid: 3f3c145b81f5f614fbc8f66fbc128ef9, type: 3}
+  - type: 2
+    prefab: {fileID: 2182635367070413570, guid: db1559ecb0744da4c8a96fbcecdc4b1f, type: 3}
+  - type: 4
+    prefab: {fileID: 1955653033643960971, guid: c40d934cad44e9f46bfc1653df0eb4fc, type: 3}
+  - type: 6
+    prefab: {fileID: 8380526028218928638, guid: 98b795cde7ea82f46a4eceb1e6b2fe1d, type: 3}
+  - type: 7
+    prefab: {fileID: 8631519239870723613, guid: 0c827c069966bfe43ad2269da365b870, type: 3}
+  - type: 5
+    prefab: {fileID: 1848268819529807099}
+  _playerController: {fileID: 8301474488034487811}
