@@ -47,9 +47,11 @@ public class WeaponManager : MonoBehaviour
     private Dictionary<WeaponType, WeaponData> _weaponDataDict;
     private Dictionary<WeaponType, GameObject> _weaponFirePointDict;
 
+    // Словарь для хранения текущего запаса патронов для каждого оружия.
+    private Dictionary<WeaponType, int> _ammoDict = new Dictionary<WeaponType, int>();
+
     private WeaponType _currentWeaponType = WeaponType.NoWeapon;
-    // Текущее количество патрон для оружия, если оно стрелковое (ammoCapacity > 0)
-    private int _currentAmmo = 0;
+
     private Coroutine _autoFireCoroutine;
 
     private PlayerController _playerController;
@@ -105,6 +107,22 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    // Свойство для доступа к текущему запасу патронов оружия
+    private int CurrentAmmo
+    {
+        get
+        {
+            if (_ammoDict.ContainsKey(_currentWeaponType))
+                return _ammoDict[_currentWeaponType];
+            return 0;
+        }
+        set
+        {
+            if (_ammoDict.ContainsKey(_currentWeaponType))
+                _ammoDict[_currentWeaponType] = value;
+        }
+    }
+
     // Попытка подобрать оружие (вызывается из PlayerController при ЛКМ, если нет оружия)
     public void TryPickUpWeapon()
     {
@@ -136,8 +154,12 @@ public class WeaponManager : MonoBehaviour
         {
             if (data.ammoCapacity > 0)
             {
-                _currentAmmo = data.ammoCapacity;
-                Debug.Log($"Установлено патронов: {_currentAmmo}");
+                if (!_ammoDict.ContainsKey(_currentWeaponType))
+                {
+                    // При первом подборе устанавливаем максимальное количество патронов.
+                    _ammoDict[_currentWeaponType] = data.ammoCapacity;
+                }
+                Debug.Log($"Текущий запас патронов: {_ammoDict[_currentWeaponType]}");
             }
         }
     }
@@ -226,31 +248,13 @@ public class WeaponManager : MonoBehaviour
     private IEnumerator AutoFireCoroutine()
     {
         if (!_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
-        {
             yield break;
-        }
 
         while (true)
         {
-            // Если оружие стрелковое, проверяем наличие патронов
-            if (data.ammoCapacity > 0)
-            {
-                if (_currentAmmo <= 0)
-                {
-                    Debug.Log("Нет патронов для автострельбы!");
-                    // Можно вызвать звук пустого магазина или перезарядку
-                    yield break;
-                }
-                _currentAmmo--;
-                //Debug.Log($"Осталось патронов: {_currentAmmo}");
-            }
-
+            // Здесь вместо двойного списания патронов – всё делается в методе Attack().
             _animator.SetTrigger("Attack");
-
-            // Вызываем выстрел напрямую (вместо ожидания Animation Event)
-            RangeAttackSingle(data);
-
-            // Ждём задержку между выстрелами
+            Attack();
             yield return new WaitForSeconds(data.attackDelay);
         }
     }
@@ -273,12 +277,15 @@ public class WeaponManager : MonoBehaviour
         // Для стрелкового оружия сначала проверяем наличие патронов
         if (data.ammoCapacity > 0)
         {
-            if (_currentAmmo <= 0)
+            int ammoCost = (_currentWeaponType == WeaponType.Shotgun) ? data.projectileCount : 1;
+            if (CurrentAmmo < ammoCost)
             {
                 Debug.Log("Нет патронов!");
-                // Здесь можно вызвать звук пустого магазина
+                // Можно добавить звук пустого магазина.
                 return;
             }
+            CurrentAmmo -= ammoCost;
+            //Debug.Log($"Выстрел из {_currentWeaponType}. Осталось патронов: {CurrentAmmo}");
         }
 
         // Выбор логики атаки
@@ -291,6 +298,11 @@ public class WeaponManager : MonoBehaviour
                 break;
 
             case WeaponType.Pistol:
+                RangeAttackSingle(data);
+                break;
+
+            case WeaponType.Uzi:
+            case WeaponType.Rifle:
                 RangeAttackSingle(data);
                 break;
 
@@ -376,7 +388,6 @@ public class WeaponManager : MonoBehaviour
     // ==== Одиночный выстрел (Pistol) ====
     private void RangeAttackSingle(WeaponData data)
     {
-        _currentAmmo--;
 
         if (_weaponFirePointDict.TryGetValue(_currentWeaponType, out GameObject fp) && data.projectilePrefab != null)
         {
@@ -386,7 +397,7 @@ public class WeaponManager : MonoBehaviour
             {
                 bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
             }
-            Debug.Log($"Выстрел из {_currentWeaponType}, урон: {data.damage}");
+            Debug.Log($"Выстрел из {_currentWeaponType}, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
         }
         else
         {
@@ -397,7 +408,6 @@ public class WeaponManager : MonoBehaviour
     // ==== Выстрел дробовика (несколько снарядов с разбросом) ====
     private void RangeAttackShotgun(WeaponData data)
     {
-        _currentAmmo -= data.projectileCount;
 
         if (_weaponFirePointDict.TryGetValue(_currentWeaponType, out GameObject fp) && data.projectilePrefab != null)
         {
@@ -432,11 +442,26 @@ public class WeaponManager : MonoBehaviour
                     bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
                 }
             }
-            Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}");
+            Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
         }
         else
         {
             Debug.LogError($"Fire point или префаб снаряда не назначен для {_currentWeaponType}");
+        }
+    }
+
+    // Метод, вызываемый при подборе боеприпасов (AmmoPickup).
+    public void RefillAmmo()
+    {
+        if (_currentWeaponType == WeaponType.NoWeapon)
+            return;
+        if (_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
+        {
+            if (data.ammoCapacity > 0)
+            {
+                _ammoDict[_currentWeaponType] = data.ammoCapacity;
+                Debug.Log($"Боеприпасы для {_currentWeaponType} пополнены до {data.ammoCapacity}");
+            }
         }
     }
 
