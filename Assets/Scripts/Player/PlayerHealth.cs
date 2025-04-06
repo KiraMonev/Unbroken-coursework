@@ -37,4 +37,9 @@ public class PlayerHealth : MonoBehaviour
                 hearts[i].enabled = false;
         }
     }
+
+    public void IncreaseHealth(int healthAmount)
+    {
+        Health += 1;
+    }
 }
