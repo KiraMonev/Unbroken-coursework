@@ -56,12 +56,12 @@ public class WeaponManager : MonoBehaviour
 
     private PlayerController _playerController;
     private Animator _animator;
-
+    private PlayerHealth _playerHealth;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
-
+        _playerHealth = GetComponent<PlayerHealth>();
         InitializeWeaponDictionary();
         InitializeWeaponAnimatorDictionary();
         InitializeWeaponDataDictionary();
@@ -252,7 +252,11 @@ public class WeaponManager : MonoBehaviour
 
         while (true)
         {
-            // «десь вместо двойного списани€ патронов Ц всЄ делаетс€ в методе Attack().
+            if (_playerHealth.isDead)
+            {
+                StopAutoFire();
+                yield break;
+            }
             _animator.SetTrigger("Attack");
             Attack();
             yield return new WaitForSeconds(data.attackDelay);

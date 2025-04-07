@@ -3,9 +3,15 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     [SerializeField] private Camera _mainCamera;
+    private PlayerHealth _playerHealth;
 
+    private void Awake()
+    {
+        _playerHealth = GetComponent<PlayerHealth>();
+    } 
     private void Update()
     {
+        if (_playerHealth.isDead) return;
         RotateTowardMouse();
     }
 
