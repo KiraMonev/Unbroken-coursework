@@ -7333,6 +7333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 7954682188896285012, guid: 872a0b234be7cb44e82aea02541bc321, type: 3}
+      propertyPath: _weaponType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8111203429889800965, guid: 872a0b234be7cb44e82aea02541bc321, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.74
