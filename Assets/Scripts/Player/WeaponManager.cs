@@ -135,6 +135,7 @@ public class WeaponManager : MonoBehaviour
                 if (_currentWeaponType == WeaponType.NoWeapon)
                 {
                     PickUpWeapon(pickup);
+                    AchievementManager.instance.Unlock("Example");
                 }
                 return;
             }
