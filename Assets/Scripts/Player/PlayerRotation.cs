@@ -4,9 +4,17 @@ public class PlayerRotation : MonoBehaviour
 {
     [SerializeField] private Camera _mainCamera;
 
+    private PauseMenu _pauseMenu;
+
+    private void Awake()
+    {
+        _pauseMenu = FindObjectOfType<PauseMenu>();
+    }
+
     private void Update()
     {
-        RotateTowardMouse();
+        if (!_pauseMenu.isPaused)
+            RotateTowardMouse();
     }
 
     private void RotateTowardMouse()
