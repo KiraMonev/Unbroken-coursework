@@ -11,7 +11,7 @@ public class AchievenmentListIngame : MonoBehaviour
     [HideInInspector] public Text CompleteText;
     [HideInInspector] public Scrollbar Scrollbar;
 
-    private bool MenuOpen = false;
+    public bool MenuOpen = false;
     public KeyCode OpenMenuKey; 
     private void AddAchievements(string Filter)
     {  
