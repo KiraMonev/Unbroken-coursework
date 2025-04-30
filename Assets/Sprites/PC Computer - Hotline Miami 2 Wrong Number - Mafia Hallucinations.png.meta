@@ -1,0 +1,3189 @@
+fileFormatVersion: 2
+guid: efd7d84a7b2a2ef4ab7553b2df1e06e7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 305
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 045fae3d4fbe19648a6c3d21f231d195
+      internalID: -1873680845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 304
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db2954d30b5cde1498d97f59fd0d2066
+      internalID: -1357573581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 304
+        width: 66
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fd27172b8b6c98459c7a057e752a507
+      internalID: -1636209124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_3
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 300
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a230bc4535644a54681ebc43c2000235
+      internalID: 1223046611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_4
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 299
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9580d90e6bb1dd8478a352b231297517
+      internalID: 1832958659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_5
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 268
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b8aef61e9aabe044b28fbdc5f879878
+      internalID: 1384658516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_6
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 300
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e7a28e6cc3b0dd43b0ad082c91106f4
+      internalID: 966965215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_7
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 300
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2ec0b21b1ca0f5489bb61ab869c0201
+      internalID: 164811880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_8
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 301
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f1ddad955513514392708e81a68d779
+      internalID: -948350153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_9
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 301
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a1b0c193d76b15479b15767604e730e
+      internalID: 89746929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_10
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 301
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7729dbc32e87db3408dfbd1841d34087
+      internalID: -657062459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_11
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 301
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 870dc4efa2a6c154eb3e779d4e93a1cf
+      internalID: -865910976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 272
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82bf9da478f3eb24dbc581e57bd5ddc0
+      internalID: -1623134255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_13
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 270
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 905317ede5f862f459d345abd151fc16
+      internalID: 1235225199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_14
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 271
+        width: 66
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208e2e90dca2fe94b9d376a5291355c2
+      internalID: 1479966370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_15
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 268
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c50bd49db2e291c4984fcf33d52e5db6
+      internalID: 876688631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_16
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 268
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89852fafa071f7e43b6065c824c0a75a
+      internalID: 1526925479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_17
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 267
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f9de2777a69ff44ca53f3981a811054
+      internalID: -2009966387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_18
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 267
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51f220dc792a0cf49b9e22ce606e95b8
+      internalID: -329829363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_19
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 266
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb7109350d1244418b7ac0dcb96ea8a
+      internalID: 1142940388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_20
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 266
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d96ad9a4d68ffc4385343082b72010c
+      internalID: 192352915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_21
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 266
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9083dd0bfc3b5b4d84f5507ee480fa0
+      internalID: 1561581056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_22
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 266
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7216ffa2b55eea409c61071bfa5f9bb
+      internalID: 1385492766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_23
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 266
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b43f7921946323446881ac90f5becb43
+      internalID: -550960265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_24
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 266
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea729a3abc777894c9e1b23a279d5b10
+      internalID: 711356627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_25
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 238
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 223c5821808138347a0fa9aba009c335
+      internalID: 22629187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_26
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 237
+        width: 66
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 880d9eebc98420b4c8d1f785e49b8300
+      internalID: 109735942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_27
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 234
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 287684230c8b97e43828c4374e8d8900
+      internalID: -911838279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_28
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 241
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e9f6e3bc116d0a4cae63a43f7d5dffb
+      internalID: -335115977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_29
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 235
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9403f19a2991df0458a9d449ca032234
+      internalID: -2132872246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_30
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 233
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2da866e67ed2b094fb9c1d34998940bc
+      internalID: -810712249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_31
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 233
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa00940ee951937498fc8a33b68baaff
+      internalID: 29322235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_32
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 233
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c69e9cdb67f71a4fb1b5a2c78a511b8
+      internalID: -1992840380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_33
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 234
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 219dd89d9e24f834a95aeaac7af3d004
+      internalID: -376389058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_34
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 247
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef89ab9a02f2d094f85be0e27c130f0b
+      internalID: -1332730422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_35
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 247
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d10e1794109653d42a531175e0ccdbde
+      internalID: 332141052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_36
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 247
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57b66573d1ba3c447bba09cf97ed25c1
+      internalID: 108190134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_37
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 240
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea12bf4f427b6734a9dec2e81fc9d2fe
+      internalID: 143767393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_38
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 240
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f0062b327ac0dd48aa8428c7821a378
+      internalID: -1543664974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_39
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 240
+        width: 9
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfad1366cc22aaa48b7886d799fe7a65
+      internalID: -1648005702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_40
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 206
+        width: 56
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d8a9e367defd224ea8872332d965046
+      internalID: -1345072590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_41
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 205
+        width: 66
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9d02dd8df7a1149a258bf044ef0be8
+      internalID: -1395574061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_42
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 201
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b9ffd27c261d1a46926a3b3ef3c5bd3
+      internalID: -415499535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_43
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 214
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fa80c8c9732a144877bfb937143f07
+      internalID: -817478572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_44
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 202
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 849c2d7cbd8f36644acb60b8826d6be2
+      internalID: 807118079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_45
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 200
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381bd4a9a14b4c041a1e3e137fba91d3
+      internalID: 106860079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_46
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 214
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98aec7f06efc5a64ca1f7614b61c7fcd
+      internalID: -1409354892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_47
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 215
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b4b4957462023d42a9c55ff31333c20
+      internalID: 1201632680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_48
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 215
+        width: 9
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29e9dde99c9647f4492432e362aafeec
+      internalID: 1440966033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_49
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 215
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ecdb1d8e4e30645b9f257c36388994
+      internalID: 755468160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_50
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 215
+        width: 9
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4c4bb76df455de479806329c2022310
+      internalID: -1665526024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_51
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 215
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b17a9d0d725fded4d87f7aa9a0078d95
+      internalID: -1784024421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_52
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 215
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 948742df737f07046ab0f06bf752803e
+      internalID: -1139853069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_53
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 206
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fc37506e765d494f9b5a7ab12bf2206
+      internalID: 580580958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_54
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 206
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78f40d4194578ee44bbc4e042da70200
+      internalID: -365837804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_55
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 206
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 625fd5e102d6289488dc5c2a548850e5
+      internalID: -119602781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_56
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 207
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 453a60776331a2f4c91e2181674470eb
+      internalID: -479524824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_57
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 206
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e69bf7bbe74ef2a458553a7617bfaaad
+      internalID: -1146690280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_58
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 206
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8318aed8f71105c4ea4f231ddb564a53
+      internalID: 1934638700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_59
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 207
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 895990b20b9b8f94b8be430d3ab49345
+      internalID: -1169406556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_60
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 173
+        width: 56
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc414e69c32dabc4daf14ff4e70ba59d
+      internalID: -75246569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_61
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 172
+        width: 66
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37ae601254154d64082d7070ad183d0f
+      internalID: 1338055608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_62
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 184
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb611f31ef7560347a077da01199f20c
+      internalID: -656489497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_63
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 169
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e5277080f0868e4eaee274ececa5c09
+      internalID: 1074323323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_64
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 167
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47cebe02263bfa140b2a485fc9e0275c
+      internalID: -1815476486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_65
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 181
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd6c85994829a7441a6d30ce1483452b
+      internalID: -475322493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_66
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 168
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 435ff21c73d23ec40914644592fc63e3
+      internalID: -439358830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_67
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 168
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8328e96da03e8104ea4b4edf0a58fcaa
+      internalID: 618326932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_68
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 168
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eef1de81783bb64d96831735c8e79fd
+      internalID: 90550579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_69
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 168
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c043ad9b14a4724bb8d516fd88e6b42
+      internalID: 1812603737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_70
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 168
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 962ccf77446fd794aaa7fc12d61c3454
+      internalID: 296661478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_71
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 168
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a280d1b6abbaa4243bf9ec2bf5718672
+      internalID: -1689521072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_72
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 173
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47b98f464a1c8384ea313422359640b7
+      internalID: -1825271995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_73
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 174
+        width: 9
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2377502e7c335cb43ba74b9b88f64870
+      internalID: 1363890586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_74
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 140
+        width: 56
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664f45e91f697bb4892856757efb5a44
+      internalID: 2011658408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_75
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 159
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1ec497913d9c614687f3da3a7e41a5a
+      internalID: 565936887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_76
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 135
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c07c6e072f375e40a4a4d6354f21ffc
+      internalID: -1405985415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_77
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 139
+        width: 66
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f07fd5116fc76d0438d136ac39de68c8
+      internalID: 1224431897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_78
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 144
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a3213748a0c3604dac62aee0a293ce2
+      internalID: 875005148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_79
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 150
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22301657721f4604ea1c120659fb37cf
+      internalID: 1810345726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_80
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 136
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5de7f09093178ef4982034378c65ce0a
+      internalID: 586445189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_81
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 134
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9d91611621457b4eb7a551d9196adc4
+      internalID: 36087130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_82
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 148
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 821093718e47e9d44a784d0af0b802d1
+      internalID: -1769951237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_83
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 135
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ded599969a92d24ba630708a3f9e293
+      internalID: -590326454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_84
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 135
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8403c93f3f0fb274cbeb7c8fac63a1bd
+      internalID: -174373875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_85
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 135
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab9e26781372e474c82a7deeb838919e
+      internalID: -1672200348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_86
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 135
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1476845f9b7a74e8ac80a7e5371c65
+      internalID: 1335741252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_87
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 135
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f59a4efa31e5946ad5d35f01289a83
+      internalID: 995066083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_88
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 139
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5588ff81ba90d2046b32c05b88e2fd58
+      internalID: -22380996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_89
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 134
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b16618e445b9bd40bef937830fd7948
+      internalID: -1034010605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_90
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 141
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41573eea22215a84fb16d28a1401e23c
+      internalID: -1647427876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_91
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 107
+        width: 56
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931f15d2fef5c4344b2cef3dab65cd9f
+      internalID: 1840839300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_92
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 106
+        width: 66
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1211e379c69db408ffce21611cfc91
+      internalID: 1622406610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_93
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 120
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07eac8bab2ae6e6428783ebb5f3e0da0
+      internalID: 1426281292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_94
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 109
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e18aa40d673ab4b4a8baeaac621231be
+      internalID: -1363355820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_95
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 103
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55aa060259066b74286e878e1532fee9
+      internalID: 148945455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_96
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 101
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 325c7b5c9f451024f8922279f272419c
+      internalID: 1940542650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_97
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 102
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25104222eddaf104e9f86e2089657da3
+      internalID: 1806916906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_98
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 102
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c60e5401248b14da2bbd828aa08fe5
+      internalID: 1907965893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_99
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 102
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2db54b7b08a207640b0f7394083f5a9d
+      internalID: 502042346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_100
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 102
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313d967fdc410334dbd8147b22d68bf2
+      internalID: 1189455649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_101
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 102
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e35c604abeb19444db8bed1eff643c67
+      internalID: -156226629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_102
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 105
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d08c4c527e808e459ebade68f89feb9
+      internalID: 1297530839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_103
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 104
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab80b5de6f9dfd14fab7b67066365ff4
+      internalID: -1464373063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_104
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 115
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a386f443b5804840964cbb331caa139
+      internalID: -1216816472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_105
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 108
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 245fa40f0ff7d2c488272c1a6ead56bb
+      internalID: -1815887676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_106
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 74
+        width: 56
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bccb7aaa40f934742aa1b6deb122315e
+      internalID: -1896536046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_107
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 73
+        width: 66
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff83d8af5df08b04db27a70ca02fe198
+      internalID: 775780413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_108
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 59
+        width: 12
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c3329fc36c577748b8290c15e8bd9f1
+      internalID: 200169023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_109
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 84
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c216d57a9418cf458909f82a1e34b18
+      internalID: 340422708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_110
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 70
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83b8700452dc55048bc785b3a1cec440
+      internalID: 677754103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_111
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 68
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ca1c8a43b98e44fbbe8ebfe2162f26
+      internalID: -1317534376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_112
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 69
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c78a7810f501c84a986d97534ac6847
+      internalID: -2031652715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_113
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 69
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7bcd5c58863544418e40559dacb188f
+      internalID: -653475445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_114
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 69
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff90321a8b627274abe0e6b417d0b571
+      internalID: 381955584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_115
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 68
+        width: 18
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0fd24d7553fbde46b380ed1a298e23a
+      internalID: 70588247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_116
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 88
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16f703a5b174bb04296d93df1e3c963c
+      internalID: 1752079005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_117
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 75
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b4527bd1729504fad58874734acb75
+      internalID: -1434565588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_118
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 59
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b731febeeae1442a63b44e0dc24d32
+      internalID: -1584023884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_119
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 67
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 113e882097c8f4b4789004001c0f486c
+      internalID: 961217910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_120
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 72
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 824882784eb748840ab182bd161b432b
+      internalID: 727646925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_121
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 41
+        width: 56
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a90f648d958e027489feaab166e774ba
+      internalID: 184871885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_122
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 36
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 274189c45a746dd41bbabfaa29c9f790
+      internalID: -488081672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_123
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 36
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f559c2e1fcd59d6429b66a092d8e0aaa
+      internalID: 538539188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_124
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 35
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ae8c20dcad60b24e970f1d933de2771
+      internalID: 1087382596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_125
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 50
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39fd224ec5438744835b9f45b798e6a
+      internalID: 2046023820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_126
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 36
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2f2978f19ef30a43a5611ecee263143
+      internalID: 1158665275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_127
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 36
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f90a5ffb4f18af40adf56a12291a146
+      internalID: 1896080433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_128
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 36
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec95a86d119ba243853ad70da643318
+      internalID: -2011796572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_129
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 38
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ea4c6a28a3c8d34bb1d353c4e7f9c2a
+      internalID: 1483604370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_130
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 52
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63229ef1c6e4a3d43a08de5d1c6ee7c3
+      internalID: -1957679308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_131
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 33
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d60a562bca5be4e47b8ca797abb4b1ba
+      internalID: 858974180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_132
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 34
+        width: 30
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f31488aac1668b4c8cb2e32ec0347a8
+      internalID: 1864321116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_133
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 42
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6cef90c4f6b3241885534c5a575ad2
+      internalID: 474830405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_134
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 34
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b2f263e8ab6bc945a9dd5c63612a91b
+      internalID: 1736951536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_135
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 10
+        width: 30
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e98b0f17ce07df4b9a4dd7009ae169a
+      internalID: 13805357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_136
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 8
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b192c13309ef7a4a8bf17abe8a47fec
+      internalID: -2139913672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_137
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 9
+        width: 31
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 428dd7cd039b4c4428007233cd2d63a5
+      internalID: 1582516162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_0: -1873680845
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_1: -1357573581
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_10: -657062459
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_100: 1189455649
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_101: -156226629
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_102: 1297530839
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_103: -1464373063
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_104: -1216816472
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_105: -1815887676
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_106: -1896536046
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_107: 775780413
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_108: 200169023
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_109: 340422708
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_11: -865910976
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_110: 677754103
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_111: -1317534376
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_112: -2031652715
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_113: -653475445
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_114: 381955584
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_115: 70588247
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_116: 1752079005
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_117: -1434565588
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_118: -1584023884
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_119: 961217910
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_12: -1623134255
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_120: 727646925
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_121: 184871885
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_122: -488081672
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_123: 538539188
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_124: 1087382596
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_125: 2046023820
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_126: 1158665275
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_127: 1896080433
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_128: -2011796572
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_129: 1483604370
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_13: 1235225199
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_130: -1957679308
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_131: 858974180
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_132: 1864321116
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_133: 474830405
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_134: 1736951536
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_135: 13805357
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_136: -2139913672
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_137: 1582516162
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_14: 1479966370
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_15: 876688631
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_16: 1526925479
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_17: -2009966387
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_18: -329829363
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_19: 1142940388
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_2: -1636209124
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_20: 192352915
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_21: 1561581056
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_22: 1385492766
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_23: -550960265
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_24: 711356627
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_25: 22629187
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_26: 109735942
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_27: -911838279
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_28: -335115977
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_29: -2132872246
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_3: 1223046611
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_30: -810712249
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_31: 29322235
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_32: -1992840380
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_33: -376389058
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_34: -1332730422
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_35: 332141052
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_36: 108190134
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_37: 143767393
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_38: -1543664974
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_39: -1648005702
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_4: 1832958659
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_40: -1345072590
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_41: -1395574061
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_42: -415499535
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_43: -817478572
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_44: 807118079
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_45: 106860079
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_46: -1409354892
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_47: 1201632680
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_48: 1440966033
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_49: 755468160
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_5: 1384658516
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_50: -1665526024
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_51: -1784024421
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_52: -1139853069
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_53: 580580958
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_54: -365837804
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_55: -119602781
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_56: -479524824
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_57: -1146690280
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_58: 1934638700
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_59: -1169406556
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_6: 966965215
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_60: -75246569
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_61: 1338055608
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_62: -656489497
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_63: 1074323323
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_64: -1815476486
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_65: -475322493
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_66: -439358830
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_67: 618326932
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_68: 90550579
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_69: 1812603737
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_7: 164811880
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_70: 296661478
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_71: -1689521072
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_72: -1825271995
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_73: 1363890586
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_74: 2011658408
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_75: 565936887
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_76: -1405985415
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_77: 1224431897
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_78: 875005148
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_79: 1810345726
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_8: -948350153
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_80: 586445189
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_81: 36087130
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_82: -1769951237
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_83: -590326454
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_84: -174373875
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_85: -1672200348
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_86: 1335741252
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_87: 995066083
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_88: -22380996
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_89: -1034010605
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_9: 89746929
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_90: -1647427876
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_91: 1840839300
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_92: 1622406610
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_93: 1426281292
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_94: -1363355820
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_95: 148945455
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_96: 1940542650
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_97: 1806916906
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_98: 1907965893
+      PC Computer - Hotline Miami 2 Wrong Number - Mafia Hallucinations_99: 502042346
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
