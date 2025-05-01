@@ -66,5 +66,9 @@ public class PlayerHealth : MonoBehaviour
             //anim.SetTrigger("Die"); наверное не будет
             //deathPanel.SetActive(true); нету
         }
+
+    public void IncreaseHealth(int healthAmount)
+    {
+        Health += 1;
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -57,11 +58,16 @@ public class WeaponManager : MonoBehaviour
     private PlayerController _playerController;
     private Animator _animator;
     private PlayerHealth _playerHealth;
+
+    private UIBulletsAmount _bulletsAmoutUI;
+
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _bulletsAmoutUI = FindObjectOfType<UIBulletsAmount>();
+
         InitializeWeaponDictionary();
         InitializeWeaponAnimatorDictionary();
         InitializeWeaponDataDictionary();
@@ -113,7 +119,11 @@ public class WeaponManager : MonoBehaviour
         get
         {
             if (_ammoDict.ContainsKey(_currentWeaponType))
+            {
+                _bulletsAmoutUI.SetCurrentAmmo(_ammoDict[_currentWeaponType]);
                 return _ammoDict[_currentWeaponType];
+            }
+            _bulletsAmoutUI.SetCurrentAmmo(0);
             return 0;
         }
         set
@@ -135,6 +145,7 @@ public class WeaponManager : MonoBehaviour
                 if (_currentWeaponType == WeaponType.NoWeapon)
                 {
                     PickUpWeapon(pickup);
+                    AchievementManager.instance.Unlock("Example");  // Проверка работы достижений
                 }
                 return;
             }
@@ -166,7 +177,10 @@ public class WeaponManager : MonoBehaviour
                 {
                     // При первом подборе устанавливаем максимальное количество патронов.
                     _ammoDict[_currentWeaponType] = data.ammoCapacity;
+                    _bulletsAmoutUI.SetCurrentAmmo(data.ammoCapacity);
                 }
+                _bulletsAmoutUI.SetTotalAmmo(data.ammoCapacity);
+                _bulletsAmoutUI.SetCurrentAmmo(_ammoDict[_currentWeaponType]);
                 Debug.Log($"Текущий запас патронов: {_ammoDict[_currentWeaponType]}");
             }
         }
@@ -190,6 +204,8 @@ public class WeaponManager : MonoBehaviour
                 pickup.Throw(throwVector.normalized, _throwForce);
                 // Звук броска
                 SoundManager.Instance.PlayPlayer(AudioType.Throw);
+                _bulletsAmoutUI.SetTotalAmmo(0);
+                _bulletsAmoutUI.SetCurrentAmmo(0);
             }
         }
         else
@@ -486,6 +502,7 @@ public class WeaponManager : MonoBehaviour
             if (data.ammoCapacity > 0)
             {
                 _ammoDict[_currentWeaponType] = data.ammoCapacity;
+                _bulletsAmoutUI.SetCurrentAmmo(_ammoDict[_currentWeaponType]);
                 Debug.Log($"Боеприпасы для {_currentWeaponType} пополнены до {data.ammoCapacity}");
             }
         }
