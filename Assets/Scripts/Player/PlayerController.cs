@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private PlayerHealth _playerHealth;
 
+    private PauseMenu _pauseMenu;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _weaponManager = GetComponent<WeaponManager>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     private void FixedUpdate()
@@ -78,32 +80,33 @@ public class PlayerController : MonoBehaviour
     // ЛКМ: если оружия нет – подбираем, иначе – атакуем
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        if (_playerHealth.isDead) return;
-        if (context.started)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
         {
-            if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
+            if (context.started)
             {
-                _weaponManager.TryPickUpWeapon();
-                Debug.Log("Пробуем подобрать оружие");
-            }
-            else
-            {
-                WeaponType current = _weaponManager.GetCurrentWeaponType();
-                // Если оружие имеет автоматический огонь (Uzi или Rifle), запускаем автострельбу
-                if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+                if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
                 {
-                    _weaponManager.StartAutoFire();
-                    //Debug.Log("Запуск автострельбы");
+                    _weaponManager.TryPickUpWeapon();
+                    Debug.Log("Пробуем подобрать оружие");
                 }
                 else
                 {
-                    // Для остальных оружий запускаем одиночный выстрел через анимацию
-                    _animator.SetTrigger("Attack");
-                    //Debug.Log("Запуск анимации атаки");
+                    WeaponType current = _weaponManager.GetCurrentWeaponType();
+                    // Если оружие имеет автоматический огонь (Uzi или Rifle), запускаем автострельбу
+                    if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+                    {
+                        _weaponManager.StartAutoFire();
+                        //Debug.Log("Запуск автострельбы");
+                    }
+                    else
+                    {
+                        // Для остальных оружий запускаем одиночный выстрел через анимацию
+                        _animator.SetTrigger("Attack");
+                        //Debug.Log("Запуск анимации атаки");
+                    }
                 }
             }
         }
-
         if (context.canceled)
         {
             WeaponType current = _weaponManager.GetCurrentWeaponType();
@@ -118,12 +121,14 @@ public class PlayerController : MonoBehaviour
     // ПКМ: сброс оружия (если оно есть)
     public void OnRightMouse(InputAction.CallbackContext context)
     {
-        if (_playerHealth.isDead) return;
-        if (context.performed)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
         {
-            if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
+            if (context.performed)
             {
-                _weaponManager.DropWeapon();
+                if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
+                {
+                    _weaponManager.DropWeapon();
+                }
             }
         }
     }

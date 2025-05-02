@@ -67,4 +67,9 @@ public class PlayerHealth : MonoBehaviour
             //deathPanel.SetActive(true); нету
         }
     }
+
+    public void IncreaseHealth(int healthAmount)
+    {
+        Health += 1;
+    }
 }

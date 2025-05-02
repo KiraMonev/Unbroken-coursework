@@ -4,15 +4,18 @@ public class PlayerRotation : MonoBehaviour
 {
     [SerializeField] private Camera _mainCamera;
     private PlayerHealth _playerHealth;
+    private PauseMenu _pauseMenu;
 
     private void Awake()
     {
         _playerHealth = GetComponent<PlayerHealth>();
-    } 
+        _pauseMenu = FindObjectOfType<PauseMenu>();
+    }
     private void Update()
     {
         if (_playerHealth.isDead) return;
-        RotateTowardMouse();
+        if (!_pauseMenu.isPaused)
+            RotateTowardMouse();
     }
 
     private void RotateTowardMouse()
