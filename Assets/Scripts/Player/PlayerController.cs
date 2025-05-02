@@ -33,36 +33,61 @@ public class PlayerController : MonoBehaviour
         UpdateAnimation();
     }
 
+    // private void Move()
+    // {
+    //     if (_velocity.magnitude < 0.01f) // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //     {
+    //         _velocity = Vector2.zero;
+    //     }
+    //     // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //     if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
+    //     {
+    //         _velocity = Vector2.zero;
+    //         Debug.Log("Wall hit in move direction");
+    //         return;
+    //     }
+
+    //     // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //     Vector2 targetVelocity = _moveInput * _maxSpeed;
+    //     Vector2 velocityDiff = targetVelocity - _velocity;
+    //     float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
+    //     Vector2 movement = velocityDiff * (accelerateRate * Time.fixedDeltaTime);
+
+    //     _velocity += movement;
+    //     _velocity = Vector2.ClampMagnitude(_velocity, _maxSpeed);
+    //     _velocity *= Mathf.Pow(1f - _velocityPower, Time.fixedDeltaTime);
+
+    //     _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
+    // }
+
     private void Move()
     {
-        if (_velocity.magnitude < 0.01f) // Порог для предотвращения остаточной скорости
-        {
-            _velocity = Vector2.zero;
-        }
-        // Если есть ввод и путь заблокирован в направлении движения
-        if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
-        {
-            _velocity = Vector2.zero;
-            Debug.Log("Wall hit in move direction");
-            return;
-        }
-
-        // Расчет целевой скорости
         Vector2 targetVelocity = _moveInput * _maxSpeed;
+
         Vector2 velocityDiff = targetVelocity - _velocity;
-        float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
+        float accelerateRate = (_moveInput.magnitude > 0.01f) ? _acceleration : _deceleration;
         Vector2 movement = velocityDiff * (accelerateRate * Time.fixedDeltaTime);
 
         _velocity += movement;
         _velocity = Vector2.ClampMagnitude(_velocity, _maxSpeed);
         _velocity *= Mathf.Pow(1f - _velocityPower, Time.fixedDeltaTime);
 
-        _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
+        Vector2 proposedPosition = _rigidbody.position + _velocity * Time.fixedDeltaTime;
+
+        if (!IsPathBlocked(proposedPosition))
+        {
+            _rigidbody.MovePosition(proposedPosition);
+        }
+        else
+        {
+            _velocity = Vector2.zero;
+            Debug.Log("Blocked by wall.");
+        }
     }
 
     private void UpdateAnimation()
     {
-        float speed = _velocity.magnitude; // Вычисляем текущую скорость
+        float speed = _velocity.magnitude; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _animator.SetFloat("Speed", speed);
     }
 
@@ -71,7 +96,7 @@ public class PlayerController : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    // ЛКМ: если оружия нет – подбираем, иначе – атакуем
+    // пїЅпїЅпїЅ: пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -79,22 +104,22 @@ public class PlayerController : MonoBehaviour
             if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
             {
                 _weaponManager.TryPickUpWeapon();
-                Debug.Log("Пробуем подобрать оружие");
+                Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
             }
             else
             {
                 WeaponType current = _weaponManager.GetCurrentWeaponType();
-                // Если оружие имеет автоматический огонь (Uzi или Rifle), запускаем автострельбу
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (Uzi пїЅпїЅпїЅ Rifle), пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 if (current == WeaponType.Uzi || current == WeaponType.Rifle)
                 {
                     _weaponManager.StartAutoFire();
-                    //Debug.Log("Запуск автострельбы");
+                    //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                 }
                 else
                 {
-                    // Для остальных оружий запускаем одиночный выстрел через анимацию
+                    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     _animator.SetTrigger("Attack");
-                    //Debug.Log("Запуск анимации атаки");
+                    //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
                 }
             }
         }
@@ -105,12 +130,12 @@ public class PlayerController : MonoBehaviour
             if (current == WeaponType.Uzi || current == WeaponType.Rifle)
             {
                 _weaponManager.StopAutoFire();
-                //Debug.Log("Остановка автострельбы");
+                //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
             }
         }
     }
 
-    // ПКМ: сброс оружия (если оно есть)
+    // пїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)
     public void OnRightMouse(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -127,10 +152,23 @@ public class PlayerController : MonoBehaviour
         return _moveInput;
     }
 
-    private bool IsPathBlocked(Vector2 direction)
+    // private bool IsPathBlocked(Vector2 direction)
+    // {
+    //     RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
+    //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    //     return hit.collider != null;
+    // }
+
+    private bool IsPathBlocked(Vector2 targetPosition)
     {
-        RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
-        // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // Визуализация луча
+        Collider2D collider = GetComponent<BoxCollider2D>();
+        if (collider == null) return false;
+
+        Vector2 offset = targetPosition - _rigidbody.position;
+
+        RaycastHit2D hit = Physics2D.BoxCast(_rigidbody.position, collider.bounds.size, 0f, offset.normalized, offset.magnitude, _wallLayer);
+
         return hit.collider != null;
     }
+
 }

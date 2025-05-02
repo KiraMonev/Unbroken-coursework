@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 31446390}
   - component: {fileID: 31446391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (95)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41725286}
   - component: {fileID: 41725287}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (56)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56914689}
   - component: {fileID: 56914690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (66)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80383039}
   - component: {fileID: 80383040}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103506531}
   - component: {fileID: 103506530}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 110568306}
   - component: {fileID: 110568307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1130,7 +1130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113703547}
   - component: {fileID: 113703548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (75)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1214,7 +1214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 129186877}
   - component: {fileID: 129186878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (100)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1382,7 +1382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144083391}
   - component: {fileID: 144083392}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (59)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1577,7 +1577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179867160}
   - component: {fileID: 179867161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1745,7 +1745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202855935}
   - component: {fileID: 202855936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (60)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1829,7 +1829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 207793074}
   - component: {fileID: 207793075}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (44)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2092,7 +2092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 216420231}
   - component: {fileID: 216420232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (86)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2414,7 +2414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 285928822}
   - component: {fileID: 285928823}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (36)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2582,7 +2582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 289727852}
   - component: {fileID: 289727853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (81)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2750,7 +2750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 303405017}
   - component: {fileID: 303405018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (68)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2834,7 +2834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306136764}
   - component: {fileID: 306136765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (70)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2918,7 +2918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 308125595}
   - component: {fileID: 308125596}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (103)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3146,7 +3146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 339549183}
   - component: {fileID: 339549184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (108)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3230,7 +3230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343296580}
   - component: {fileID: 343296581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (113)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3468,7 +3468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361054720}
   - component: {fileID: 361054719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3551,7 +3551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 362420240}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: FirePoint_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -3905,7 +3905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 396170687}
   - component: {fileID: 396170686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3988,7 +3988,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405999779}
-  m_Layer: 0
+  - component: {fileID: 405999780}
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4144,6 +4145,51 @@ Transform:
   - {fileID: 1266156549}
   m_Father: {fileID: 150565334}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &405999780
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405999778}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &408424140
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,7 +4200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 408424141}
   - component: {fileID: 408424142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (126)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4238,7 +4284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 416645584}
   - component: {fileID: 416645585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (82)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4322,7 +4368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420070643}
   - component: {fileID: 420070644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (51)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4476,7 +4522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 462853888}
   - component: {fileID: 462853889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (49)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4560,7 +4606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463904462}
   - component: {fileID: 463904463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (73)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4644,7 +4690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 467406695}
   - component: {fileID: 467406696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (48)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4798,7 +4844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 483381605}
   - component: {fileID: 483381606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (119)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5228,7 +5274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 559097496}
   - component: {fileID: 559097495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5347,7 +5393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 567692944}
   - component: {fileID: 567692943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5515,7 +5561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 572031457}
   - component: {fileID: 572031458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (71)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5599,7 +5645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576027640}
   - component: {fileID: 576027639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5683,7 +5729,7 @@ GameObject:
   m_Component:
   - component: {fileID: 579584574}
   - component: {fileID: 579584575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (83)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5935,7 +5981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 597818986}
   - component: {fileID: 597818987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (125)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6019,7 +6065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 597934690}
   - component: {fileID: 597934689}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6271,7 +6317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 618508564}
   - component: {fileID: 618508565}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (67)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6439,7 +6485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 624477694}
   - component: {fileID: 624477695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (122)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6523,7 +6569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627647269}
   - component: {fileID: 627647270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (131)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6775,7 +6821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672255498}
   - component: {fileID: 672255499}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (105)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7017,7 +7063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710217711}
   - component: {fileID: 710217712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (64)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7269,7 +7315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 726969057}
   - component: {fileID: 726969058}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (62)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7927,7 +7973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 784098325}
   - component: {fileID: 784098326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (43)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8077,7 +8123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 801424250}
   - component: {fileID: 801424251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (40)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8161,7 +8207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 808606828}
   - component: {fileID: 808606829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (42)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8391,7 +8437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 831026636}
   - component: {fileID: 831026637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (80)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8559,7 +8605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 861430657}
   - component: {fileID: 861430658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (118)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8643,7 +8689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 864102257}
   - component: {fileID: 864102258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8727,7 +8773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 872907831}
   - component: {fileID: 872907832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (91)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8811,7 +8857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 873173821}
   - component: {fileID: 873173820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9035,7 +9081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 890837985}
   - component: {fileID: 890837984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9203,7 +9249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 898125904}
   - component: {fileID: 898125905}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (92)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9287,7 +9333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 912443688}
   - component: {fileID: 912443689}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (41)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9445,7 +9491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927580291}
   - component: {fileID: 927580292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (128)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9529,7 +9575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937921586}
   - component: {fileID: 937921585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9612,7 +9658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 946578434}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: FirePoint_Rifle
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -9644,7 +9690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959522013}
   - component: {fileID: 959522014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (74)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9872,7 +9918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 999726148}
   - component: {fileID: 999726149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (124)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10198,7 +10244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023432076}
   - component: {fileID: 1023432075}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10282,7 +10328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1032595358}
   - component: {fileID: 1032595359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (76)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10366,7 +10412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1035694447}
   - component: {fileID: 1035694448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (101)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10450,7 +10496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036055240}
   - component: {fileID: 1036055241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (69)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10534,7 +10580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036250367}
   - component: {fileID: 1036250368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (88)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10764,7 +10810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1045357685}
   - component: {fileID: 1045357686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (106)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10848,7 +10894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061346886}
   - component: {fileID: 1061346887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (104)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10932,7 +10978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063142496}
   - component: {fileID: 1063142497}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (54)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11016,7 +11062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1069794340}
   - component: {fileID: 1069794339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11102,6 +11148,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 2473453845335418800, guid: 2f49bca5e049c82438167585ce353887, type: 3}
+    - target: {fileID: 1033118122941815789, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1984877865422099221, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3593481142580325530, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnLeftMouse
@@ -11116,7 +11170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362309346045747630, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5036646271251046960, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
       propertyPath: m_LocalScale.x
@@ -11165,6 +11219,10 @@ PrefabInstance:
     - target: {fileID: 5036646271251046960, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121814297081283979, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
+      propertyPath: _wallLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6708620458566133215, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
       propertyPath: _mainCamera
@@ -11267,7 +11325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1079446097}
   - component: {fileID: 1079446098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (50)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11351,7 +11409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1089904515}
   - component: {fileID: 1089904516}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (93)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11518,7 +11576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1117079454}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: FirePoint_Uzi
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -11802,7 +11860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1171388279}
   - component: {fileID: 1171388280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (117)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11886,7 +11944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1184401662}
   - component: {fileID: 1184401663}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (34)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11970,7 +12028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1209661231}
   - component: {fileID: 1209661232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (121)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12054,7 +12112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1212232567}
   - component: {fileID: 1212232568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (57)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12200,7 +12258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1220015084}
   - component: {fileID: 1220015083}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12442,7 +12500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1239221923}
   - component: {fileID: 1239221924}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (120)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12526,7 +12584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1248710024}
   - component: {fileID: 1248710025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (55)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12610,7 +12668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1266156549}
   - component: {fileID: 1266156548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12778,7 +12836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1275064797}
   - component: {fileID: 1275064796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12862,7 +12920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1283690400}
   - component: {fileID: 1283690401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12946,7 +13004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285912252}
   - component: {fileID: 1285912253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (47)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13030,7 +13088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1307497454}
   - component: {fileID: 1307497455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (79)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13152,7 +13210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321233941}
   - component: {fileID: 1321233942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (38)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13236,7 +13294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1322019174}
   - component: {fileID: 1322019175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (89)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13320,7 +13378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331176849}
   - component: {fileID: 1331176850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (77)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13782,7 +13840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377222826}
   - component: {fileID: 1377222827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13950,7 +14008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389632464}
   - component: {fileID: 1389632463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14034,7 +14092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1397977352}
   - component: {fileID: 1397977351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14118,7 +14176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1400312764}
   - component: {fileID: 1400312763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14202,7 +14260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406063693}
   - component: {fileID: 1406063694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (72)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14286,7 +14344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406160352}
   - component: {fileID: 1406160351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14369,7 +14427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1406431028}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: FirePoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14405,7 +14463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408464054}
   - component: {fileID: 1408464055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (102)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14489,7 +14547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443501147}
   - component: {fileID: 1443501148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (109)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14573,7 +14631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451427822}
   - component: {fileID: 1451427821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14895,7 +14953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479571865}
   - component: {fileID: 1479571866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (46)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15111,7 +15169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1517732412}
   - component: {fileID: 1517732411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15195,7 +15253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1523321582}
   - component: {fileID: 1523321583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (63)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15353,7 +15411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1526095806}
   - component: {fileID: 1526095807}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (116)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15437,7 +15495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1529051313}
   - component: {fileID: 1529051314}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (112)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15566,7 +15624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1542639516}
   - component: {fileID: 1542639515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15734,7 +15792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1565321268}
   - component: {fileID: 1565321269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15986,7 +16044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577033245}
   - component: {fileID: 1577033244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16144,7 +16202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1620894503}
   - component: {fileID: 1620894502}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16228,7 +16286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1625608009}
   - component: {fileID: 1625608010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (127)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16312,7 +16370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1629607195}
   - component: {fileID: 1629607196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (111)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16550,7 +16608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1641089202}
   - component: {fileID: 1641089201}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16634,7 +16692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659115385}
   - component: {fileID: 1659115386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (99)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17034,7 +17092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1697016852}
   - component: {fileID: 1697016851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17710,7 +17768,7 @@ GameObject:
   - component: {fileID: 1733642241}
   - component: {fileID: 1733642243}
   - component: {fileID: 1733642242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21547,7 +21605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1741340624}
   - component: {fileID: 1741340625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (87)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22027,7 +22085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789459498}
   - component: {fileID: 1789459499}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22111,7 +22169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1795376901}
   - component: {fileID: 1795376902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (98)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22279,7 +22337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1800765090}
   - component: {fileID: 1800765089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22363,7 +22421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1811347733}
   - component: {fileID: 1811347734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (65)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22615,7 +22673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823717102}
   - component: {fileID: 1823717103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22699,7 +22757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823767219}
   - component: {fileID: 1823767220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (53)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23119,7 +23177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1850379841}
   - component: {fileID: 1850379842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (115)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23203,7 +23261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1850453275}
   - component: {fileID: 1850453276}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23361,7 +23419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1858373636}
   - component: {fileID: 1858373635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23529,7 +23587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1874940500}
   - component: {fileID: 1874940499}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_32 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23674,7 +23732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1882513829}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: FirePoint_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -23772,7 +23830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1907712395}
   - component: {fileID: 1907712396}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (85)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23856,7 +23914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1909521448}
   - component: {fileID: 1909521449}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (97)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24260,7 +24318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956879337}
   - component: {fileID: 1956879338}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (90)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24344,7 +24402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1973820917}
   - component: {fileID: 1973820918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24428,7 +24486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1981695066}
   - component: {fileID: 1981695067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (84)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24512,7 +24570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1983183899}
   - component: {fileID: 1983183900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24596,7 +24654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1995287570}
   - component: {fileID: 1995287571}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (94)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24680,7 +24738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2000567568}
   - component: {fileID: 2000567569}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (45)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24764,7 +24822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2010474655}
   - component: {fileID: 2010474656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (96)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24848,7 +24906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2011686645}
   - component: {fileID: 2011686646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (110)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24932,7 +24990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2014255276}
   - component: {fileID: 2014255277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (52)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25156,7 +25214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028853174}
   - component: {fileID: 2028853175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (114)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25240,7 +25298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030172263}
   - component: {fileID: 2030172264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (78)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25826,7 +25884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091462977}
   - component: {fileID: 2091462978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (35)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25910,7 +25968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2102299383}
   - component: {fileID: 2102299384}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (123)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25994,7 +26052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120326650}
   - component: {fileID: 2120326649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26162,7 +26220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2130042438}
   - component: {fileID: 2130042439}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FloorTiles_31 (107)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
