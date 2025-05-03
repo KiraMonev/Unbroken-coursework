@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private WeaponManager _weaponManager;
     private Animator _animator;
+    private PlayerHealth _playerHealth;
 
     private PauseMenu _pauseMenu;
 
@@ -26,11 +27,13 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _weaponManager = GetComponent<WeaponManager>();
+        _playerHealth = GetComponent<PlayerHealth>();
         _pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     private void FixedUpdate()
     {
+        if (_playerHealth.isDead) return;
         Move();
         UpdateAnimation();
     }
@@ -70,13 +73,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (_playerHealth.isDead) return;
         _moveInput = context.ReadValue<Vector2>();
     }
 
     // Ћ ћ: если оружи€ нет Ц подбираем, иначе Ц атакуем
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        if (!_pauseMenu.isPaused)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
         {
             if (context.started)
             {
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour
     // ѕ ћ: сброс оружи€ (если оно есть)
     public void OnRightMouse(InputAction.CallbackContext context)
     {
-        if (!_pauseMenu.isPaused)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
         {
             if (context.performed)
             {

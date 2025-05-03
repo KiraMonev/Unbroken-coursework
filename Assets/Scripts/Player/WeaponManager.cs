@@ -57,13 +57,13 @@ public class WeaponManager : MonoBehaviour
 
     private PlayerController _playerController;
     private Animator _animator;
-
+    private PlayerHealth _playerHealth;
     private UIBulletsAmount _bulletsAmoutUI;
-
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
+        _playerHealth = GetComponent<PlayerHealth>();
         _bulletsAmoutUI = FindObjectOfType<UIBulletsAmount>();
 
         InitializeWeaponDictionary();
@@ -158,6 +158,14 @@ public class WeaponManager : MonoBehaviour
         Destroy(pickup.gameObject);
         //Debug.Log($"Подобрали оружие: {_currentWeaponType}");
 
+        // Звук подбора
+        if (_currentWeaponType == WeaponType.Knife || _currentWeaponType == WeaponType.Katana)
+            SoundManager.Instance.PlayPlayer(AudioType.PickupKatanaAndKnife);
+        else if (_currentWeaponType == WeaponType.Ballbat)
+                SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+        else
+            SoundManager.Instance.PlayPlayer(AudioType.PickupWeapon);
+
         // Если оружие стрелковое (ammoCapacity > 0), устанавливаем текущий запас патрон
         if (_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
         {
@@ -192,6 +200,8 @@ public class WeaponManager : MonoBehaviour
             {
                 Vector2 throwVector = throwDirection + Vector2.up * 0.5f;
                 pickup.Throw(throwVector.normalized, _throwForce);
+                // Звук броска
+                SoundManager.Instance.PlayPlayer(AudioType.Throw);
                 _bulletsAmoutUI.SetTotalAmmo(0);
                 _bulletsAmoutUI.SetCurrentAmmo(0);
             }
@@ -266,7 +276,11 @@ public class WeaponManager : MonoBehaviour
 
         while (true)
         {
-            // Здесь вместо двойного списания патронов – всё делается в методе Attack().
+            if (_playerHealth.isDead)
+            {
+                StopAutoFire();
+                yield break;
+            }
             _animator.SetTrigger("Attack");
             Attack();
             yield return new WaitForSeconds(data.attackDelay);
@@ -295,7 +309,7 @@ public class WeaponManager : MonoBehaviour
             if (CurrentAmmo < ammoCost)
             {
                 Debug.Log("Нет патронов!");
-                // Можно добавить звук пустого магазина.
+                SoundManager.Instance.PlayPlayer(AudioType.EmptyAmmo);
                 return;
             }
             CurrentAmmo -= ammoCost;
@@ -305,22 +319,34 @@ public class WeaponManager : MonoBehaviour
         // Выбор логики атаки
         switch (_currentWeaponType)
         {
+            case WeaponType.Ballbat:
+                SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+                MeleeAttack(data);
+                break;
+
             case WeaponType.Knife:
             case WeaponType.Katana:
-            case WeaponType.Ballbat:
+                SoundManager.Instance.PlayPlayer(AudioType.KatanaAndKnife);
                 MeleeAttack(data);
                 break;
 
             case WeaponType.Pistol:
+                SoundManager.Instance.PlayPlayer(AudioType.PistolShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Uzi:
+                SoundManager.Instance.PlayPlayer(AudioType.UziShoot);
+                RangeAttackSingle(data);
+                break;
+
             case WeaponType.Rifle:
+                SoundManager.Instance.PlayPlayer(AudioType.RifleShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Shotgun:
+                SoundManager.Instance.PlayPlayer(AudioType.ShotgunShoot);
                 RangeAttackShotgun(data);
                 break;
 

@@ -11,11 +11,20 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
 
+    public bool isDead = false;
+    private SpriteRenderer _spr;
+    private Color _originalColor;
 
     public int Health
     {
-        get { return health; }
+        get { return health; }  
         set { health = Mathf.Clamp(value, 0, numOfHearts); } // Устанавливаем здоровье с ограничениями
+    }
+
+    private void Awake()
+    {
+        _spr = GetComponent<SpriteRenderer>();
+        _originalColor = _spr.color;
     }
 
     private void FixedUpdate()
@@ -35,6 +44,27 @@ public class PlayerHealth : MonoBehaviour
                 hearts[i].enabled = true;
             else
                 hearts[i].enabled = false;
+        }
+    }
+
+    private IEnumerator FlashRed()
+    {
+        _spr.color = new Color32(255, 105, 105, 255);
+        yield return new WaitForSeconds(0.15f);
+        _spr.color = _originalColor;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (isDead) return;
+        Health -= damage;
+        StartCoroutine(FlashRed());
+        //audioManager.PlayTakeDamageSound(); нету
+        if (Health <= 0)
+        {
+            isDead = true;
+            //anim.SetTrigger("Die"); наверное не будет
+            //deathPanel.SetActive(true); нету
         }
     }
 
