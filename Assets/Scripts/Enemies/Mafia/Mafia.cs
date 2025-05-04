@@ -194,19 +194,22 @@ public class Mafia : MonoBehaviour
         else
         {
             // Получаем всех врагов вокруг
-            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
 
             foreach (Collider2D enemy in hitPlayer)
             {
                 // Проверяем, находится ли враг в пределах угла атаки (полусферы)
-                Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
-                float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
-                animator.SetBool("Gun", true);
-                animator.SetBool("GunTaking", false);
-                if (angleToEnemy <= attackAngle / 2f)
+                if (enemy.gameObject.CompareTag("Player"))
                 {
-                    // Наносим урон (здесь можно добавить эффекты или отбрасывание)
-                    animator.PlayInFixedTime("Attack");
+                    Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
+                    float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
+                    animator.SetBool("Gun", true);
+                    animator.SetBool("GunTaking", false);
+                    if (angleToEnemy <= attackAngle / 2f)
+                    {
+                        // Наносим урон (здесь можно добавить эффекты или отбрасывание)
+                        animator.PlayInFixedTime("Attack");
+                    }
                 }
             }
 
