@@ -15,6 +15,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private float movementSmoothing = 0.05f;
 
     [Header("Combat Settings")]
+    [SerializeField] private int health = 2;
     [SerializeField] private float shootingDistance = 3f;
     [SerializeField] private float shootingCooldown = 1f;
     [SerializeField] private float stoppingDistance = 2.5f;
@@ -71,6 +72,10 @@ public class Mafia : MonoBehaviour
         if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
         {
             GetNextWaypoint();
+        }
+        if (health == 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -334,6 +339,18 @@ public class Mafia : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(1);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health-=damage;
+    }
     private void OnDrawGizmos()
     {
         if (player != null)
