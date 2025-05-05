@@ -33,56 +33,31 @@ public class PlayerController : MonoBehaviour
         UpdateAnimation();
     }
 
-    // private void Move()
-    // {
-    //     if (_velocity.magnitude < 0.01f) // ����� ��� �������������� ���������� ��������
-    //     {
-    //         _velocity = Vector2.zero;
-    //     }
-    //     // ���� ���� ���� � ���� ������������ � ����������� ��������
-    //     if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
-    //     {
-    //         _velocity = Vector2.zero;
-    //         Debug.Log("Wall hit in move direction");
-    //         return;
-    //     }
-
-    //     // ������ ������� ��������
-    //     Vector2 targetVelocity = _moveInput * _maxSpeed;
-    //     Vector2 velocityDiff = targetVelocity - _velocity;
-    //     float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
-    //     Vector2 movement = velocityDiff * (accelerateRate * Time.fixedDeltaTime);
-
-    //     _velocity += movement;
-    //     _velocity = Vector2.ClampMagnitude(_velocity, _maxSpeed);
-    //     _velocity *= Mathf.Pow(1f - _velocityPower, Time.fixedDeltaTime);
-
-    //     _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
-    // }
-
     private void Move()
     {
-        Vector2 targetVelocity = _moveInput * _maxSpeed;
+        if (_velocity.magnitude < 0.01f) // ����� ��� �������������� ���������� ��������
+        {
+            _velocity = Vector2.zero;
+        }
+        // ���� ���� ���� � ���� ������������ � ����������� ��������
+        if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
+        {
+            _velocity = Vector2.zero;
+            Debug.Log("Wall hit in move direction");
+            return;
+        }
 
+        // ������ ������� ��������
+        Vector2 targetVelocity = _moveInput * _maxSpeed;
         Vector2 velocityDiff = targetVelocity - _velocity;
-        float accelerateRate = (_moveInput.magnitude > 0.01f) ? _acceleration : _deceleration;
+        float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
         Vector2 movement = velocityDiff * (accelerateRate * Time.fixedDeltaTime);
 
         _velocity += movement;
         _velocity = Vector2.ClampMagnitude(_velocity, _maxSpeed);
         _velocity *= Mathf.Pow(1f - _velocityPower, Time.fixedDeltaTime);
 
-        Vector2 proposedPosition = _rigidbody.position + _velocity * Time.fixedDeltaTime;
-
-        if (!IsPathBlocked(proposedPosition))
-        {
-            _rigidbody.MovePosition(proposedPosition);
-        }
-        else
-        {
-            _velocity = Vector2.zero;
-            Debug.Log("Blocked by wall.");
-        }
+        _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
     }
 
     private void UpdateAnimation()
@@ -152,23 +127,10 @@ public class PlayerController : MonoBehaviour
         return _moveInput;
     }
 
-    // private bool IsPathBlocked(Vector2 direction)
-    // {
-    //     RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
-    //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
-    //     return hit.collider != null;
-    // }
-
-    private bool IsPathBlocked(Vector2 targetPosition)
+    private bool IsPathBlocked(Vector2 direction)
     {
-        Collider2D collider = GetComponent<BoxCollider2D>();
-        if (collider == null) return false;
-
-        Vector2 offset = targetPosition - _rigidbody.position;
-
-        RaycastHit2D hit = Physics2D.BoxCast(_rigidbody.position, collider.bounds.size, 0f, offset.normalized, offset.magnitude, _wallLayer);
-
+        RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
+        // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
         return hit.collider != null;
     }
-
 }
