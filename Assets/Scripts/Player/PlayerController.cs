@@ -127,10 +127,18 @@ public class PlayerController : MonoBehaviour
         return _moveInput;
     }
 
+    // private bool IsPathBlocked(Vector2 direction)
+    // {
+    //     RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
+    //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
+    //     return hit.collider != null;
+    // }
+
     private bool IsPathBlocked(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
-        // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
-        return hit.collider != null;
+        RaycastHit2D[] hits = new RaycastHit2D[1];
+        int count = _rigidbody.Cast(direction, hits, 0.1f); // 0.1f — дистанция проверки
+        return count > 0 && ((1 << hits[0].collider.gameObject.layer) & _wallLayer) != 0;
     }
+
 }
