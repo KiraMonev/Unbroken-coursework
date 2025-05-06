@@ -7741,6 +7741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 639856529106769561, guid: 8494db03d20737e4b9cbced8ae416196, type: 3}
+      propertyPath: _weaponType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3884699430765923758, guid: 8494db03d20737e4b9cbced8ae416196, type: 3}
       propertyPath: m_Name
       value: Uzi
