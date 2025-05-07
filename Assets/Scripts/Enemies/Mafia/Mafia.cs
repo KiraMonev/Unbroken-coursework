@@ -15,6 +15,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private float movementSmoothing = 0.05f;
 
     [Header("Combat Settings")]
+    [SerializeField] private int health = 2;
     [SerializeField] private float shootingDistance = 3f;
     [SerializeField] private float shootingCooldown = 1f;
     [SerializeField] private float stoppingDistance = 2.5f;
@@ -71,6 +72,10 @@ public class Mafia : MonoBehaviour
         if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
         {
             GetNextWaypoint();
+        }
+        if (health == 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -189,19 +194,22 @@ public class Mafia : MonoBehaviour
         else
         {
             // Получаем всех врагов вокруг
-            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
 
             foreach (Collider2D enemy in hitPlayer)
             {
                 // Проверяем, находится ли враг в пределах угла атаки (полусферы)
-                Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
-                float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
-                animator.SetBool("Gun", true);
-                animator.SetBool("GunTaking", false);
-                if (angleToEnemy <= attackAngle / 2f)
+                if (enemy.gameObject.CompareTag("Player"))
                 {
-                    // Наносим урон (здесь можно добавить эффекты или отбрасывание)
-                    animator.PlayInFixedTime("Attack");
+                    Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
+                    float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
+                    animator.SetBool("Gun", true);
+                    animator.SetBool("GunTaking", false);
+                    if (angleToEnemy <= attackAngle / 2f)
+                    {
+                        // Наносим урон (здесь можно добавить эффекты или отбрасывание)
+                        animator.PlayInFixedTime("Attack");
+                    }
                 }
             }
 
@@ -334,6 +342,18 @@ public class Mafia : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(1);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health-=damage;
+    }
     private void OnDrawGizmos()
     {
         if (player != null)
