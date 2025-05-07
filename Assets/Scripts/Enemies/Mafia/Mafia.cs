@@ -42,6 +42,7 @@ public class Mafia : MonoBehaviour
     private float lastShotTime;
     private Coroutine shootingCoroutine;
     private Vector2 m_Velocity = Vector2.zero;
+    private bool isDead=false;  
 
     void Start()
     {
@@ -56,26 +57,29 @@ public class Mafia : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (CanSeePlayer())
+        if (!isDead)
         {
-            HandlePlayerDetection();
-        }
-        else if (isChasing)
-        {
-            ReturnToPatrol();
-        }
+            if (CanSeePlayer())
+            {
+                HandlePlayerDetection();
+            }
+            else if (isChasing)
+            {
+                ReturnToPatrol();
+            }
 
-        MoveToTarget();
-        UpdateAnimation();
-        UpdateRotation();
+            MoveToTarget();
+            UpdateAnimation();
+            UpdateRotation();
 
-        if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
-        {
-            GetNextWaypoint();
-        }
-        if (health == 0)
-        {
-            Destroy(gameObject);
+            if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+            {
+                GetNextWaypoint();
+            }
+            if (health == 0)
+            {
+                Death();
+            }
         }
     }
 
@@ -353,6 +357,17 @@ public class Mafia : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health-=damage;
+    }
+
+    private void Death()
+    {
+        animator.SetBool("isDead", true);
+        isDead = true;
+        if (isMafia)
+        {
+            gameObject.transform.localScale = Vector3.one * 2;
+        }
+        rb.simulated=false;
     }
     private void OnDrawGizmos()
     {
