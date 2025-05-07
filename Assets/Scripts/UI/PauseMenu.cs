@@ -3,18 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject pauseMenu;
+    [SerializeField] public GameObject pauseMenu;
     public static PauseMenu Instance;
-    [SerializeField]
-    private GameObject gameUI;
-    private bool isPaused = false;
+    [SerializeField] public GameObject gameUI;
+    public bool isPaused = false;
+    private AchievenmentListIngame _achievementList;
+
+    private void Awake()
+    {
+        _achievementList = FindObjectOfType<AchievenmentListIngame>();
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (isPaused && !_achievementList.MenuOpen)
                 ResumeGame();
             else
                 PauseGame();
@@ -40,7 +44,6 @@ public class PauseMenu : MonoBehaviour
     public void LoadLevel()
     {
         Time.timeScale = 1f;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

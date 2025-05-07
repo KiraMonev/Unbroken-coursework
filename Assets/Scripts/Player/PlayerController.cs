@@ -18,17 +18,22 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private WeaponManager _weaponManager;
     private Animator _animator;
+    private PlayerHealth _playerHealth;
 
+    private PauseMenu _pauseMenu;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _weaponManager = GetComponent<WeaponManager>();
+        _playerHealth = GetComponent<PlayerHealth>();
+        _pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     private void FixedUpdate()
     {
+        if (_playerHealth.isDead) return;
         Move();
         UpdateAnimation();
     }
@@ -68,37 +73,40 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (_playerHealth.isDead) return;
         _moveInput = context.ReadValue<Vector2>();
     }
 
     // ���: ���� ������ ��� � ���������, ����� � �������
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
         {
-            if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
+            if (context.started)
             {
-                _weaponManager.TryPickUpWeapon();
-                Debug.Log("������� ��������� ������");
-            }
-            else
-            {
-                WeaponType current = _weaponManager.GetCurrentWeaponType();
-                // ���� ������ ����� �������������� ����� (Uzi ��� Rifle), ��������� ������������
-                if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+                if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
                 {
-                    _weaponManager.StartAutoFire();
-                    //Debug.Log("������ ������������");
+                    _weaponManager.TryPickUpWeapon();
+                    Debug.Log("������� ��������� ������");
                 }
                 else
                 {
-                    // ��� ��������� ������ ��������� ��������� ������� ����� ��������
-                    _animator.SetTrigger("Attack");
-                    //Debug.Log("������ �������� �����");
+                    WeaponType current = _weaponManager.GetCurrentWeaponType();
+                    // ���� ������ ����� �������������� ����� (Uzi ��� Rifle), ��������� ������������
+                    if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+                    {
+                        _weaponManager.StartAutoFire();
+                        //Debug.Log("������ ������������");
+                    }
+                    else
+                    {
+                        // ��� ��������� ������ ��������� ��������� ������� ����� ��������
+                        _animator.SetTrigger("Attack");
+                        //Debug.Log("������ �������� �����");
+                    }
                 }
             }
         }
-
         if (context.canceled)
         {
             WeaponType current = _weaponManager.GetCurrentWeaponType();
@@ -113,11 +121,14 @@ public class PlayerController : MonoBehaviour
     // ���: ����� ������ (���� ��� ����)
     public void OnRightMouse(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
         {
-            if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
+            if (context.performed)
             {
-                _weaponManager.DropWeapon();
+                if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
+                {
+                    _weaponManager.DropWeapon();
+                }
             }
         }
     }
