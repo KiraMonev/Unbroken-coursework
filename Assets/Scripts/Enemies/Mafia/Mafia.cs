@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Mafia : MonoBehaviour
 {
+    [SerializeField] private bool isMafia;
     [Header("Movement Settings")]
     [SerializeField] private float patrolSpeed = 2f;
     [SerializeField] private float chaseSpeed = 5f;
@@ -14,6 +15,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private float movementSmoothing = 0.05f;
 
     [Header("Combat Settings")]
+    [SerializeField] private int health = 2;
     [SerializeField] private float shootingDistance = 3f;
     [SerializeField] private float shootingCooldown = 1f;
     [SerializeField] private float stoppingDistance = 2.5f;
@@ -21,12 +23,16 @@ public class Mafia : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private float bulletLifetime = 2f;
+    [SerializeField] private Transform attackPoint; // Точка, откуда исходит атака (например, рука полицейского)
+    [SerializeField] private float attackRange = 1.5f; // Радиус атаки дубинкой
+    [SerializeField] private float attackAngle = 120f; // Угол атаки (полусфера)
 
     [Header("References")]
     [SerializeField] private Transform player;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private List<Transform> patrolWaypoints = new List<Transform>();
+    [SerializeField] private LayerMask playerLayer;
 
     private bool isChasing = false;
     private bool isInCombat = false;
@@ -67,6 +73,10 @@ public class Mafia : MonoBehaviour
         {
             GetNextWaypoint();
         }
+        if (health == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void HandlePlayerDetection()
@@ -91,8 +101,20 @@ public class Mafia : MonoBehaviour
     private void StartChasing()
     {
         isChasing = true;
-        animator.PlayInFixedTime("Taking");
-        TakeGun();
+        if (isMafia)
+        {
+            animator.Play("Taking");
+        }
+        else
+        {
+            Debug.Log("Taking!");
+            animator.Play("TakingDubinka");
+            animator.SetBool("GunTaking", true);
+        }
+        if (isMafia)
+        {
+            TakeGun();
+        }
     }
 
     private void EngageCombat()
@@ -123,7 +145,15 @@ public class Mafia : MonoBehaviour
     {
         isChasing = false;
         isInCombat = false;
-        animator.SetBool("Gun", false);
+        if (isMafia)
+        {
+            animator.SetBool("Gun", false);
+        }
+        else
+        {
+            animator.SetBool("Gun", false);
+            animator.SetBool("GunTaking", false);
+        }
         currentTarget = GetClosestWaypoint();
 
         if (shootingCoroutine != null)
@@ -149,15 +179,55 @@ public class Mafia : MonoBehaviour
 
         lastShotTime = Time.time;
 
-        Vector2 shootDirection = ((Vector2)player.position - (Vector2)firePoint.position).normalized;
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        bulletRb.velocity = shootDirection * bulletSpeed;
+        if (isMafia)
+        {
+            Vector2 shootDirection = ((Vector2)player.position - (Vector2)firePoint.position).normalized;
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.velocity = shootDirection * bulletSpeed;
 
-        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+            bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        Destroy(bullet, bulletLifetime);
+            Destroy(bullet, bulletLifetime);
+        }
+        else
+        {
+            // Получаем всех врагов вокруг
+            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+
+            foreach (Collider2D enemy in hitPlayer)
+            {
+                // Проверяем, находится ли враг в пределах угла атаки (полусферы)
+                if (enemy.gameObject.CompareTag("Player"))
+                {
+                    Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
+                    float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
+                    animator.SetBool("Gun", true);
+                    animator.SetBool("GunTaking", false);
+                    if (angleToEnemy <= attackAngle / 2f)
+                    {
+                        // Наносим урон (здесь можно добавить эффекты или отбрасывание)
+                        animator.PlayInFixedTime("Attack");
+                    }
+                }
+            }
+
+            // Визуализация атаки (опционально)
+            Debug.DrawRay(attackPoint.position, attackPoint.right * attackRange, Color.red, 0.5f);
+        }
+    }
+
+    public void PoliceHit()
+    {
+        Vector2 directionToEnemy = (player.transform.position - attackPoint.position).normalized;
+        float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
+        RaycastHit2D hit = Physics2D.Raycast(attackPoint.position,directionToEnemy,Vector2.Distance(player.transform.position, attackPoint.position),obstacleLayer);
+        if (angleToEnemy <= attackAngle / 2f && hit.collider==null)
+        {
+            player.GetComponent<PlayerHealth>().TakeDamage(1);
+            Debug.Log($"Удар дубинкой!");
+        }
     }
 
     private void MoveToTarget()
@@ -266,9 +336,24 @@ public class Mafia : MonoBehaviour
 
     public void TakeGun()
     {
-        animator.SetBool("Gun", true);
+        if (isMafia)
+        {
+            animator.SetBool("Gun", true);
+        }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(1);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health-=damage;
+    }
     private void OnDrawGizmos()
     {
         if (player != null)

@@ -40,11 +40,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (_velocity.magnitude < 0.01f) // Порог для предотвращения остаточной скорости
+        if (_velocity.magnitude < 0.01f) // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         {
             _velocity = Vector2.zero;
         }
-        // Если есть ввод и путь заблокирован в направлении движения
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
         {
             _velocity = Vector2.zero;
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // Расчет целевой скорости
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Vector2 targetVelocity = _moveInput * _maxSpeed;
         Vector2 velocityDiff = targetVelocity - _velocity;
         float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        float speed = _velocity.magnitude; // Вычисляем текущую скорость
+        float speed = _velocity.magnitude; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _animator.SetFloat("Speed", speed);
     }
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    // ЛКМ: если оружия нет – подбираем, иначе – атакуем
+    // пїЅпїЅпїЅ: пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         if (!_pauseMenu.isPaused && !_playerHealth.isDead)
@@ -87,22 +87,22 @@ public class PlayerController : MonoBehaviour
                 if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
                 {
                     _weaponManager.TryPickUpWeapon();
-                    Debug.Log("Пробуем подобрать оружие");
+                    Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
                 }
                 else
                 {
                     WeaponType current = _weaponManager.GetCurrentWeaponType();
-                    // Если оружие имеет автоматический огонь (Uzi или Rifle), запускаем автострельбу
+                    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (Uzi пїЅпїЅпїЅ Rifle), пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     if (current == WeaponType.Uzi || current == WeaponType.Rifle)
                     {
                         _weaponManager.StartAutoFire();
-                        //Debug.Log("Запуск автострельбы");
+                        //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                     }
                     else
                     {
-                        // Для остальных оружий запускаем одиночный выстрел через анимацию
+                        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                         _animator.SetTrigger("Attack");
-                        //Debug.Log("Запуск анимации атаки");
+                        //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
                     }
                 }
             }
@@ -113,12 +113,12 @@ public class PlayerController : MonoBehaviour
             if (current == WeaponType.Uzi || current == WeaponType.Rifle)
             {
                 _weaponManager.StopAutoFire();
-                //Debug.Log("Остановка автострельбы");
+                //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
             }
         }
     }
 
-    // ПКМ: сброс оружия (если оно есть)
+    // пїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)
     public void OnRightMouse(InputAction.CallbackContext context)
     {
         if (!_pauseMenu.isPaused && !_playerHealth.isDead)
@@ -138,10 +138,18 @@ public class PlayerController : MonoBehaviour
         return _moveInput;
     }
 
+    // private bool IsPathBlocked(Vector2 direction)
+    // {
+    //     RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
+    //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    //     return hit.collider != null;
+    // }
+
     private bool IsPathBlocked(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
-        // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // Визуализация луча
-        return hit.collider != null;
+        RaycastHit2D[] hits = new RaycastHit2D[1];
+        int count = _rigidbody.Cast(direction, hits, 0.1f); // 0.1f вЂ” РґРёСЃС‚Р°РЅС†РёСЏ РїСЂРѕРІРµСЂРєРё
+        return count > 0 && ((1 << hits[0].collider.gameObject.layer) & _wallLayer) != 0;
     }
+
 }

@@ -21,6 +21,7 @@ public class BulletEnemy : MonoBehaviour
         if(collision.collider.CompareTag("Player"))
         {
             Debug.Log("Попал");
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(1);
             Destroy(gameObject);
         }
         else
