@@ -1,15 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Health Settings")]
     [SerializeField] private int health;
     [SerializeField] private int numOfHearts;
-    [SerializeField] private Image[] hearts;
+
+    [Header("UI Settings")]
+    [Tooltip("Tag for heart UI images in the scene.")]
+    [SerializeField] private string heartTag = "HeartImage";
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
+
+    private Image[] hearts;   // Ссылки на UI изображения сердечек
 
     public bool isDead = false;
     private SpriteRenderer _spr;
@@ -17,33 +25,60 @@ public class PlayerHealth : MonoBehaviour
 
     public int Health
     {
-        get { return health; }  
-        set { health = Mathf.Clamp(value, 0, numOfHearts); } // Устанавливаем здоровье с ограничениями
+        get => health;
+        set => health = Mathf.Clamp(value, 0, numOfHearts);
     }
 
     private void Awake()
     {
         _spr = GetComponent<SpriteRenderer>();
         _originalColor = _spr.color;
+        // Подписываемся на событие после загрузки любых сцен
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        // И сразу ищем сердечки в стартовой сцене
+        FindHearts();
+    }
+
+    private void OnDestroy()
+    {
+        // Отписываемся, чтобы избежать утечек
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // После загрузки новой сцены обновляем ссылки на UI
+        FindHearts();
+    }
+
+    // Находит в сцене объекты по тегу и получает их Image компоненты
+    private void FindHearts()
+    {
+        var heartObjects = GameObject.FindGameObjectsWithTag(heartTag);
+        hearts = heartObjects
+            .OrderBy(go => go.name) // Сортируем по имени, чтобы порядок был корректным
+            .Select(go => go.GetComponent<Image>())
+            .Where(img => img != null)
+            .ToArray();
     }
 
     private void FixedUpdate()
     {
-        if (health > numOfHearts)
-        {
-            health = numOfHearts;
-        }
+        // Если UI ещё не готов — ничего не делаем
+        if (hearts == null || hearts.Length == 0)
+            return;
+
+        // Гарантируем, что текущее здоровье не больше максимального
+        health = Mathf.Min(health, numOfHearts);
+
+        // Обновляем каждое сердечко
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < health)
-                hearts[i].sprite = fullHeart;
-            else
-                hearts[i].sprite = emptyHeart;
+            Image img = hearts[i];
+            if (img == null) continue;
 
-            if (i < numOfHearts)
-                hearts[i].enabled = true;
-            else
-                hearts[i].enabled = false;
+            img.sprite = (i < health) ? fullHeart : emptyHeart;
+            img.enabled = (i < numOfHearts);
         }
     }
 
@@ -57,19 +92,19 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isDead) return;
+
         Health -= damage;
         StartCoroutine(FlashRed());
-        //audioManager.PlayTakeDamageSound(); нету
+
         if (Health <= 0)
         {
             isDead = true;
-            //anim.SetTrigger("Die"); наверное не будет
-            //deathPanel.SetActive(true); нету
+            // Здесь можно запустить анимацию смерти и показать панель
         }
     }
 
-    public void IncreaseHealth(int healthAmount)
+    public void IncreaseHealth(int amount)
     {
-        Health += 1;
+        Health += amount;
     }
 }

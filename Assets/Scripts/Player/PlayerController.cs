@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    // Синглтон для сохранения между сценами
+    public static PlayerController Instance { get; private set; }
+
     [Header("Movement Settings")]
     [SerializeField] private float _maxSpeed = 5f;
     [SerializeField] private float _acceleration = 50f;
@@ -24,11 +28,48 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        _weaponManager = GetComponent<WeaponManager>();
-        _playerHealth = GetComponent<PlayerHealth>();
+        // Если это первый экземпляр — сохраняем и инициализируем
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+            // Инициализация ссылок
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+            _weaponManager = GetComponent<WeaponManager>();
+            _playerHealth = GetComponent<PlayerHealth>();
+            _pauseMenu = FindObjectOfType<PauseMenu>();
+        }
+        else
+        {
+            // Удаляем дубликат
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Отписка от события при уничтожении
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Вызывается после загрузки каждой новой сцены
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        MoveToSpawnPoint();
+        // Если в новой сцене PauseMenu создаётся позже, можно повторно найти его здесь:
         _pauseMenu = FindObjectOfType<PauseMenu>();
+    }
+
+    // Перемещает игрока к объекту с тэгом "SpawnPoint"
+    private void MoveToSpawnPoint()
+    {
+        GameObject spawn = GameObject.FindWithTag("Spawnpoint");
+        if (spawn != null)
+            transform.position = spawn.transform.position;
     }
 
     private void FixedUpdate()
@@ -40,11 +81,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (_velocity.magnitude < 0.01f) // ����� ��� �������������� ���������� ��������
+        if (_velocity.magnitude < 0.01f)
         {
             _velocity = Vector2.zero;
         }
-        // ���� ���� ���� � ���� ������������ � ����������� ��������
+
         if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
         {
             _velocity = Vector2.zero;
@@ -52,7 +93,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // ������ ������� ��������
         Vector2 targetVelocity = _moveInput * _maxSpeed;
         Vector2 velocityDiff = targetVelocity - _velocity;
         float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
@@ -67,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        float speed = _velocity.magnitude; // ��������� ������� ��������
+        float speed = _velocity.magnitude;
         _animator.SetFloat("Speed", speed);
     }
 
@@ -77,7 +117,6 @@ public class PlayerController : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    // ���: ���� ������ ��� � ���������, ����� � �������
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         if (!_pauseMenu.isPaused && !_playerHealth.isDead)
@@ -87,22 +126,18 @@ public class PlayerController : MonoBehaviour
                 if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
                 {
                     _weaponManager.TryPickUpWeapon();
-                    Debug.Log("������� ��������� ������");
+                    Debug.Log("Схвачено оружие");
                 }
                 else
                 {
                     WeaponType current = _weaponManager.GetCurrentWeaponType();
-                    // ���� ������ ����� �������������� ����� (Uzi ��� Rifle), ��������� ������������
                     if (current == WeaponType.Uzi || current == WeaponType.Rifle)
                     {
                         _weaponManager.StartAutoFire();
-                        //Debug.Log("������ ������������");
                     }
                     else
                     {
-                        // ��� ��������� ������ ��������� ��������� ������� ����� ��������
                         _animator.SetTrigger("Attack");
-                        //Debug.Log("������ �������� �����");
                     }
                 }
             }
@@ -113,12 +148,10 @@ public class PlayerController : MonoBehaviour
             if (current == WeaponType.Uzi || current == WeaponType.Rifle)
             {
                 _weaponManager.StopAutoFire();
-                //Debug.Log("��������� ������������");
             }
         }
     }
 
-    // ���: ����� ������ (���� ��� ����)
     public void OnRightMouse(InputAction.CallbackContext context)
     {
         if (!_pauseMenu.isPaused && !_playerHealth.isDead)
@@ -138,18 +171,10 @@ public class PlayerController : MonoBehaviour
         return _moveInput;
     }
 
-    // private bool IsPathBlocked(Vector2 direction)
-    // {
-    //     RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
-    //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
-    //     return hit.collider != null;
-    // }
-
     private bool IsPathBlocked(Vector2 direction)
     {
         RaycastHit2D[] hits = new RaycastHit2D[1];
-        int count = _rigidbody.Cast(direction, hits, 0.1f); // 0.1f — дистанция проверки
+        int count = _rigidbody.Cast(direction, hits, 0.1f);
         return count > 0 && ((1 << hits[0].collider.gameObject.layer) & _wallLayer) != 0;
     }
-
 }

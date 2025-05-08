@@ -11,7 +11,19 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        _achievementList = FindObjectOfType<AchievenmentListIngame>();
+        // ≈сли это первый экземпл€р Ч сохран€ем и инициализируем
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            _achievementList = FindObjectOfType<AchievenmentListIngame>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     void Update()

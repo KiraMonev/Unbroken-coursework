@@ -8,6 +8,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void Awake()
     {
+        _mainCamera = FindObjectOfType<Camera>();
         _playerHealth = GetComponent<PlayerHealth>();
         _pauseMenu = FindObjectOfType<PauseMenu>();
     }
