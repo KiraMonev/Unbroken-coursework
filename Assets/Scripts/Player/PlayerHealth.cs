@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealth : MonoBehaviour
@@ -23,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
     private SpriteRenderer _spr;
     private Color _originalColor;
 
+    private DeathMenu _deathMenu;
+
     public int Health
     {
         get => health;
@@ -33,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _spr = GetComponent<SpriteRenderer>();
         _originalColor = _spr.color;
+        _deathMenu = FindObjectOfType<DeathMenu>();
         SceneManager.sceneLoaded += OnSceneLoaded;
         FindHearts();
     }
@@ -99,11 +103,18 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             isDead = true;
+            _deathMenu.ShowDeathMenu();
         }
     }
 
     public void IncreaseHealth(int amount)
     {
         Health += amount;
+    }
+
+    public void SetFullHealth()
+    {
+        isDead = false;
+        Health = numOfHearts;
     }
 }
