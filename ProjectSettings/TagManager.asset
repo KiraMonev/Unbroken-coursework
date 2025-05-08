@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Spawnpoint
   - HeartImage
+  - GameUI
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

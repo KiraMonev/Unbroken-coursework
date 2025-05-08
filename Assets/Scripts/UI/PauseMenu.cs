@@ -11,19 +11,50 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        // ≈сли это первый экземпл€р Ч сохран€ем и инициализируем
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
             _achievementList = FindObjectOfType<AchievenmentListIngame>();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FindUIElements();
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            gameUI.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+    }
+
+    private void FindUIElements()
+    {
+        GameObject gameManager = GameObject.Find("GameManager");
+        if (gameManager != null)
+        {
+            Transform uiTransform = gameManager.transform.Find("UI");
+            if (uiTransform != null)
+            {
+                pauseMenu = uiTransform.Find("PauseMenu").gameObject;
+                gameUI = uiTransform.Find("GameStats").gameObject;
+            }
+        }
     }
 
     void Update()

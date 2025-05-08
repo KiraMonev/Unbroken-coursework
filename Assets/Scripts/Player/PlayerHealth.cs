@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
 
-    private Image[] hearts;   // Ссылки на UI изображения сердечек
+    private Image[] hearts;
 
     public bool isDead = false;
     private SpriteRenderer _spr;
@@ -33,45 +33,45 @@ public class PlayerHealth : MonoBehaviour
     {
         _spr = GetComponent<SpriteRenderer>();
         _originalColor = _spr.color;
-        // Подписываемся на событие после загрузки любых сцен
         SceneManager.sceneLoaded += OnSceneLoaded;
-        // И сразу ищем сердечки в стартовой сцене
         FindHearts();
     }
 
     private void OnDestroy()
     {
-        // Отписываемся, чтобы избежать утечек
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // После загрузки новой сцены обновляем ссылки на UI
+        StartCoroutine(FindHeartsAfterDelay());
+    }
+
+    private IEnumerator FindHeartsAfterDelay()
+    {
+        yield return null;
         FindHearts();
     }
 
-    // Находит в сцене объекты по тегу и получает их Image компоненты
     private void FindHearts()
     {
         var heartObjects = GameObject.FindGameObjectsWithTag(heartTag);
+        Debug.Log($"Found {heartObjects.Length} heart objects");
         hearts = heartObjects
-            .OrderBy(go => go.name) // Сортируем по имени, чтобы порядок был корректным
+            .OrderBy(go => go.name)
             .Select(go => go.GetComponent<Image>())
             .Where(img => img != null)
             .ToArray();
+        Debug.Log($"Hearts array length: {hearts.Length}");
     }
 
     private void FixedUpdate()
     {
-        // Если UI ещё не готов — ничего не делаем
         if (hearts == null || hearts.Length == 0)
             return;
 
-        // Гарантируем, что текущее здоровье не больше максимального
         health = Mathf.Min(health, numOfHearts);
 
-        // Обновляем каждое сердечко
         for (int i = 0; i < hearts.Length; i++)
         {
             Image img = hearts[i];
@@ -99,7 +99,6 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             isDead = true;
-            // Здесь можно запустить анимацию смерти и показать панель
         }
     }
 
