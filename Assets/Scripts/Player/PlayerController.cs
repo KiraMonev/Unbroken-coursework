@@ -6,14 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float _maxSpeed = 5f;
+    [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private float _acceleration = 50f;
     [SerializeField] private float _deceleration = 50f;
-    [SerializeField] private float _velocityPower = 0.9f;
-    [SerializeField] private LayerMask _wallLayer;
 
     private Vector2 _moveInput;
     private Rigidbody2D _rigidbody;
     private Vector2 _velocity;
+    private ContactFilter2D _castFilter;
+    private RaycastHit2D[] _hitBuffer = new RaycastHit2D[4];
 
     [Header("References")]
     private WeaponManager _weaponManager;
@@ -29,6 +30,11 @@ public class PlayerController : MonoBehaviour
         _weaponManager = GetComponent<WeaponManager>();
         _playerHealth = GetComponent<PlayerHealth>();
         _pauseMenu = FindObjectOfType<PauseMenu>();
+
+        _castFilter = new ContactFilter2D();
+        _castFilter.useLayerMask = true;
+        _castFilter.layerMask = _wallLayer;
+        _castFilter.useTriggers = false;
     }
 
     private void FixedUpdate()
@@ -40,30 +46,40 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (_velocity.magnitude < 0.01f) // ����� ��� �������������� ���������� ��������
+        float delta = Time.fixedDeltaTime;
+
+        Vector2 targetVelocity = (_moveInput.sqrMagnitude > 0.01f)
+            ? _moveInput.normalized * _maxSpeed
+            : Vector2.zero;
+
+        float accelRate = (_moveInput.sqrMagnitude > 0.01f)
+            ? _acceleration
+            : _deceleration;
+
+        _velocity = Vector2.MoveTowards(_velocity, targetVelocity, accelRate * delta);
+
+        // Проверяем столкновения по каждой оси и обнуляем компоненту скорости
+        if (Mathf.Abs(_velocity.x) > 0.001f)
         {
-            _velocity = Vector2.zero;
+            Vector2 dirX = new Vector2(Mathf.Sign(_velocity.x), 0f);
+            float distX = Mathf.Abs(_velocity.x * delta);
+            if (_rigidbody.Cast(dirX, _castFilter, _hitBuffer, distX) > 0)
+                _velocity.x = 0;
         }
-        // ���� ���� ���� � ���� ������������ � ����������� ��������
-        if (_moveInput.magnitude > 0.01f && IsPathBlocked(_moveInput.normalized))
+
+        // вертикаль
+        if (Mathf.Abs(_velocity.y) > 0.001f)
         {
-            _velocity = Vector2.zero;
-            Debug.Log("Wall hit in move direction");
-            return;
+            Vector2 dirY = new Vector2(0f, Mathf.Sign(_velocity.y));
+            float distY = Mathf.Abs(_velocity.y * delta);
+            if (_rigidbody.Cast(dirY, _castFilter, _hitBuffer, distY) > 0)
+                _velocity.y = 0;
         }
 
-        // ������ ������� ��������
-        Vector2 targetVelocity = _moveInput * _maxSpeed;
-        Vector2 velocityDiff = targetVelocity - _velocity;
-        float accelerateRate = (targetVelocity.magnitude > 0.01f) ? _acceleration : _deceleration;
-        Vector2 movement = velocityDiff * (accelerateRate * Time.fixedDeltaTime);
-
-        _velocity += movement;
-        _velocity = Vector2.ClampMagnitude(_velocity, _maxSpeed);
-        _velocity *= Mathf.Pow(1f - _velocityPower, Time.fixedDeltaTime);
-
-        _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
+        _rigidbody.velocity = _velocity;
     }
+
+
 
     private void UpdateAnimation()
     {
@@ -144,12 +160,5 @@ public class PlayerController : MonoBehaviour
     //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
     //     return hit.collider != null;
     // }
-
-    private bool IsPathBlocked(Vector2 direction)
-    {
-        RaycastHit2D[] hits = new RaycastHit2D[1];
-        int count = _rigidbody.Cast(direction, hits, 0.1f); // 0.1f — дистанция проверки
-        return count > 0 && ((1 << hits[0].collider.gameObject.layer) & _wallLayer) != 0;
-    }
 
 }

@@ -6530,10 +6530,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _smoothTime: 0
-  _rotationSpeed: 0.6
-  _maxRotationAngle: 10
   _offset: {x: 0, y: 0, z: -10}
+  _smoothTime: 0
+  _clampX: {x: -10, y: 10}
+  _clampY: {x: -10, y: 10}
+  _maxRotationAngle: 10
+  _rotationSmoothTime: 0.2
 --- !u!1001 &1854006985
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,74 +1,75 @@
 using UnityEngine;
 
-public class SmoothCameraFolow : MonoBehaviour
+public class SmoothCameraFollow : MonoBehaviour
 {
+    [Header("Target")]
     [SerializeField] private Transform _target;
-    [SerializeField] private float _smoothTime = 0.3f;
-    [SerializeField] private float _rotationSpeed = 5f;
-    [SerializeField] private float _maxRotationAngle = 10f;
-    [SerializeField] private Vector3 _offset = new Vector3(0, 0, -10); // Смещение камеры относительно цели
+    [SerializeField] private Vector3 _offset = new Vector3(0, 0, -10);
 
-    private Vector3 _velocity = Vector3.zero;
+    [Header("Position Smoothing")]
+    [SerializeField] private float _smoothTime = 0.3f;
+    [SerializeField] private Vector2 _clampX = new Vector2(-10f, 10f);
+    [SerializeField] private Vector2 _clampY = new Vector2(-10f, 10f);
+    private Vector3 _currentVelocity = Vector3.zero;
+
+    [Header("Rotation Smoothing")]
+    [SerializeField] private float _maxRotationAngle = 10f;
+    [SerializeField] private float _rotationSmoothTime = 0.2f;
     private float _currentRotation = 0f;
-    private GameObject _player; //----------
+    private float _rotationVelocity = 0f;
 
     private void Start()
     {
-        _player = GameObject.FindWithTag("Player");
-        if (_player != null)
-        {
-            _target = _player.transform;
-        }
-        else
-        {
-            Debug.LogError("Не найден объект с тегом 'Player' в сцене!");
-        }
-    }
-
-    private void FixedUpdate()
-    {
         if (_target == null)
         {
-            Debug.LogWarning("Таргет не установлен!");
-            return;
+            var player = GameObject.FindWithTag("Player");
+            if (player != null) _target = player.transform;
+            else Debug.LogError("SmoothCameraFollow: target not set and no Player tag found.");
         }
-
-        FollowTarget();
-        RotateCamera();
     }
 
-    private void FollowTarget()
+    // LateUpdate, чтобы подстроиться под все движения и анимации игрока
+    private void LateUpdate()
     {
-        // Получаем цель и добавляем смещение
-        Vector3 targetPosition = _target.position + _offset;
-
-        // Сглаживаем движение камеры, чтобы избежать резких колебаний
-        Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _smoothTime);
-
-        // Если игрок не двигается, то уменьшить смещение камеры
-        if (_target.GetComponent<Rigidbody2D>().velocity.magnitude < 0.1f)
-        {
-            smoothedPosition = Vector3.Lerp(transform.position, smoothedPosition, 0.1f); // Дополнительное сглаживание, когда игрок не двигается
-        }
-
-        // Позиционируем камеру с ограничениями на оси X и Y
-        smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, -10f, 10f);  // Пример ограничений, подстройте по своему
-        smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, -10f, 10f);
-
-        // Применяем позицию к камере
-        transform.position = smoothedPosition;
+        if (_target == null) return;
+        UpdatePosition();
+        UpdateRotation();
     }
 
-
-    private void RotateCamera()
+    private void UpdatePosition()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        float screenCenterX = Screen.width / 2f;
-        float mouseDeltaX = (mousePosition.x - screenCenterX) / screenCenterX;
+        Vector3 desiredPos = _target.position + _offset;
 
-        float targetRotation = mouseDeltaX * _maxRotationAngle;
-        _currentRotation = Mathf.Lerp(_currentRotation, targetRotation, Time.deltaTime * _rotationSpeed);
+        // 2) сглаженно двигаем из текущей позиции в нужную
+        Vector3 smoothed = Vector3.SmoothDamp(
+            transform.position,
+            desiredPos,
+            ref _currentVelocity,
+            _smoothTime
+        );
 
-        transform.rotation = Quaternion.Euler(0, 0, _currentRotation);
+        // 3) жёсткое ограничение по краям
+        smoothed.x = Mathf.Clamp(smoothed.x, _clampX.x, _clampX.y);
+        smoothed.y = Mathf.Clamp(smoothed.y, _clampY.x, _clampY.y);
+
+        transform.position = smoothed;
+    }
+
+    private void UpdateRotation()
+    {
+        // угол, на который хотим повернуться (влево/вправо от центра экрана)
+        float screenCenterX = Screen.width * 0.5f;
+        float mouseDeltaX = (Input.mousePosition.x - screenCenterX) / screenCenterX;
+        float targetRot = mouseDeltaX * _maxRotationAngle;
+
+        // сглаженный переход угла
+        _currentRotation = Mathf.SmoothDampAngle(
+            _currentRotation,
+            targetRot,
+            ref _rotationVelocity,
+            _rotationSmoothTime
+        );
+
+        transform.rotation = Quaternion.Euler(0f, 0f, _currentRotation);
     }
 }
