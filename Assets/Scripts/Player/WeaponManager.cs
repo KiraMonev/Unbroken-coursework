@@ -48,23 +48,23 @@ public class WeaponManager : MonoBehaviour
     private Dictionary<WeaponType, WeaponData> _weaponDataDict;
     private Dictionary<WeaponType, GameObject> _weaponFirePointDict;
 
-    // Словарь для хранения текущего запаса патронов для каждого оружия.
-    private Dictionary<WeaponType, int> _ammoDict = new Dictionary<WeaponType, int>();
-
+    // Текущий выбранный тип и боезапас
     private WeaponType _currentWeaponType = WeaponType.NoWeapon;
+    private int _currentAmmo;
+    private int _totalAmmo;
 
     private Coroutine _autoFireCoroutine;
 
     private PlayerController _playerController;
     private Animator _animator;
     private PlayerHealth _playerHealth;
-    private UIBulletsAmount _bulletsAmoutUI;
+    private UIBulletsAmount _uiAmmo;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
-        _bulletsAmoutUI = FindObjectOfType<UIBulletsAmount>();
+        _uiAmmo = FindObjectOfType<UIBulletsAmount>();
 
         InitializeWeaponDictionary();
         InitializeWeaponAnimatorDictionary();
@@ -116,18 +116,13 @@ public class WeaponManager : MonoBehaviour
     {
         get
         {
-            if (_ammoDict.ContainsKey(_currentWeaponType))
-            {
-                _bulletsAmoutUI.SetCurrentAmmo(_ammoDict[_currentWeaponType]);
-                return _ammoDict[_currentWeaponType];
-            }
-            _bulletsAmoutUI.SetCurrentAmmo(0);
-            return 0;
+            _uiAmmo.SetCurrentAmmo(_currentAmmo);
+            return _currentAmmo;
         }
         set
         {
-            if (_ammoDict.ContainsKey(_currentWeaponType))
-                _ammoDict[_currentWeaponType] = value;
+            _currentAmmo = Mathf.Clamp(value, 0, _totalAmmo);
+            _uiAmmo.SetCurrentAmmo(_currentAmmo);
         }
     }
 
@@ -152,36 +147,31 @@ public class WeaponManager : MonoBehaviour
 
     private void PickUpWeapon(WeaponPickup pickup)
     {
-        _currentWeaponType = pickup.WeaponType;
-        ChangeWeaponAnimator(_currentWeaponType);
-        ActivateFirePoint(_currentWeaponType);
-        Destroy(pickup.gameObject);
-        //Debug.Log($"Подобрали оружие: {_currentWeaponType}");
+        var type = pickup.WeaponType;
+        var data = _weaponDataDict[type];
 
-        // Звук подбора
-        if (_currentWeaponType == WeaponType.Knife || _currentWeaponType == WeaponType.Katana)
+        _currentWeaponType = type;
+        ChangeWeaponAnimator(type);
+        ActivateFirePoint(type);
+
+        // Забираем боезапас из пикапа
+        if (data.ammoCapacity > 0)
+        {
+            _currentAmmo = pickup.CurrentAmmo;
+            _totalAmmo = data.ammoCapacity;
+            _uiAmmo.SetTotalAmmo(_totalAmmo);
+            _uiAmmo.SetCurrentAmmo(_currentAmmo);
+        }
+
+        Destroy(pickup.gameObject);
+
+        // Звук
+        if (type == WeaponType.Knife || type == WeaponType.Katana)
             SoundManager.Instance.PlayPlayer(AudioType.PickupKatanaAndKnife);
-        else if (_currentWeaponType == WeaponType.Ballbat)
-                SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+        else if (type == WeaponType.Ballbat)
+            SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
         else
             SoundManager.Instance.PlayPlayer(AudioType.PickupWeapon);
-
-        // Если оружие стрелковое (ammoCapacity > 0), устанавливаем текущий запас патрон
-        if (_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
-        {
-            if (data.ammoCapacity > 0)
-            {
-                if (!_ammoDict.ContainsKey(_currentWeaponType))
-                {
-                    // При первом подборе устанавливаем максимальное количество патронов.
-                    _ammoDict[_currentWeaponType] = data.ammoCapacity;
-                    _bulletsAmoutUI.SetCurrentAmmo(data.ammoCapacity);
-                }
-                _bulletsAmoutUI.SetTotalAmmo(data.ammoCapacity);
-                _bulletsAmoutUI.SetCurrentAmmo(_ammoDict[_currentWeaponType]);
-                Debug.Log($"Текущий запас патронов: {_ammoDict[_currentWeaponType]}");
-            }
-        }
     }
 
     public void DropWeapon()
@@ -199,18 +189,20 @@ public class WeaponManager : MonoBehaviour
             if (pickup != null)
             {
                 Vector2 throwVector = throwDirection + Vector2.up * 0.5f;
+                pickup.CurrentAmmo = _currentAmmo;
                 pickup.Throw(throwVector.normalized, _throwForce);
                 // Звук броска
                 SoundManager.Instance.PlayPlayer(AudioType.Throw);
-                _bulletsAmoutUI.SetTotalAmmo(0);
-                _bulletsAmoutUI.SetCurrentAmmo(0);
+                _uiAmmo.SetTotalAmmo(0);
+                _uiAmmo.SetCurrentAmmo(0);
             }
         }
         else
         {
             Debug.LogError($"Оружие типа {_currentWeaponType} не найдено в списке префабов.");
         }
-
+        _currentAmmo = 0;
+        _totalAmmo = 0;
         _currentWeaponType = WeaponType.NoWeapon;
         ChangeWeaponAnimator(WeaponType.NoWeapon);
         ActivateFirePoint(WeaponType.NoWeapon);
@@ -495,14 +487,21 @@ public class WeaponManager : MonoBehaviour
     {
         if (_currentWeaponType == WeaponType.NoWeapon)
             return;
+
         if (_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
         {
+            // Только для огнестрела
             if (data.ammoCapacity > 0)
             {
-                _ammoDict[_currentWeaponType] = data.ammoCapacity;
-                _bulletsAmoutUI.SetCurrentAmmo(_ammoDict[_currentWeaponType]);
-                Debug.Log($"Боеприпасы для {_currentWeaponType} пополнены до {data.ammoCapacity}");
+                CurrentAmmo = data.ammoCapacity;
+                _totalAmmo = data.ammoCapacity;
+
+                Debug.Log($"Боезапас для {_currentWeaponType} пополнен до {_currentAmmo}.");
             }
+        }
+        else
+        {
+            Debug.LogError($"Нет данных WeaponData для {_currentWeaponType} при попытке пополнить патроны.");
         }
     }
 

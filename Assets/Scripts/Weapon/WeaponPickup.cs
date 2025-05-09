@@ -5,6 +5,21 @@ public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private WeaponType _weaponType;
     public WeaponType WeaponType => _weaponType;
+
+    [Header("Данные оружия")]
+    [SerializeField] private WeaponData _weaponData;
+    [Header("Текущий боезапас")]
+    [SerializeField] private int _currentAmmo;
+    public int CurrentAmmo
+    {
+        get => _currentAmmo;
+        set
+        {
+            _currentAmmo = Mathf.Clamp(value, 0, _weaponData != null ? _weaponData.ammoCapacity : value);
+        }
+    }
+
+    [Header("Настройки броска")]
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private Collider2D _collider;
     [SerializeField] private float _enableTriggerDelay = 0.5f;
@@ -15,6 +30,10 @@ public class WeaponPickup : MonoBehaviour
             _rigidBody = GetComponent<Rigidbody2D>();
         if (_collider == null)
             _collider = GetComponent<Collider2D>();
+        if (_weaponData != null)
+            _currentAmmo = _weaponData.ammoCapacity;
+        else
+            Debug.Log("The weapon is missing _weaponData.");
     }
 
     private void Start()

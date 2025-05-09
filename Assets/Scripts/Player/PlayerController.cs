@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        float speed = _velocity.magnitude; // ��������� ������� ��������
+        float speed = _velocity.magnitude; 
         _animator.SetFloat("Speed", speed);
     }
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    // ���: ���� ������ ��� � ���������, ����� � �������
+    // Обработка левого клика мыши: подобрать оружие или атаковать
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
         if (!_pauseMenu.isPaused && !_playerHealth.isDead)
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     WeaponType current = _weaponManager.GetCurrentWeaponType();
-                    // ���� ������ ����� �������������� ����� (Uzi ��� Rifle), ��������� ������������
+                    // Для автоматического оружия запускаем автострельбу
                     if (current == WeaponType.Uzi || current == WeaponType.Rifle)
                     {
                         _weaponManager.StartAutoFire();
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        // ��� ��������� ������ ��������� ��������� ������� ����� ��������
+                        // Одиночная атака
                         _animator.SetTrigger("Attack");
                         //Debug.Log("������ �������� �����");
                     }
