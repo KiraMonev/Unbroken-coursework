@@ -1,49 +1,88 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Health Settings")]
     [SerializeField] private int health;
     [SerializeField] private int numOfHearts;
-    [SerializeField] private Image[] hearts;
+
+    [Header("UI Settings")]
+    [Tooltip("Tag for heart UI images in the scene.")]
+    [SerializeField] private string heartTag = "HeartImage";
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
+
+    private Image[] hearts;
 
     public bool isDead = false;
     private SpriteRenderer _spr;
     private Color _originalColor;
 
+    private DeathMenu _deathMenu;
+
     public int Health
     {
-        get { return health; }  
-        set { health = Mathf.Clamp(value, 0, numOfHearts); } // Устанавливаем здоровье с ограничениями
+        get => health;
+        set => health = Mathf.Clamp(value, 0, numOfHearts);
     }
 
     private void Awake()
     {
         _spr = GetComponent<SpriteRenderer>();
         _originalColor = _spr.color;
+        _deathMenu = FindObjectOfType<DeathMenu>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        FindHearts();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(FindHeartsAfterDelay());
+    }
+
+    private IEnumerator FindHeartsAfterDelay()
+    {
+        yield return null;
+        FindHearts();
+    }
+
+    private void FindHearts()
+    {
+        var heartObjects = GameObject.FindGameObjectsWithTag(heartTag);
+        Debug.Log($"Found {heartObjects.Length} heart objects");
+        hearts = heartObjects
+            .OrderBy(go => go.name)
+            .Select(go => go.GetComponent<Image>())
+            .Where(img => img != null)
+            .ToArray();
+        Debug.Log($"Hearts array length: {hearts.Length}");
     }
 
     private void FixedUpdate()
     {
-        if (health > numOfHearts)
-        {
-            health = numOfHearts;
-        }
+        if (hearts == null || hearts.Length == 0)
+            return;
+
+        health = Mathf.Min(health, numOfHearts);
+
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < health)
-                hearts[i].sprite = fullHeart;
-            else
-                hearts[i].sprite = emptyHeart;
+            Image img = hearts[i];
+            if (img == null) continue;
 
-            if (i < numOfHearts)
-                hearts[i].enabled = true;
-            else
-                hearts[i].enabled = false;
+            img.sprite = (i < health) ? fullHeart : emptyHeart;
+            img.enabled = (i < numOfHearts);
         }
     }
 
@@ -57,19 +96,25 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isDead) return;
+
         Health -= damage;
         StartCoroutine(FlashRed());
-        //audioManager.PlayTakeDamageSound(); нету
+
         if (Health <= 0)
         {
             isDead = true;
-            //anim.SetTrigger("Die"); наверное не будет
-            //deathPanel.SetActive(true); нету
+            _deathMenu.ShowDeathMenu();
         }
     }
 
-    public void IncreaseHealth(int healthAmount)
+    public void IncreaseHealth(int amount)
     {
-        Health += 1;
+        Health += amount;
+    }
+
+    public void SetFullHealth()
+    {
+        isDead = false;
+        Health = numOfHearts;
     }
 }

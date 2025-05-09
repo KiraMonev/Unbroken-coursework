@@ -1,14 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class DeathMenu : MonoBehaviour
 {
-    [SerializeField] public GameObject pauseMenu;
-    public static PauseMenu Instance;
+    [SerializeField] public GameObject deathMenu;
+    public static DeathMenu Instance;
     [SerializeField] public GameObject gameUI;
-    public bool isPaused = false;
-    private AchievenmentListIngame _achievementList;
-
     private PlayerHealth _playerHealth;
 
     private void Awake()
@@ -17,7 +14,6 @@ public class PauseMenu : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            _achievementList = FindObjectOfType<AchievenmentListIngame>();
             _playerHealth = FindObjectOfType<PlayerHealth>();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -35,14 +31,14 @@ public class PauseMenu : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         FindUIElements();
-        if (isPaused)
+        if (_playerHealth.isDead)
         {
-            ResumeGame();
+            HideDeathMenu();
         }
         else
         {
             gameUI.SetActive(true);
-            pauseMenu.SetActive(false);
+            deathMenu.SetActive(false);
         }
     }
 
@@ -54,37 +50,25 @@ public class PauseMenu : MonoBehaviour
             Transform uiTransform = gameManager.transform.Find("UI");
             if (uiTransform != null)
             {
-                pauseMenu = uiTransform.Find("PauseMenu").gameObject;
+                deathMenu = uiTransform.Find("DeathMenu").gameObject;
                 gameUI = uiTransform.Find("GameStats").gameObject;
             }
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && !_playerHealth.isDead)
-        {
-            if (isPaused && !_achievementList.MenuOpen)
-                ResumeGame();
-            else
-                PauseGame();
-        }
-    }
-
-    public void ResumeGame()
+    public void HideDeathMenu()
     {
         Time.timeScale = 1f;
-        pauseMenu.SetActive(false);
+        deathMenu.SetActive(false);
         gameUI.SetActive(true);
-        isPaused = false;
+        _playerHealth.SetFullHealth();
     }
 
-    void PauseGame()
+    public void ShowDeathMenu()
     {
-        pauseMenu.SetActive(true);
+        deathMenu.SetActive(true);
         gameUI.SetActive(false);
         Time.timeScale = 0f;
-        isPaused = true;
     }
 
     public void LoadLevel()

@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Settings/Scenes/URP2DSceneTemplate.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Level 1.unity
+    guid: bbc5e584bf0dc4d41bfe1b996b90e988
   - enabled: 1
-    path: Assets/Scenes/UiScene.unity
-    guid: d62939fd75e408141aa483f0268ff78b
+    path: Assets/Scenes/Level 2.unity
+    guid: 9aae3a13405744798a7e570ae4945856
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 9c7ea7a3a3646094e813b933524cba62
+    path: Assets/Scenes/Level 3.unity
+    guid: 56389a044aefc4b73b8df9a0c86c2500
   m_configObjects: {}

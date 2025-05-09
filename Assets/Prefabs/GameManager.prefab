@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 798031917039893957}
   m_Layer: 0
   m_Name: GameStats
-  m_TagString: Untagged
+  m_TagString: GameUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1104,7 +1104,7 @@ GameObject:
   - component: {fileID: 2315278630010321537}
   m_Layer: 5
   m_Name: Heart (2)
-  m_TagString: Untagged
+  m_TagString: HeartImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1312,7 +1312,7 @@ GameObject:
   - component: {fileID: 6443538459564177601}
   m_Layer: 5
   m_Name: Heart (1)
-  m_TagString: Untagged
+  m_TagString: HeartImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 7400332626772447419}
   m_Layer: 5
   m_Name: Heart
-  m_TagString: Untagged
+  m_TagString: HeartImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
