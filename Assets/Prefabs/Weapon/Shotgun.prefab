@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponType: 7
+  _weaponData: {fileID: 11400000, guid: a98e7374f3d0520479bdc202d0104f91, type: 2}
+  _currentAmmo: 0
   _rigidBody: {fileID: -2013384464697916268}
   _collider: {fileID: 601301753431071835}
   _enableTriggerDelay: 0.7
@@ -111,7 +113,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6911306342328360316}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -135,8 +136,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,6 +147,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &-2013384464697916268
