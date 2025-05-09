@@ -132,6 +132,7 @@ MonoBehaviour:
     m_Bits: 64
   rotationSpeed: 15
   movementSmoothing: 0.05
+  health: 2
   shootingDistance: 1
   shootingCooldown: 1
   stoppingDistance: 1
