@@ -14,6 +14,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _acceleration = 50f;
     [SerializeField] private float _deceleration = 50f;
 
+    [Header("Dash Settings")]
+    [SerializeField] private float dashSpeed = 15f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+
+    // Dash state
+    private bool isDashing;
+    private float dashTimeLeft;
+    private float dashCooldownTimer;
+    private Vector2 dashDirection;
+    private bool canDash = true; // unlocked via shop =================== REPLACE ON FALSE ===================
+
     private Vector2 _moveInput;
     private Rigidbody2D _rigidbody;
     private Vector2 _velocity;
@@ -81,7 +93,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (_playerHealth.isDead) return;
-        Move();
+
+        // Update cooldown
+        if (dashCooldownTimer > 0)
+            dashCooldownTimer -= Time.fixedDeltaTime;
+
+        if (isDashing)
+            PerformDash();
+        else
+        {
+            Move();
+        }
         UpdateAnimation();
     }
 
@@ -120,7 +142,21 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = _velocity;
     }
 
+    private void PerformDash()
+    {
+        if (dashTimeLeft == dashDuration)
+        {
+            SoundManager.Instance.PlayPlayer(AudioType.Dash);
+            _rigidbody.velocity = dashDirection * dashSpeed;
+        }
 
+        dashTimeLeft -= Time.fixedDeltaTime;
+        if (dashTimeLeft <= 0)
+        {
+            isDashing = false;
+            dashCooldownTimer = dashCooldown;
+        }
+    }
 
     private void UpdateAnimation()
     {
@@ -133,7 +169,21 @@ public class PlayerController : MonoBehaviour
         if (_playerHealth.isDead) return;
         _moveInput = context.ReadValue<Vector2>();
     }
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (!_playerHealth.isDead && canDash && context.performed && !isDashing && dashCooldownTimer <= 0)
+        {
+            dashDirection = _moveInput.sqrMagnitude > 0.1f ? _moveInput.normalized : Vector2.right;
+            isDashing = true;
+            dashTimeLeft = dashDuration;
+        }
+    }
 
+    // Call this when player purchases dash ability in shop
+    public void UnlockDash()
+    {
+        canDash = true;
+    }
     // Обработка левого клика мыши: подобрать оружие или атаковать
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
@@ -190,12 +240,4 @@ public class PlayerController : MonoBehaviour
     {
         return _moveInput;
     }
-
-    // private bool IsPathBlocked(Vector2 direction)
-    // {
-    //     RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, direction, 0.4f, _wallLayer);
-    //     // Debug.DrawRay(_rigidbody.position, direction * 0.4f, Color.red); // ������������ ����
-    //     return hit.collider != null;
-    // }
-
 }
