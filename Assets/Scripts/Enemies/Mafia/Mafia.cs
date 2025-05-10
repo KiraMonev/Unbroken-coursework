@@ -354,6 +354,7 @@ public class Mafia : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health-=damage;
+        Debug.Log(damage);
     }
     private void OnDrawGizmos()
     {
