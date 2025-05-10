@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponDataShotgun
   m_EditorClassIdentifier: 
   weaponType: 7
-  damage: 10
+  damage: 15
   attackSpeed: 0
   attackDelay: 0
   ammoCapacity: 30

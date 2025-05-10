@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponDataPistol
   m_EditorClassIdentifier: 
   weaponType: 4
-  damage: 5
+  damage: 10
   attackSpeed: 0
   attackDelay: 0
   ammoCapacity: 20
