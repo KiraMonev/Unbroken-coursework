@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3903546674998448339}
   m_Layer: 0
   m_Name: Police
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 2004098282, guid: 83e58440d8f3e034ea07e18f2d92bd8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,10 +132,10 @@ MonoBehaviour:
     m_Bits: 64
   rotationSpeed: 15
   movementSmoothing: 0.05
-  health: 2
-  shootingDistance: 1
+  health: 40
+  shootingDistance: 0.5
   shootingCooldown: 1
-  stoppingDistance: 1
+  stoppingDistance: 0.5
   bulletPrefab: {fileID: 0}
   firePoint: {fileID: 0}
   bulletSpeed: 10
@@ -143,7 +143,6 @@ MonoBehaviour:
   attackPoint: {fileID: 449876144831052260}
   attackRange: 1.5
   attackAngle: 120
-  player: {fileID: 0}
   animator: {fileID: 2671058303472390032}
   rb: {fileID: 265977460814617810}
   patrolWaypoints:

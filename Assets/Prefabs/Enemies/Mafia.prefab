@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 5848736667058281257}
   m_Layer: 0
   m_Name: Mafia
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &129114464494375072
 Transform:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 966965215, guid: efd7d84a7b2a2ef4ab7553b2df1e06e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMafia: 1
   patrolSpeed: 2
-  chaseSpeed: 5
+  chaseSpeed: 2
   maxViewDistance: 5
   waypointReachedThreshold: 0.1
   obstacleLayer:
@@ -204,17 +204,17 @@ MonoBehaviour:
     m_Bits: 64
   rotationSpeed: 10
   movementSmoothing: 0.05
-  shootingDistance: 3
+  health: 40
+  shootingDistance: 2.5
   shootingCooldown: 1
   stoppingDistance: 2.5
   bulletPrefab: {fileID: 8383192401903511657, guid: a6b1ff30621cf8e47a190bbac1e3a255, type: 3}
   firePoint: {fileID: 5748975750978120447}
-  bulletSpeed: 10
+  bulletSpeed: 7
   bulletLifetime: 2
   attackPoint: {fileID: 0}
   attackRange: 1.5
   attackAngle: 120
-  player: {fileID: 0}
   animator: {fileID: 8745863088904342423}
   rb: {fileID: 7034497342669608600}
   patrolWaypoints:

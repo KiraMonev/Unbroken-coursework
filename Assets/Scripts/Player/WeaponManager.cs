@@ -407,13 +407,16 @@ public class WeaponManager : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-
+            if (!hit.CompareTag("Enemy"))
+                continue;
             Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона.");
-                // Здесь можно вызвать метод TakeDamage
-                // hit.GetComponent<Enemy>()?.TakeDamage(data.damage);
-
+            var mafia = hit.GetComponent<Mafia>();
+            if (mafia != null)
+            {
+                int dmg = Mathf.RoundToInt(data.damage);
+                mafia.TakeDamage(dmg);
+            }
         }
-        // добавить звук удара
     }
 
 
