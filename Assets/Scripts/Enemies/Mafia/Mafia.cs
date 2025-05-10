@@ -343,18 +343,10 @@ public class Mafia : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Bullet"))
-        {
-            TakeDamage(1);
-        }
-    }
-
     public void TakeDamage(int damage)
     {
         health-=damage;
-        Debug.Log(damage);
+        Debug.Log("Damage = " + damage);
     }
     private void OnDrawGizmos()
     {

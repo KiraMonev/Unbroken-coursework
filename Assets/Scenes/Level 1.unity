@@ -4142,6 +4142,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 293761219693538530, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5059201108273228226, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -33885,9 +33889,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3903546674998448339, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3939756425189765856, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: m_Name
       value: Police
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939756425189765856, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4435788238881555846, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: m_SortingOrder
@@ -36353,4 +36365,6 @@ SceneRoots:
   - {fileID: 1950711707}
   - {fileID: 1695523205}
   - {fileID: 332160479}
-
+  - {fileID: 371971646}
+  - {fileID: 35260586}
+  - {fileID: 1939712393}
