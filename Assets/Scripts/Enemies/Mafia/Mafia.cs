@@ -28,7 +28,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private float attackAngle = 120f; // ”гол атаки (полусфера)
 
     [Header("References")]
-    [SerializeField] private Transform player;
+    private Transform player;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private List<Transform> patrolWaypoints = new List<Transform>();
@@ -45,6 +45,7 @@ public class Mafia : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         if (patrolWaypoints.Count == 0)
         {
             Debug.LogError("No patrol waypoints assigned!");
