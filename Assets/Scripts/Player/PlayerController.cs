@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth _playerHealth;
 
     private PauseMenu _pauseMenu;
+    public bool isConversation = false;
 
     private void Awake()
     {
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_playerHealth.isDead) return;
+        if (_playerHealth.isDead || isConversation) return;
         Move();
         UpdateAnimation();
     }
@@ -137,7 +138,7 @@ public class PlayerController : MonoBehaviour
     // Обработка левого клика мыши: подобрать оружие или атаковать
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead && !isConversation)
         {
             if (context.started)
             {
