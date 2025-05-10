@@ -4151,6 +4151,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5848736667058281257, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
+      propertyPath: health
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848736667058281257, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
+      propertyPath: chaseSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848736667058281257, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
+      propertyPath: bulletSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848736667058281257, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
+      propertyPath: maxViewDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848736667058281257, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
+      propertyPath: shootingDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848736667058281257, guid: 95b5a8cc53cf3954699d8490108f2b29, type: 3}
       propertyPath: patrolWaypoints.Array.data[0]
       value: 
       objectReference: {fileID: 1159636677}
