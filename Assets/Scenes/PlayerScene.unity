@@ -2430,17 +2430,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9163984499633617568, guid: c3fe15df533c76249abe4a57b21fae56, type: 3}
   m_PrefabInstance: {fileID: 522769975}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &535853925 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6443538459564177601, guid: 2bce98722e3f2934d99bf7d9fa07a309, type: 3}
-  m_PrefabInstance: {fileID: 392448120}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &604369451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2689,17 +2678,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6701998920050230886, guid: 89b595c071c23fd4c8378ef6c9fe55e6, type: 3}
   m_PrefabInstance: {fileID: 701816238}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &719509359 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7400332626772447419, guid: 2bce98722e3f2934d99bf7d9fa07a309, type: 3}
-  m_PrefabInstance: {fileID: 392448120}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &730654843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6025,17 +6003,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3213898844385971062, guid: 2918da1bb2843144eaceb48dba9a0342, type: 3}
   m_PrefabInstance: {fileID: 1615819897}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1625666252 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2315278630010321537, guid: 2bce98722e3f2934d99bf7d9fa07a309, type: 3}
-  m_PrefabInstance: {fileID: 392448120}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1649076492
 GameObject:
   m_ObjectHideFlags: 0
@@ -6715,18 +6682,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4126212481126194240, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
-      propertyPath: hearts.Array.data[0]
-      value: 
-      objectReference: {fileID: 719509359}
-    - target: {fileID: 4126212481126194240, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
-      propertyPath: hearts.Array.data[1]
-      value: 
-      objectReference: {fileID: 535853925}
-    - target: {fileID: 4126212481126194240, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
-      propertyPath: hearts.Array.data[2]
-      value: 
-      objectReference: {fileID: 1625666252}
     - target: {fileID: 4362309346045747630, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
       propertyPath: m_Name
       value: PlayerNoWeapon
