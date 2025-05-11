@@ -23,9 +23,12 @@ public class Mafia : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private float bulletLifetime = 2f;
-    [SerializeField] private Transform attackPoint; // Точка, откуда исходит атака (например, рука полицейского)
-    [SerializeField] private float attackRange = 1.5f; // Радиус атаки дубинкой
-    [SerializeField] private float attackAngle = 120f; // Угол атаки (полусфера)
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackAngle = 120f;
+
+    [Header("Visual Effects")]
+    [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения при уроне
 
     [Header("References")]
     private Transform player;
@@ -33,8 +36,10 @@ public class Mafia : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private List<Transform> patrolWaypoints = new List<Transform>();
     [SerializeField] private LayerMask playerLayer;
+    private SpriteRenderer spriteRenderer; // Для эффекта покраснения
 
-    private bool isDead=false;  
+    private Color originalColor;
+    private bool isDead = false;
     private bool isChasing = false;
     private bool isInCombat = false;
     private int currentWaypointIndex = 0;
@@ -47,6 +52,8 @@ public class Mafia : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Инициализация SpriteRenderer
+        originalColor = spriteRenderer.color;
         if (patrolWaypoints.Count == 0)
         {
             Debug.LogError("No patrol waypoints assigned!");
@@ -68,7 +75,6 @@ public class Mafia : MonoBehaviour
             {
                 ReturnToPatrol();
             }
-
             MoveToTarget();
             UpdateAnimation();
             UpdateRotation();
@@ -109,16 +115,12 @@ public class Mafia : MonoBehaviour
         if (isMafia)
         {
             animator.Play("Taking");
+            TakeGun();
         }
         else
         {
             Debug.Log("Taking!");
             animator.Play("TakingDubinka");
-            animator.SetBool("GunTaking", true);
-        }
-        if (isMafia)
-        {
-            TakeGun();
         }
     }
 
@@ -180,46 +182,45 @@ public class Mafia : MonoBehaviour
 
     private void Shoot()
     {
-        if (Time.time - lastShotTime < shootingCooldown || player == null) return;
-
-        lastShotTime = Time.time;
-
-        if (isMafia)
+        if (!isDead)
         {
-            Vector2 shootDirection = ((Vector2)player.position - (Vector2)firePoint.position).normalized;
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            bulletRb.velocity = shootDirection * bulletSpeed;
+            if (Time.time - lastShotTime < shootingCooldown || player == null) return;
 
-            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-            bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            lastShotTime = Time.time;
 
-            Destroy(bullet, bulletLifetime);
-        }
-        else
-        {
-            // Получаем всех врагов вокруг
-            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
-
-            foreach (Collider2D enemy in hitPlayer)
+            if (isMafia)
             {
-                // Проверяем, находится ли враг в пределах угла атаки (полусферы)
-                if (enemy.gameObject.CompareTag("Player"))
+                Vector2 shootDirection = ((Vector2)player.position - (Vector2)firePoint.position).normalized;
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+                bulletRb.velocity = shootDirection * bulletSpeed;
+
+                float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+                bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                Destroy(bullet, bulletLifetime);
+            }
+            else
+            {
+                Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+
+                foreach (Collider2D enemy in hitPlayer)
                 {
-                    Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
-                    float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
-                    animator.SetBool("Gun", true);
-                    animator.SetBool("GunTaking", false);
-                    if (angleToEnemy <= attackAngle / 2f)
+                    if (enemy.gameObject.CompareTag("Player"))
                     {
-                        // Наносим урон (здесь можно добавить эффекты или отбрасывание)
-                        animator.PlayInFixedTime("Attack");
+                        Vector2 directionToEnemy = (enemy.transform.position - attackPoint.position).normalized;
+                        float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
+                        animator.SetBool("Gun", true);
+                        animator.SetBool("GunTaking", false);
+                        if (angleToEnemy <= attackAngle / 2f)
+                        {
+                            animator.PlayInFixedTime("Attack");
+                        }
                     }
                 }
-            }
 
-            // Визуализация атаки (опционально)
-            Debug.DrawRay(attackPoint.position, attackPoint.right * attackRange, Color.red, 0.5f);
+                Debug.DrawRay(attackPoint.position, attackPoint.right * attackRange, Color.red, 0.5f);
+            }
         }
     }
 
@@ -227,8 +228,8 @@ public class Mafia : MonoBehaviour
     {
         Vector2 directionToEnemy = (player.transform.position - attackPoint.position).normalized;
         float angleToEnemy = Vector2.Angle(attackPoint.right, directionToEnemy);
-        RaycastHit2D hit = Physics2D.Raycast(attackPoint.position,directionToEnemy,Vector2.Distance(player.transform.position, attackPoint.position),obstacleLayer);
-        if (angleToEnemy <= attackAngle / 2f && hit.collider==null)
+        RaycastHit2D hit = Physics2D.Raycast(attackPoint.position, directionToEnemy, Vector2.Distance(player.transform.position, attackPoint.position), obstacleLayer);
+        if (angleToEnemy <= attackAngle / 2f && hit.collider == null)
         {
             player.GetComponent<PlayerHealth>().TakeDamage(1);
             Debug.Log($"Удар дубинкой!");
@@ -240,7 +241,6 @@ public class Mafia : MonoBehaviour
         float speed = isChasing ? chaseSpeed : patrolSpeed;
         Vector2 direction = (currentTarget - (Vector2)transform.position).normalized;
 
-        // Обновляем направление взгляда только при движении
         if (direction.magnitude > 0.1f && !isInCombat)
         {
             lookDirection = direction;
@@ -267,17 +267,14 @@ public class Mafia : MonoBehaviour
 
         if (isInCombat && player != null)
         {
-            // В режиме боя смотрим на игрока
             targetDirection = ((Vector2)player.position - (Vector2)transform.position).normalized;
         }
         else if (rb.velocity.magnitude > 0.1f)
         {
-            // При движении смотрим в направлении движения
             targetDirection = rb.velocity.normalized;
         }
         else
         {
-            // В остальных случаях сохраняем текущее направление
             return;
         }
 
@@ -349,13 +346,24 @@ public class Mafia : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health-=damage;
+        health -= damage;
         Debug.Log("Damage = " + damage);
+        StartCoroutine(FlashRed()); // Запускаем эффект покраснения
+    }
+
+    private IEnumerator FlashRed()
+    {
+        spriteRenderer.color = Color.red; // Устанавливаем красный цвет
+        yield return new WaitForSeconds(flashDuration); // Ждем
+        spriteRenderer.color = originalColor; // Возвращаем исходный цвет
     }
 
     private void Death()
     {
+        spriteRenderer.color = originalColor;
         animator.SetBool("isDead", true);
+        animator.SetBool("GunTaking", false);
+        animator.SetBool("Gun", false);
         isDead = true;
         if (isMafia)
         {
@@ -363,6 +371,7 @@ public class Mafia : MonoBehaviour
         }
         rb.simulated = false;
     }
+
     private void OnDrawGizmos()
     {
         if (player != null)
