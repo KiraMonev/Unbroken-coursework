@@ -98,11 +98,13 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         Health -= damage;
+        SoundManager.Instance.PlayPlayer(PlayerSoundType.TakeDamage);
         StartCoroutine(FlashRed());
 
         if (Health <= 0)
         {
             isDead = true;
+            SoundManager.Instance.PlayPlayer(PlayerSoundType.Death);
             _deathMenu.ShowDeathMenu();
         }
     }

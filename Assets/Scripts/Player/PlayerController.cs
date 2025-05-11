@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dashTimeLeft == dashDuration)
         {
-            SoundManager.Instance.PlayPlayer(AudioType.Dash);
+            SoundManager.Instance.PlayPlayer(PlayerSoundType.Dash);
             _rigidbody.velocity = dashDirection * dashSpeed;
         }
 
@@ -179,11 +179,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Call this when player purchases dash ability in shop
-    public void UnlockDash()
-    {
-        canDash = true;
-    }
     // Обработка левого клика мыши: подобрать оружие или атаковать
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
@@ -239,5 +234,12 @@ public class PlayerController : MonoBehaviour
     public Vector2 GetMoveInput()
     {
         return _moveInput;
+    }
+
+    // Activate dash in the SHOP
+    public void UnlockDash()
+    {
+        canDash = true;
+        Debug.Log("Activate dash");
     }
 }

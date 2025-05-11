@@ -34,7 +34,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController _baseAnimatorController;
 
     [Header("Fire Points")]
-    [Tooltip("Сопоставь каждому типу оружия свой fire point (дочерний объект на Player).")]
     [SerializeField] private List<WeaponFirePoint> _weaponFirePoints;
     [System.Serializable]
     public class WeaponFirePoint
@@ -52,6 +51,7 @@ public class WeaponManager : MonoBehaviour
     private WeaponType _currentWeaponType = WeaponType.NoWeapon;
     private int _currentAmmo;
     private int _totalAmmo;
+    private bool _doubleDamageUnlocked = false;
 
     private Coroutine _autoFireCoroutine;
 
@@ -167,11 +167,11 @@ public class WeaponManager : MonoBehaviour
 
         // Звук
         if (type == WeaponType.Knife || type == WeaponType.Katana)
-            SoundManager.Instance.PlayPlayer(AudioType.PickupKatanaAndKnife);
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.PickupKatanaAndKnife);
         else if (type == WeaponType.Ballbat)
-            SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.BallbatAttack);
         else
-            SoundManager.Instance.PlayPlayer(AudioType.PickupWeapon);
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.PickupWeapon);
     }
 
     public void DropWeapon()
@@ -192,7 +192,7 @@ public class WeaponManager : MonoBehaviour
                 pickup.CurrentAmmo = _currentAmmo;
                 pickup.Throw(throwVector.normalized, _throwForce);
                 // Звук броска
-                SoundManager.Instance.PlayPlayer(AudioType.Throw);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.Throw);
                 _uiAmmo.SetTotalAmmo(0);
                 _uiAmmo.SetCurrentAmmo(0);
             }
@@ -301,7 +301,7 @@ public class WeaponManager : MonoBehaviour
             if (CurrentAmmo < ammoCost)
             {
                 Debug.Log("Нет патронов!");
-                SoundManager.Instance.PlayPlayer(AudioType.EmptyAmmo);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.EmptyAmmo);
                 return;
             }
             CurrentAmmo -= ammoCost;
@@ -312,33 +312,33 @@ public class WeaponManager : MonoBehaviour
         switch (_currentWeaponType)
         {
             case WeaponType.Ballbat:
-                SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.BallbatAttack);
                 MeleeAttack(data);
                 break;
 
             case WeaponType.Knife:
             case WeaponType.Katana:
-                SoundManager.Instance.PlayPlayer(AudioType.KatanaAndKnife);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.KatanaAndKnife);
                 MeleeAttack(data);
                 break;
 
             case WeaponType.Pistol:
-                SoundManager.Instance.PlayPlayer(AudioType.PistolShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.PistolShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Uzi:
-                SoundManager.Instance.PlayPlayer(AudioType.UziShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.UziShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Rifle:
-                SoundManager.Instance.PlayPlayer(AudioType.RifleShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.RifleShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Shotgun:
-                SoundManager.Instance.PlayPlayer(AudioType.ShotgunShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.ShotgunShoot);
                 RangeAttackShotgun(data);
                 break;
 
@@ -409,11 +409,12 @@ public class WeaponManager : MonoBehaviour
         {
             if (!hit.CompareTag("Enemy"))
                 continue;
+            float multiplier = _doubleDamageUnlocked ? 2f : 1f;
+            int dmg = Mathf.RoundToInt(data.damage * multiplier);
             Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона.");
             var mafia = hit.GetComponent<Mafia>();
             if (mafia != null)
             {
-                int dmg = Mathf.RoundToInt(data.damage);
                 mafia.TakeDamage(dmg);
             }
         }
@@ -430,7 +431,8 @@ public class WeaponManager : MonoBehaviour
             Bullet bullet = proj.GetComponent<Bullet>();
             if (bullet != null)
             {
-                bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
+                float multiplier = _doubleDamageUnlocked ? 2f : 1f;
+                bullet.SetParameters(data.damage * multiplier, data.projectileSpeed, data.bulletScale, data.bulletColor);
             }
             Debug.Log($"Выстрел из {_currentWeaponType}, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
         }
@@ -458,7 +460,7 @@ public class WeaponManager : MonoBehaviour
 
             // Коэффициент смещения (подберите экспериментально)
             float offsetFactor = 0.1f;
-
+            float multiplier = _doubleDamageUnlocked ? 2f : 1f;
             for (int i = 0; i < count; i++)
             {
                 float angleOffset = startAngle + step * i;
@@ -474,7 +476,7 @@ public class WeaponManager : MonoBehaviour
                 Bullet bullet = proj.GetComponent<Bullet>();
                 if (bullet != null)
                 {
-                    bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
+                    bullet.SetParameters(data.damage * multiplier, data.projectileSpeed, data.bulletScale, data.bulletColor);
                 }
             }
             Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
@@ -506,6 +508,13 @@ public class WeaponManager : MonoBehaviour
         {
             Debug.LogError($"Нет данных WeaponData для {_currentWeaponType} при попытке пополнить патроны.");
         }
+    }
+
+    //Activate damage X2 in the SHOP
+    public void UnlockDoubleDamage()
+    {
+        _doubleDamageUnlocked = true;
+        Debug.Log("Activate damage X2");
     }
 
 }

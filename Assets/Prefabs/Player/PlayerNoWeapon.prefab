@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4498560456212582177}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1886515685470340838}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Rifle
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 6168321848272083551}
   - component: {fileID: 8862222692885095622}
   - component: {fileID: 4126212481126194240}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PlayerNoWeapon
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3596077951686619896}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4284694495271758697}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Uzi
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 936077528884356162}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
