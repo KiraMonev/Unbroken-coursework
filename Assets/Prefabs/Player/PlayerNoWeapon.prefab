@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4498560456212582177}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1886515685470340838}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Rifle
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 6168321848272083551}
   - component: {fileID: 8862222692885095622}
   - component: {fileID: 4126212481126194240}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PlayerNoWeapon
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -206,6 +206,9 @@ MonoBehaviour:
     m_Bits: 64
   _acceleration: 30
   _deceleration: 60
+  dashSpeed: 15
+  dashDuration: 0.15
+  dashCooldown: 1
 --- !u!114 &3593481142580325530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +282,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8bd672c1-8f25-4d2d-8c28-8dde60543281
     m_ActionName: Player/Drop[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5121814297081283979}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c7c5413b-ccf2-4289-8a86-fa6f33f3b3c8
+    m_ActionName: Player/Dash[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -437,10 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   numOfHearts: 3
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  heartTag: HeartImage
   fullHeart: {fileID: 1727785776, guid: 39ff8e36d47823748823b9eaabcd363d, type: 3}
   emptyHeart: {fileID: -1505689624, guid: 39ff8e36d47823748823b9eaabcd363d, type: 3}
   isDead: 0
@@ -453,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3596077951686619896}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4284694495271758697}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Uzi
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -519,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 936077528884356162}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}

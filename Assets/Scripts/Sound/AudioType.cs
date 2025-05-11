@@ -11,5 +11,6 @@ public enum AudioType
     PickupWeapon,
     PistolShoot,
     RifleShoot,
-    ShotgunShoot
+    ShotgunShoot,
+    Dash
 }

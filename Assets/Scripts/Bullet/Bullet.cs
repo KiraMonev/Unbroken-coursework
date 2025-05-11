@@ -31,22 +31,30 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Enemy"))
-    //    {
-    //        Debug.Log($"Снаряд попал в {collision.name}. Урон: {_damage}");
-    //        collision.GetComponent<Enemy>()?.TakeDamage(_damage);
-    //        Destroy(gameObject); // Уничтожение пули
-    //    }
-    //}
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Bullet") && !collision.gameObject.CompareTag("Player"))
+        var other = collision.gameObject;
+
+        // Если вражеский объект — наносим ему урон
+        if (other.CompareTag("Enemy"))
+        {
+            var mafiaEnemy = other.GetComponent<Mafia>();
+            if (mafiaEnemy != null)
+            {
+                int dmg = Mathf.RoundToInt(_damage);
+                mafiaEnemy.TakeDamage(dmg);
+                Debug.Log($"Damage of bullet = {dmg}");
+            }
+
+            Destroy(gameObject);
+            return;
+        }
+
+        // Если столкновение ни с пулей, ни с игроком — просто уничтожаем пулю
+        if (!other.CompareTag("Bullet") && !other.CompareTag("Player"))
         {
             Destroy(gameObject);
-            Debug.Log($"Пуля уничтожена при столкновении с {collision.gameObject.name}");
+            Debug.Log($"Пуля уничтожена при столкновении с {other.name}");
         }
     }
 }
