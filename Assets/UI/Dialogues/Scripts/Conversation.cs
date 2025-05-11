@@ -13,7 +13,7 @@ public class Conversation : MonoBehaviour
 
     private void Start()
     {
-        _playerController.isConversation = true;
+        ConversationManager.OnConversationStarted += SetConversationState;
         ConversationManager.Instance.StartConversation(conversation);
         ConversationManager.OnConversationEnded += RemoveConversationState;
     }
@@ -22,5 +22,11 @@ public class Conversation : MonoBehaviour
     {
         Debug.Log("Закончили диалог");
         _playerController.isConversation = false;
+    }
+
+    private void SetConversationState()
+    {
+        Debug.Log("Начали диалог");
+        _playerController.isConversation = true;
     }
 }
