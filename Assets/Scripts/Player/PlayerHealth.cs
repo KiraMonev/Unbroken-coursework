@@ -12,18 +12,28 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private int numOfHearts;
 
+    [Header("Armor Settings")]
+    [Tooltip("Текущее количество единиц брони")]
+    [SerializeField] private int armor;
+    [Tooltip("Максимум брони, который можно купить")]
+    [SerializeField] private int maxArmor = 1;
+
     [Header("UI Settings")]
     [Tooltip("Tag for heart UI images in the scene.")]
     [SerializeField] private string heartTag = "HeartImage";
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
 
+    [SerializeField] private string armorTag = "ArmorImage";
+    [SerializeField] private Sprite fullArmorIcon;
+    [SerializeField] private Sprite emptyArmorIcon;
+
     private Image[] hearts;
+    private Image[] armors;
 
     public bool isDead = false;
     private SpriteRenderer _spr;
     private Color _originalColor;
-
     private DeathMenu _deathMenu;
 
     public int Health
@@ -31,7 +41,11 @@ public class PlayerHealth : MonoBehaviour
         get => health;
         set => health = Mathf.Clamp(value, 0, numOfHearts);
     }
-
+    public int Armor
+    {
+        get => armor;
+        set => armor = Mathf.Clamp(value, 0, maxArmor);
+    }
     private void Awake()
     {
         _spr = GetComponent<SpriteRenderer>();
@@ -39,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         _deathMenu = FindObjectOfType<DeathMenu>();
         SceneManager.sceneLoaded += OnSceneLoaded;
         FindHearts();
+        FindArmors();
     }
 
     private void OnDestroy()
@@ -48,13 +63,14 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(FindHeartsAfterDelay());
+        StartCoroutine(FindUIAfterDelay());
     }
 
-    private IEnumerator FindHeartsAfterDelay()
+    private IEnumerator FindUIAfterDelay()
     {
         yield return null;
         FindHearts();
+        FindArmors();
     }
 
     private void FindHearts()
@@ -69,12 +85,21 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Hearts array length: {hearts.Length}");
     }
 
+    private void FindArmors()
+    {
+        var armorObjects = GameObject.FindGameObjectsWithTag(armorTag);
+        armors = armorObjects.OrderBy(go => go.name)
+            .Select(go => go.GetComponent<Image>())
+            .Where(img => img != null)
+            .ToArray();
+    }
     private void FixedUpdate()
     {
         if (hearts == null || hearts.Length == 0)
             return;
 
         health = Mathf.Min(health, numOfHearts);
+        Armor = Mathf.Min(Armor, maxArmor);
 
         for (int i = 0; i < hearts.Length; i++)
         {
@@ -83,6 +108,12 @@ public class PlayerHealth : MonoBehaviour
 
             img.sprite = (i < health) ? fullHeart : emptyHeart;
             img.enabled = (i < numOfHearts);
+        }
+        for (int i = 0; i < armors.Length; i++)
+        {
+            if (armors[i] == null) continue;
+            armors[i].sprite = (i < Armor) ? fullArmorIcon : emptyArmorIcon;
+            armors[i].enabled = (i < maxArmor);
         }
     }
 
@@ -97,21 +128,41 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
-        Health -= damage;
         SoundManager.Instance.PlayPlayer(PlayerSoundType.TakeDamage);
         StartCoroutine(FlashRed());
 
-        if (Health <= 0)
+        // Сначала расходуем броню
+        int remainingDamage = damage;
+        if (Armor > 0)
         {
-            isDead = true;
-            SoundManager.Instance.PlayPlayer(PlayerSoundType.Death);
-            _deathMenu.ShowDeathMenu();
+            int absorb = Mathf.Min(Armor, damage);
+            Armor -= absorb;
+            remainingDamage -= absorb;
+
+        }
+
+        // Если броня не полностью погасила урон
+        if (remainingDamage > 0)
+        {
+            Health -= remainingDamage;
+
+            if (Health <= 0)
+            {
+                isDead = true;
+                SoundManager.Instance.PlayPlayer(PlayerSoundType.Death);
+                _deathMenu.ShowDeathMenu();
+            }
         }
     }
 
     public void IncreaseHealth(int amount)
     {
         Health += amount;
+    }
+
+    public void IncreaseArmor(int amount)
+    {
+        Armor += amount;
     }
 
     public void SetFullHealth()
