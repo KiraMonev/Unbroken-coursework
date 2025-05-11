@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dashTimeLeft == dashDuration)
         {
-            SoundManager.Instance.PlayPlayer(AudioType.Dash);
+            SoundManager.Instance.PlayPlayer(PlayerSoundType.Dash);
             _rigidbody.velocity = dashDirection * dashSpeed;
         }
 

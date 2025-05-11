@@ -167,11 +167,11 @@ public class WeaponManager : MonoBehaviour
 
         // Звук
         if (type == WeaponType.Knife || type == WeaponType.Katana)
-            SoundManager.Instance.PlayPlayer(AudioType.PickupKatanaAndKnife);
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.PickupKatanaAndKnife);
         else if (type == WeaponType.Ballbat)
-            SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.BallbatAttack);
         else
-            SoundManager.Instance.PlayPlayer(AudioType.PickupWeapon);
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.PickupWeapon);
     }
 
     public void DropWeapon()
@@ -192,7 +192,7 @@ public class WeaponManager : MonoBehaviour
                 pickup.CurrentAmmo = _currentAmmo;
                 pickup.Throw(throwVector.normalized, _throwForce);
                 // Звук броска
-                SoundManager.Instance.PlayPlayer(AudioType.Throw);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.Throw);
                 _uiAmmo.SetTotalAmmo(0);
                 _uiAmmo.SetCurrentAmmo(0);
             }
@@ -301,7 +301,7 @@ public class WeaponManager : MonoBehaviour
             if (CurrentAmmo < ammoCost)
             {
                 Debug.Log("Нет патронов!");
-                SoundManager.Instance.PlayPlayer(AudioType.EmptyAmmo);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.EmptyAmmo);
                 return;
             }
             CurrentAmmo -= ammoCost;
@@ -312,33 +312,33 @@ public class WeaponManager : MonoBehaviour
         switch (_currentWeaponType)
         {
             case WeaponType.Ballbat:
-                SoundManager.Instance.PlayPlayer(AudioType.BallbatAttack);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.BallbatAttack);
                 MeleeAttack(data);
                 break;
 
             case WeaponType.Knife:
             case WeaponType.Katana:
-                SoundManager.Instance.PlayPlayer(AudioType.KatanaAndKnife);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.KatanaAndKnife);
                 MeleeAttack(data);
                 break;
 
             case WeaponType.Pistol:
-                SoundManager.Instance.PlayPlayer(AudioType.PistolShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.PistolShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Uzi:
-                SoundManager.Instance.PlayPlayer(AudioType.UziShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.UziShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Rifle:
-                SoundManager.Instance.PlayPlayer(AudioType.RifleShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.RifleShoot);
                 RangeAttackSingle(data);
                 break;
 
             case WeaponType.Shotgun:
-                SoundManager.Instance.PlayPlayer(AudioType.ShotgunShoot);
+                SoundManager.Instance.PlayWeapon(WeaponSoundType.ShotgunShoot);
                 RangeAttackShotgun(data);
                 break;
 
