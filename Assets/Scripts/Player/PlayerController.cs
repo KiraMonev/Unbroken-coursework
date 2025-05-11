@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float dashCooldownTimer;
     private Vector2 dashDirection;
-    private bool canDash = true; // unlocked via shop =================== REPLACE ON FALSE ===================
+    [SerializeField] private bool canDash = true; // unlocked via shop =================== REPLACE ON FALSE ===================
 
     private Vector2 _moveInput;
     private Rigidbody2D _rigidbody;
@@ -240,7 +240,9 @@ public class PlayerController : MonoBehaviour
     // Activate dash in the SHOP
     public void UnlockDash()
     {
-        canDash = true;
-        Debug.Log("Activate dash");
+        if (canDash == false) { 
+            canDash = true;
+            Debug.Log("Activate dash");
+        }
     }
 }

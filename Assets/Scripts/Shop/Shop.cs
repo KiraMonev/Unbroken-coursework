@@ -1,14 +1,33 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject _shopCanvas;
     public bool isShopping = false;
     public GameObject gameUI;
+    private CrystalManager _crystalManager;
+    private PlayerController _playerController;
+    private WeaponManager _weaponManager;
+
+    [Header("–ывок")]
+    [SerializeField] private int _dashPrice;
+    [SerializeField] private Text _dashPriceText;
+
+    [Header("2х ”рон")]
+    [SerializeField] private int _damagePrice;
+    [SerializeField] private Text _damagePriceText;
+
+
 
     private void Awake()
     {
         gameUI = GameObject.FindGameObjectWithTag("GameUI");
+        _crystalManager = FindObjectOfType<CrystalManager>();
+        _playerController = FindObjectOfType<PlayerController>();
+        _weaponManager = FindObjectOfType<WeaponManager>();
+        _dashPriceText.text = "÷ена: " + _dashPrice.ToString();
+        _damagePriceText.text = "÷ена: " + _damagePrice.ToString();
     }
 
 
@@ -36,5 +55,21 @@ public class Shop : MonoBehaviour
         Time.timeScale = 1f;
         gameUI.SetActive(true);
         _shopCanvas.SetActive(false);
+    }
+
+    public void BuyDash()
+    {
+        if (_crystalManager.SpendCrystal(_dashPrice))
+            _playerController.UnlockDash();
+        else
+            return;
+    }
+
+    public void BuyDamage()
+    {
+        if (_crystalManager.SpendCrystal(_damagePrice))
+            _weaponManager.UnlockDoubleDamage();
+        else
+            return;
     }
 }
