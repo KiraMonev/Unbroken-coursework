@@ -457,7 +457,7 @@ MonoBehaviour:
   health: 3
   numOfHearts: 3
   armor: 0
-  maxArmor: 1
+  maxArmor: 2
   heartTag: HeartImage
   fullHeart: {fileID: 1727785776, guid: 39ff8e36d47823748823b9eaabcd363d, type: 3}
   emptyHeart: {fileID: -1505689624, guid: 39ff8e36d47823748823b9eaabcd363d, type: 3}
