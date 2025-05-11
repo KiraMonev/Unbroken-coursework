@@ -34,7 +34,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController _baseAnimatorController;
 
     [Header("Fire Points")]
-    [Tooltip("Сопоставь каждому типу оружия свой fire point (дочерний объект на Player).")]
     [SerializeField] private List<WeaponFirePoint> _weaponFirePoints;
     [System.Serializable]
     public class WeaponFirePoint
@@ -52,6 +51,7 @@ public class WeaponManager : MonoBehaviour
     private WeaponType _currentWeaponType = WeaponType.NoWeapon;
     private int _currentAmmo;
     private int _totalAmmo;
+    private bool _doubleDamageUnlocked = false;
 
     private Coroutine _autoFireCoroutine;
 
@@ -409,11 +409,12 @@ public class WeaponManager : MonoBehaviour
         {
             if (!hit.CompareTag("Enemy"))
                 continue;
+            float multiplier = _doubleDamageUnlocked ? 2f : 1f;
+            int dmg = Mathf.RoundToInt(data.damage * multiplier);
             Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона.");
             var mafia = hit.GetComponent<Mafia>();
             if (mafia != null)
             {
-                int dmg = Mathf.RoundToInt(data.damage);
                 mafia.TakeDamage(dmg);
             }
         }
@@ -430,7 +431,8 @@ public class WeaponManager : MonoBehaviour
             Bullet bullet = proj.GetComponent<Bullet>();
             if (bullet != null)
             {
-                bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
+                float multiplier = _doubleDamageUnlocked ? 2f : 1f;
+                bullet.SetParameters(data.damage * multiplier, data.projectileSpeed, data.bulletScale, data.bulletColor);
             }
             Debug.Log($"Выстрел из {_currentWeaponType}, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
         }
@@ -458,7 +460,7 @@ public class WeaponManager : MonoBehaviour
 
             // Коэффициент смещения (подберите экспериментально)
             float offsetFactor = 0.1f;
-
+            float multiplier = _doubleDamageUnlocked ? 2f : 1f;
             for (int i = 0; i < count; i++)
             {
                 float angleOffset = startAngle + step * i;
@@ -474,7 +476,7 @@ public class WeaponManager : MonoBehaviour
                 Bullet bullet = proj.GetComponent<Bullet>();
                 if (bullet != null)
                 {
-                    bullet.SetParameters(data.damage, data.projectileSpeed, data.bulletScale, data.bulletColor);
+                    bullet.SetParameters(data.damage * multiplier, data.projectileSpeed, data.bulletScale, data.bulletColor);
                 }
             }
             Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
@@ -506,6 +508,13 @@ public class WeaponManager : MonoBehaviour
         {
             Debug.LogError($"Нет данных WeaponData для {_currentWeaponType} при попытке пополнить патроны.");
         }
+    }
+
+    //Activate damage X2 in the SHOP
+    public void UnlockDoubleDamage()
+    {
+        _doubleDamageUnlocked = true;
+        Debug.Log("Activate damage X2");
     }
 
 }
