@@ -21,6 +21,12 @@ public enum PlayerSoundType
     TakeDamage,
     Death
 }
+public enum EnemiesSoundType
+{
+    TakeDamage,
+    Death,
+    Steps
+}
 
 // Структура для звуков оружия
 [System.Serializable]
@@ -42,6 +48,15 @@ public struct PlayerSoundEntry
     public float volume;
 }
 
+[System.Serializable]
+public struct EnemiesSoundEntry
+{
+    public EnemiesSoundType type;
+    public AudioClip clip;
+    [Range(0f, 1f)]
+    public float volume;
+}
+
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -53,14 +68,17 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource playerSource;
     [Tooltip("Фоновая музыка")]
     [SerializeField] private AudioSource musicSource;
-
+    [SerializeField] private AudioSource enemiesSource;
     [Header("Список звуков для оружия")]
     [SerializeField] private List<WeaponSoundEntry> weaponSoundEntries;
     [Header("Список звуков для игрока")]
     [SerializeField] private List<PlayerSoundEntry> playerSoundEntries;
+    [Header("Список звуков для врагов")]
+    [SerializeField] private List<EnemiesSoundEntry> enemiesSoundEntries;
 
     private Dictionary<WeaponSoundType, WeaponSoundEntry> _weaponSounds;
     private Dictionary<PlayerSoundType, PlayerSoundEntry> _playerSounds;
+    private Dictionary<EnemiesSoundType, EnemiesSoundEntry> _enemiesSounds;
 
     private void Awake()
     {
@@ -90,6 +108,13 @@ public class SoundManager : MonoBehaviour
             if (!_playerSounds.ContainsKey(entry.type))
                 _playerSounds[entry.type] = entry;
         }
+
+        _enemiesSounds = new Dictionary<EnemiesSoundType, EnemiesSoundEntry>();
+        foreach (var entry in enemiesSoundEntries)
+        {
+            if (!_enemiesSounds.ContainsKey(entry.type))
+                _enemiesSounds[entry.type] = entry;
+        }
     }
 
     // Воспроизвести звук, связанный с оружием
@@ -107,6 +132,13 @@ public class SoundManager : MonoBehaviour
         if (_playerSounds.TryGetValue(type, out var entry) && entry.clip != null)
         {
             playerSource.PlayOneShot(entry.clip, entry.volume);
+        }
+    }
+    public void PlayEnemies(EnemiesSoundType type)
+    {
+        if (_enemiesSounds.TryGetValue(type, out var entry) && entry.clip != null)
+        {
+            enemiesSource.PlayOneShot(entry.clip, entry.volume);
         }
     }
 

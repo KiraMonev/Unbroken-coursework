@@ -408,6 +408,7 @@ public class Mafia : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        SoundManager.Instance.PlayEnemies(EnemiesSoundType.TakeDamage);
         health -= damage;
         Debug.Log("Damage = " + damage);
         StartCoroutine(FlashRed()); // Запускаем эффект покраснения
