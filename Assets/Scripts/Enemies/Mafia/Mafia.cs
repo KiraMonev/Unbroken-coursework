@@ -34,6 +34,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private List<Transform> patrolWaypoints = new List<Transform>();
     [SerializeField] private LayerMask playerLayer;
 
+    private bool isDead=false;  
     private bool isChasing = false;
     private bool isInCombat = false;
     private int currentWaypointIndex = 0;
@@ -57,26 +58,29 @@ public class Mafia : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (CanSeePlayer())
+        if (!isDead)
         {
-            HandlePlayerDetection();
-        }
-        else if (isChasing)
-        {
-            ReturnToPatrol();
-        }
+            if (CanSeePlayer())
+            {
+                HandlePlayerDetection();
+            }
+            else if (isChasing)
+            {
+                ReturnToPatrol();
+            }
 
-        MoveToTarget();
-        UpdateAnimation();
-        UpdateRotation();
+            MoveToTarget();
+            UpdateAnimation();
+            UpdateRotation();
 
-        if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
-        {
-            GetNextWaypoint();
-        }
-        if (health<=0)
-        {
-            Destroy(gameObject);
+            if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+            {
+                GetNextWaypoint();
+            }
+            if (health <= 0)
+            {
+                Death();
+            }
         }
     }
 
@@ -347,6 +351,17 @@ public class Mafia : MonoBehaviour
     {
         health-=damage;
         Debug.Log("Damage = " + damage);
+    }
+
+    private void Death()
+    {
+        animator.SetBool("isDead", true);
+        isDead = true;
+        if (isMafia)
+        {
+            gameObject.transform.localScale = Vector3.one * 2;
+        }
+        rb.simulated = false;
     }
     private void OnDrawGizmos()
     {
