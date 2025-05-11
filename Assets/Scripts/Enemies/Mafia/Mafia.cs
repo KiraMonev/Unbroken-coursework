@@ -27,6 +27,11 @@ public class Mafia : MonoBehaviour
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private float attackAngle = 120f;
 
+    [Header("Sound Detection")]
+    [SerializeField] private float soundDetectionRadius = 10f;
+    private bool isInvestigatingSound = false;
+
+
     [Header("Visual Effects")]
     [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения при уроне
 
@@ -65,30 +70,82 @@ public class Mafia : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isDead)
-        {
-            if (CanSeePlayer())
-            {
-                HandlePlayerDetection();
-            }
-            else if (isChasing)
-            {
-                ReturnToPatrol();
-            }
-            MoveToTarget();
-            UpdateAnimation();
-            UpdateRotation();
+        if (isDead) return;
 
-            if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+        if (!isChasing && !isInvestigatingSound)
+        {
+            DetectNearbyBullets();
+        }
+
+        if (CanSeePlayer())
+        {
+            HandlePlayerDetection();
+        }
+        else if (isChasing)
+        {
+            ReturnToPatrol();
+        }
+
+        MoveToTarget();
+        UpdateAnimation();
+        UpdateRotation();
+
+        if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+        {
+            GetNextWaypoint();
+        }
+
+        if (health <= 0)
+        {
+            Death();
+        }
+    }
+
+    private void DetectNearbyBullets()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, soundDetectionRadius);
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Bullet")) // Убедись, что у пули стоит тег "Bullet"
             {
-                GetNextWaypoint();
-            }
-            if (health <= 0)
-            {
-                Death();
+                StartCoroutine(InvestigateSound());
+                break;
             }
         }
     }
+
+    private IEnumerator InvestigateSound()
+    {
+        isInvestigatingSound = true;
+        rb.velocity = Vector2.zero;
+
+        Vector2 direction = ((Vector2)player.transform.position - (Vector2)transform.position).normalized;
+        lookDirection = direction;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        float timer = 0f;
+        while (timer < 3f)
+        {
+            if (CanSeePlayer())
+            {
+                isInvestigatingSound = false; // Прерываем расследование
+                HandlePlayerDetection();      // Сразу начинаем преследовать
+                yield break;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        if (!CanSeePlayer())
+        {
+            isInvestigatingSound = false;
+            currentTarget = GetClosestWaypoint();
+        }
+    }
+
+
 
     private void HandlePlayerDetection()
     {
@@ -238,6 +295,7 @@ public class Mafia : MonoBehaviour
 
     private void MoveToTarget()
     {
+        if (isInvestigatingSound) return; // <<< ОСТАНАВЛИВАЕМСЯ во время расследования
         float speed = isChasing ? chaseSpeed : patrolSpeed;
         Vector2 direction = (currentTarget - (Vector2)transform.position).normalized;
 
@@ -259,6 +317,10 @@ public class Mafia : MonoBehaviour
     private void UpdateAnimation()
     {
         animator.SetFloat("Speed", rb.velocity.magnitude);
+        if(isInvestigatingSound)
+        {
+            animator.SetFloat("Speed", 0);
+        }
     }
 
     private void UpdateRotation()
