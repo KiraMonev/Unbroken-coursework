@@ -10,6 +10,7 @@ TagManager:
   - HeartImage
   - GameUI
   - PauseMenu
+  - ArmorImage
   layers:
   - Default
   - TransparentFX
