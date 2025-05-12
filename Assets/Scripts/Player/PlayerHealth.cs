@@ -14,9 +14,9 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Armor Settings")]
     [Tooltip("Текущее количество единиц брони")]
-    [SerializeField] private int armor;
+    [SerializeField] public int armor;
     [Tooltip("Максимум брони, который можно купить")]
-    [SerializeField] private int maxArmor = 1;
+    [SerializeField] public int maxArmor = 1;
 
     [Header("UI Settings")]
     [Tooltip("Tag for heart UI images in the scene.")]

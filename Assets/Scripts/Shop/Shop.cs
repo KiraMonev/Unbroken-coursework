@@ -9,6 +9,7 @@ public class Shop : MonoBehaviour
     private CrystalManager _crystalManager;
     private PlayerController _playerController;
     private WeaponManager _weaponManager;
+    private PlayerHealth _playerHealth;
 
     [Header("Рывок")]
     [SerializeField] private int _dashPrice;
@@ -17,6 +18,10 @@ public class Shop : MonoBehaviour
     [Header("2х Урон")]
     [SerializeField] private int _damagePrice;
     [SerializeField] private Text _damagePriceText;
+
+    [Header("Броня")]
+    [SerializeField] private int _armorPrice;
+    [SerializeField] private Text _armorPriceText;
 
 
 
@@ -28,13 +33,13 @@ public class Shop : MonoBehaviour
         _weaponManager = FindObjectOfType<WeaponManager>();
         _dashPriceText.text = "Цена: " + _dashPrice.ToString();
         _damagePriceText.text = "Цена: " + _damagePrice.ToString();
+        _playerHealth = FindObjectOfType<PlayerHealth>();
+        _armorPriceText.text = "Цена: " + _armorPrice.ToString();
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Кто то зашел в магазин");
-
         if (!other.CompareTag("Player"))
             return;
 
@@ -59,6 +64,7 @@ public class Shop : MonoBehaviour
 
     public void BuyDash()
     {
+        Debug.Log("Пытаемся купить рывок");
         if (_crystalManager.SpendCrystal(_dashPrice))
             _playerController.UnlockDash();
         else
@@ -67,8 +73,18 @@ public class Shop : MonoBehaviour
 
     public void BuyDamage()
     {
+        Debug.Log("Пытаемся купить двойной урон");
         if (_crystalManager.SpendCrystal(_damagePrice))
             _weaponManager.UnlockDoubleDamage();
+        else
+            return;
+    }
+
+    public void BuyArmor()
+    {
+        Debug.Log("Пытаемся купить броню 1шт.");
+        if (_crystalManager.SpendCrystal(_armorPrice) && _playerHealth.armor < _playerHealth.maxArmor)
+            _playerHealth.IncreaseArmor(1);
         else
             return;
     }

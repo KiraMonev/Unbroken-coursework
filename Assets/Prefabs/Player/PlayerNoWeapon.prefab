@@ -209,6 +209,8 @@ MonoBehaviour:
   dashSpeed: 15
   dashDuration: 0.15
   dashCooldown: 1
+  canDash: 0
+  isConversation: 0
 --- !u!114 &3593481142580325530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +444,7 @@ MonoBehaviour:
     firePoint: {fileID: 7006992195069130217}
   - weaponType: 6
     firePoint: {fileID: 2847054648505387842}
+  _doubleDamageUnlocked: 0
 --- !u!114 &4126212481126194240
 MonoBehaviour:
   m_ObjectHideFlags: 0
