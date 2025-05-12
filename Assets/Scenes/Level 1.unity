@@ -18636,7 +18636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
       propertyPath: enemiesSoundEntries.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
       propertyPath: playerSoundEntries.Array.data[3].clip
@@ -18651,8 +18651,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: b2defbb3f4eb37a44871cda4d34339de, type: 3}
     - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
+      propertyPath: enemiesSoundEntries.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: fb00925b0ccb82a4fa8669208fa42cc4, type: 3}
+    - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
       propertyPath: enemiesSoundEntries.Array.data[1].type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
+      propertyPath: enemiesSoundEntries.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 93a3aa86a39afe64fb965b500a4927f2, type: 3}
+    - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
+      propertyPath: enemiesSoundEntries.Array.data[2].type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
       propertyPath: playerSoundEntries.Array.data[3].volume
@@ -18664,6 +18676,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
       propertyPath: enemiesSoundEntries.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
+      propertyPath: enemiesSoundEntries.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707721834448520246, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}
+      propertyPath: enemiesSoundEntries.Array.data[2].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6731822082573646798, guid: 92474d43299c24f49ab7cf52d06c4e20, type: 3}

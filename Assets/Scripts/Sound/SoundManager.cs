@@ -24,8 +24,8 @@ public enum PlayerSoundType
 public enum EnemiesSoundType
 {
     TakeDamage,
-    Death,
-    Steps
+    Spotted,
+    SpottedMaf
 }
 
 // Структура для звуков оружия

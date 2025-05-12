@@ -43,6 +43,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private SpriteRenderer spriteRenderer; // Для эффекта покраснения
 
+    private bool isSpotted=false;
     private Color originalColor;
     private bool isDead = false;
     private bool isChasing = false;
@@ -171,11 +172,21 @@ public class Mafia : MonoBehaviour
         isChasing = true;
         if (isMafia)
         {
+            if (!isSpotted)
+            {
+                SoundManager.Instance.PlayEnemies(EnemiesSoundType.SpottedMaf);
+                isSpotted = true;
+            }
             animator.Play("Taking");
             TakeGun();
         }
         else
         {
+            if (!isSpotted)
+            {
+                SoundManager.Instance.PlayEnemies(EnemiesSoundType.Spotted);
+                isSpotted = true;
+            }
             Debug.Log("Taking!");
             animator.Play("TakingDubinka");
         }
