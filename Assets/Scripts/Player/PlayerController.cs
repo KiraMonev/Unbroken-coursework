@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         MoveToSpawnPoint();
+        _velocity.x = 0;
+        _velocity.y = 0;
         // Если в новой сцене PauseMenu создаётся позже, можно повторно найти его здесь:
         _pauseMenu = FindObjectOfType<PauseMenu>();
 

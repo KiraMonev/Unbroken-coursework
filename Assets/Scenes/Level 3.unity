@@ -12575,8 +12575,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6717528126772843501, guid: 2bce98722e3f2934d99bf7d9fa07a309, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 165973197724151677, guid: 2bce98722e3f2934d99bf7d9fa07a309, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bce98722e3f2934d99bf7d9fa07a309, type: 3}
@@ -24499,7 +24504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea2b692ec449d841bd9fce8970ed2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Level 1
+  nextSceneName: FinishScene
 --- !u!61 &1205699556
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32398,7 +32403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1558483352
 Transform:
   m_ObjectHideFlags: 0
