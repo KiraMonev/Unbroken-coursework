@@ -5,24 +5,34 @@ using UnityEngine.SceneManagement;
 public class Exit : MonoBehaviour
 {
     [SerializeField] private string nextSceneName;
+    private Finish _finishManager;
+
+    private void Awake()
+    {
+        _finishManager = FindObjectOfType<Finish>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Кто то вышел в Exit");
 
         // Проверяем, что в триггер вошёл игрок
         if (!other.CompareTag("Player"))
             return;
 
-        // Загружаем указанную сцену или следующую по индексу
-        if (!string.IsNullOrEmpty(nextSceneName))
-        {
-            SceneManager.LoadScene(nextSceneName);
+        if (SceneManager.GetActiveScene().name == "Level 3") 
+            _finishManager.ShowFinish();
+        else 
+        { 
+            if (!string.IsNullOrEmpty(nextSceneName))
+            {
+                SceneManager.LoadScene(nextSceneName);
+            }
+            else
+            {
+                int currentIndex = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(currentIndex + 1);
+            }
         }
-        else
-        {
-            int currentIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentIndex + 1);
-        }
+
     }
 }
