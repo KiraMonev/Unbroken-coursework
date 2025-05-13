@@ -57,12 +57,15 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void UpdateRotation()
     {
-        // угол, на который хотим повернуться (влево/вправо от центра экрана)
+        if (Screen.width <= 0)
+            return;
+
         float screenCenterX = Screen.width * 0.5f;
         float mouseDeltaX = (Input.mousePosition.x - screenCenterX) / screenCenterX;
+        mouseDeltaX = Mathf.Clamp(mouseDeltaX, -1f, 1f);
+
         float targetRot = mouseDeltaX * _maxRotationAngle;
 
-        // сглаженный переход угла
         _currentRotation = Mathf.SmoothDampAngle(
             _currentRotation,
             targetRot,
@@ -70,6 +73,14 @@ public class SmoothCameraFollow : MonoBehaviour
             _rotationSmoothTime
         );
 
-        transform.rotation = Quaternion.Euler(0f, 0f, _currentRotation);
+        // защита от артефактов (NaN/Infinity)
+        if (float.IsNaN(_currentRotation) || float.IsInfinity(_currentRotation))
+            _currentRotation = 0f;
+
+        // устанавливаем только ось Z
+        Vector3 e = transform.rotation.eulerAngles;
+        e.z = _currentRotation;
+        transform.rotation = Quaternion.Euler(e);
     }
+
 }

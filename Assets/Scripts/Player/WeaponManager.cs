@@ -51,7 +51,7 @@ public class WeaponManager : MonoBehaviour
     private WeaponType _currentWeaponType = WeaponType.NoWeapon;
     private int _currentAmmo;
     private int _totalAmmo;
-    private bool _doubleDamageUnlocked = false;
+    [SerializeField] private bool _doubleDamageUnlocked = false;
 
     private Coroutine _autoFireCoroutine;
 
@@ -513,8 +513,11 @@ public class WeaponManager : MonoBehaviour
     //Activate damage X2 in the SHOP
     public void UnlockDoubleDamage()
     {
-        _doubleDamageUnlocked = true;
-        Debug.Log("Activate damage X2");
+        if (_doubleDamageUnlocked == false)
+        {
+            _doubleDamageUnlocked = true;
+            Debug.Log("Activate damage X2");
+        }
     }
 
 }
