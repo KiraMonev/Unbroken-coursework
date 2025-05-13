@@ -13,6 +13,8 @@ public class Mafia : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float movementSmoothing = 0.05f;
+    [SerializeField] private float obstacleAvoidanceDistance = 1f;
+    [SerializeField] private float collisionCheckDistance = 0.5f;
 
     [Header("Combat Settings")]
     [SerializeField] private int health = 2;
@@ -29,11 +31,16 @@ public class Mafia : MonoBehaviour
 
     [Header("Sound Detection")]
     [SerializeField] private float soundDetectionRadius = 10f;
-    private bool isInvestigatingSound = false;
 
+    [Header("Player Position Tracking")]
+    [SerializeField] private int maxStoredPositions = 5;
+    [SerializeField] private float positionRecordInterval = 0.5f;
+
+    [Header("Stuck Settings")]
+    [SerializeField] private float stuckTimeThreshold = 1f;
 
     [Header("Visual Effects")]
-    [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения при уроне
+    [SerializeField] private float flashDuration = 0.2f;
 
     [Header("References")]
     private Transform player;
@@ -41,24 +48,32 @@ public class Mafia : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private List<Transform> patrolWaypoints = new List<Transform>();
     [SerializeField] private LayerMask playerLayer;
-    private SpriteRenderer spriteRenderer; // Для эффекта покраснения
+    private SpriteRenderer spriteRenderer;
 
-    private bool isSpotted=false;
+    private bool isSpotted = false;
     private Color originalColor;
     private bool isDead = false;
     private bool isChasing = false;
     private bool isInCombat = false;
+    private bool isInvestigatingSound = false;
+    private bool isFollowingLastPositions = false;
     private int currentWaypointIndex = 0;
     private Vector2 currentTarget;
     private Vector2 lookDirection = Vector2.right;
     private float lastShotTime;
     private Coroutine shootingCoroutine;
     private Vector2 m_Velocity = Vector2.zero;
+    private Queue<Vector2> playerLastPositions = new Queue<Vector2>();
+    private float lastPositionRecordTime;
+    private Vector2 lastPosition;
+    private float stuckTimer = 0f;
+    private bool isAvoidingObstacle = false;
+    private Vector2 avoidanceTarget;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Инициализация SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         if (patrolWaypoints.Count == 0)
         {
@@ -67,6 +82,7 @@ public class Mafia : MonoBehaviour
         }
         currentTarget = patrolWaypoints[currentWaypointIndex].position;
         rb.drag = 5f;
+        lastPosition = transform.position;
     }
 
     void FixedUpdate()
@@ -81,17 +97,21 @@ public class Mafia : MonoBehaviour
         if (CanSeePlayer())
         {
             HandlePlayerDetection();
+            if (isChasing && Time.time - lastPositionRecordTime >= positionRecordInterval)
+            {
+                RecordPlayerPosition();
+            }
         }
         else if (isChasing)
         {
-            ReturnToPatrol();
+            FollowLastKnownPositions();
         }
 
         MoveToTarget();
         UpdateAnimation();
         UpdateRotation();
 
-        if (!isChasing && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+        if (!isChasing && !isFollowingLastPositions && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
         {
             GetNextWaypoint();
         }
@@ -100,6 +120,22 @@ public class Mafia : MonoBehaviour
         {
             Death();
         }
+
+        // Проверка застревания
+        if (Vector2.Distance(transform.position, lastPosition) < 0.1f && rb.velocity.magnitude > 0.1f)
+        {
+            stuckTimer += Time.fixedDeltaTime;
+            if (stuckTimer >= stuckTimeThreshold)
+            {
+                HandleObstacleAvoidance();
+            }
+        }
+        else
+        {
+            stuckTimer = 0f;
+            isAvoidingObstacle = false;
+        }
+        lastPosition = transform.position;
     }
 
     private void DetectNearbyBullets()
@@ -107,7 +143,7 @@ public class Mafia : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, soundDetectionRadius);
         foreach (Collider2D hit in hits)
         {
-            if (hit.CompareTag("Bullet")) // Убедись, что у пули стоит тег "Bullet"
+            if (hit.CompareTag("Bullet"))
             {
                 StartCoroutine(InvestigateSound());
                 break;
@@ -130,8 +166,8 @@ public class Mafia : MonoBehaviour
         {
             if (CanSeePlayer())
             {
-                isInvestigatingSound = false; // Прерываем расследование
-                HandlePlayerDetection();      // Сразу начинаем преследовать
+                isInvestigatingSound = false;
+                HandlePlayerDetection();
                 yield break;
             }
 
@@ -145,8 +181,6 @@ public class Mafia : MonoBehaviour
             currentTarget = GetClosestWaypoint();
         }
     }
-
-
 
     private void HandlePlayerDetection()
     {
@@ -170,6 +204,7 @@ public class Mafia : MonoBehaviour
     private void StartChasing()
     {
         isChasing = true;
+        isFollowingLastPositions = false;
         if (isMafia)
         {
             if (!isSpotted)
@@ -216,10 +251,12 @@ public class Mafia : MonoBehaviour
         }
     }
 
-    private void ReturnToPatrol()
+    private void StopMoving()
     {
         isChasing = false;
         isInCombat = false;
+        isFollowingLastPositions = false;
+        playerLastPositions.Clear();
         if (isMafia)
         {
             animator.SetBool("Gun", false);
@@ -229,7 +266,8 @@ public class Mafia : MonoBehaviour
             animator.SetBool("Gun", false);
             animator.SetBool("GunTaking", false);
         }
-        currentTarget = GetClosestWaypoint();
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
 
         if (shootingCoroutine != null)
         {
@@ -306,10 +344,97 @@ public class Mafia : MonoBehaviour
         }
     }
 
+    private void RecordPlayerPosition()
+    {
+        playerLastPositions.Enqueue(player.position);
+        if (playerLastPositions.Count > maxStoredPositions)
+        {
+            playerLastPositions.Dequeue();
+        }
+        lastPositionRecordTime = Time.time;
+    }
+
+    private void FollowLastKnownPositions()
+    {
+        if (!isFollowingLastPositions)
+        {
+            isFollowingLastPositions = true;
+            isChasing = false;
+            if (playerLastPositions.Count > 0)
+            {
+                currentTarget = playerLastPositions.Peek();
+            }
+            else
+            {
+                StopMoving();
+            }
+        }
+        else
+        {
+            if (Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+            {
+                if (playerLastPositions.Count > 0)
+                {
+                    playerLastPositions.Dequeue();
+                }
+
+                if (playerLastPositions.Count > 0)
+                {
+                    currentTarget = playerLastPositions.Peek();
+                }
+                else
+                {
+                    StopMoving();
+                }
+            }
+        }
+    }
+
+    private void HandleObstacleAvoidance()
+    {
+        if (isAvoidingObstacle) return;
+
+        isAvoidingObstacle = true;
+        stuckTimer = 0f;
+
+        Vector2 directionToTarget = (currentTarget - (Vector2)transform.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, collisionCheckDistance, ~playerLayer);
+
+        if (hit.collider != null)
+        {
+            Vector2[] avoidanceDirections = {
+                new Vector2(-directionToTarget.y, directionToTarget.x),
+                new Vector2(directionToTarget.y, -directionToTarget.x)
+            };
+
+            foreach (Vector2 avoidanceDir in avoidanceDirections)
+            {
+                RaycastHit2D checkHit = Physics2D.Raycast(transform.position, avoidanceDir, collisionCheckDistance, ~playerLayer);
+                if (checkHit.collider == null)
+                {
+                    avoidanceTarget = (Vector2)transform.position + avoidanceDir * obstacleAvoidanceDistance;
+                    currentTarget = avoidanceTarget;
+                    return;
+                }
+            }
+
+            Vector2 oppositeDir = -directionToTarget;
+            RaycastHit2D oppositeHit = Physics2D.Raycast(transform.position, oppositeDir, collisionCheckDistance, ~playerLayer);
+            if (oppositeHit.collider == null)
+            {
+                avoidanceTarget = (Vector2)transform.position + oppositeDir * obstacleAvoidanceDistance;
+                currentTarget = avoidanceTarget;
+                return;
+            }
+        }
+
+        isAvoidingObstacle = false;
+    }
+
     private void MoveToTarget()
     {
-        if (isInvestigatingSound) return; // <<< ОСТАНАВЛИВАЕМСЯ во время расследования
-        float speed = isChasing ? chaseSpeed : patrolSpeed;
+        if (isInvestigatingSound) return;
+        float speed = isChasing || isFollowingLastPositions ? chaseSpeed : patrolSpeed;
         Vector2 direction = (currentTarget - (Vector2)transform.position).normalized;
 
         if (direction.magnitude > 0.1f && !isInCombat)
@@ -325,12 +450,29 @@ public class Mafia : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+
+        if (isAvoidingObstacle && Vector2.Distance(transform.position, avoidanceTarget) < waypointReachedThreshold)
+        {
+            isAvoidingObstacle = false;
+            if (isChasing && CanSeePlayer())
+            {
+                currentTarget = player.position;
+            }
+            else if (isFollowingLastPositions && playerLastPositions.Count > 0)
+            {
+                currentTarget = playerLastPositions.Peek();
+            }
+            else
+            {
+                StopMoving();
+            }
+        }
     }
 
     private void UpdateAnimation()
     {
         animator.SetFloat("Speed", rb.velocity.magnitude);
-        if(isInvestigatingSound)
+        if (isInvestigatingSound)
         {
             animator.SetFloat("Speed", 0);
         }
@@ -424,14 +566,14 @@ public class Mafia : MonoBehaviour
         SoundManager.Instance.PlayEnemies(EnemiesSoundType.TakeDamage);
         health -= damage;
         Debug.Log("Damage = " + damage);
-        StartCoroutine(FlashRed()); // Запускаем эффект покраснения
+        StartCoroutine(FlashRed());
     }
 
     private IEnumerator FlashRed()
     {
-        spriteRenderer.color = Color.red; // Устанавливаем красный цвет
-        yield return new WaitForSeconds(flashDuration); // Ждем
-        spriteRenderer.color = originalColor; // Возвращаем исходный цвет
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.color = originalColor;
     }
 
     private void Death()
@@ -476,6 +618,18 @@ public class Mafia : MonoBehaviour
             {
                 Gizmos.DrawLine(patrolWaypoints[i].position, patrolWaypoints[0].position);
             }
+        }
+
+        Gizmos.color = Color.cyan;
+        foreach (Vector2 pos in playerLastPositions)
+        {
+            Gizmos.DrawWireSphere(pos, 0.2f);
+        }
+
+        if (isAvoidingObstacle)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(avoidanceTarget, 0.3f);
         }
     }
 }
