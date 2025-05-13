@@ -25,7 +25,9 @@ public enum EnemiesSoundType
 {
     TakeDamage,
     Spotted,
-    SpottedMaf
+    SpottedMaf,
+    Hitted,
+    Shot
 }
 
 // Структура для звуков оружия

@@ -260,6 +260,7 @@ public class Mafia : MonoBehaviour
             {
                 Vector2 shootDirection = ((Vector2)player.position - (Vector2)firePoint.position).normalized;
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                SoundManager.Instance.PlayEnemies(EnemiesSoundType.Shot);
                 Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
                 bulletRb.velocity = shootDirection * bulletSpeed;
 
@@ -299,6 +300,7 @@ public class Mafia : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(attackPoint.position, directionToEnemy, Vector2.Distance(player.transform.position, attackPoint.position), obstacleLayer);
         if (angleToEnemy <= attackAngle / 2f && hit.collider == null)
         {
+            SoundManager.Instance.PlayEnemies(EnemiesSoundType.Hitted);
             player.GetComponent<PlayerHealth>().TakeDamage(1);
             Debug.Log($"Удар дубинкой!");
         }
