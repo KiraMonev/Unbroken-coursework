@@ -59,12 +59,23 @@ public class WeaponManager : MonoBehaviour
     private Animator _animator;
     private PlayerHealth _playerHealth;
     private UIBulletsAmount _uiAmmo;
+
+    private ManagerLevel1 _mgr;
+
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
         _playerHealth = GetComponent<PlayerHealth>();
         _uiAmmo = FindObjectOfType<UIBulletsAmount>();
+        try
+        {
+            _mgr = FindObjectOfType<ManagerLevel1>();
+        }
+        catch
+        {
+            _mgr = null;
+        }
 
         InitializeWeaponDictionary();
         InitializeWeaponAnimatorDictionary();
@@ -325,6 +336,7 @@ public class WeaponManager : MonoBehaviour
             case WeaponType.Pistol:
                 SoundManager.Instance.PlayWeapon(WeaponSoundType.PistolShoot);
                 RangeAttackSingle(data);
+                _mgr.RegisterPistolShot();
                 break;
 
             case WeaponType.Uzi:
