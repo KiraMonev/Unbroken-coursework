@@ -14,15 +14,31 @@ public class Exit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         // Проверяем, что в триггер вошёл игрок
         if (!other.CompareTag("Player"))
             return;
 
-        if (SceneManager.GetActiveScene().name == "Level 3") 
-            _finishManager.ShowFinish();
-        else 
-        { 
+        if (SceneManager.GetActiveScene().name == "Level 1")
+        {
+            ManagerLevel1 mgr = FindObjectOfType<ManagerLevel1>();
+            if (mgr.CanProceed()) { 
+                if (!string.IsNullOrEmpty(nextSceneName))
+                {
+                    SceneManager.LoadScene(nextSceneName);
+                }
+                else
+                {
+                    int currentIndex = SceneManager.GetActiveScene().buildIndex;
+                    SceneManager.LoadScene(currentIndex + 1);
+                }
+            }
+            else
+            {
+                Debug.Log("Нужно собрать ещё монеты, выйти нельзя");
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "Level 2")
+        {
             if (!string.IsNullOrEmpty(nextSceneName))
             {
                 SceneManager.LoadScene(nextSceneName);
@@ -33,6 +49,7 @@ public class Exit : MonoBehaviour
                 SceneManager.LoadScene(currentIndex + 1);
             }
         }
-
+        else if (SceneManager.GetActiveScene().name == "Level 3") 
+            _finishManager.ShowFinish();
     }
 }
