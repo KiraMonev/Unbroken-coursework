@@ -36,8 +36,15 @@ public class Mafia : MonoBehaviour
     [SerializeField] private int maxStoredPositions = 5;
     [SerializeField] private float positionRecordInterval = 0.5f;
 
-    [Header("Stuck Settings")]
+    [Header("Wander Settings")]
+    [SerializeField] private float wanderRadius = 3f;
+    [SerializeField] private float wanderInterval = 2f;
     [SerializeField] private float stuckTimeThreshold = 1f;
+
+    [Header("Look Around Settings")]
+    [SerializeField] private float forwardMoveDistance = 1f;
+    [SerializeField] private float forwardMoveSpeed = 2f;
+    [SerializeField] private float rotationDuration = 3f;
 
     [Header("Visual Effects")]
     [SerializeField] private float flashDuration = 0.2f;
@@ -57,6 +64,8 @@ public class Mafia : MonoBehaviour
     private bool isInCombat = false;
     private bool isInvestigatingSound = false;
     private bool isFollowingLastPositions = false;
+    private bool isWandering = false;
+    private bool isLookingAround = false;
     private int currentWaypointIndex = 0;
     private Vector2 currentTarget;
     private Vector2 lookDirection = Vector2.right;
@@ -69,6 +78,7 @@ public class Mafia : MonoBehaviour
     private float stuckTimer = 0f;
     private bool isAvoidingObstacle = false;
     private Vector2 avoidanceTarget;
+    private float lastWanderTime;
 
     void Start()
     {
@@ -104,14 +114,17 @@ public class Mafia : MonoBehaviour
         }
         else if (isChasing)
         {
-            FollowLastKnownPositions();
+            FollowLastKnownPositionsOrWander();
         }
 
-        MoveToTarget();
+        if (!isLookingAround)
+        {
+            MoveToTarget();
+        }
         UpdateAnimation();
         UpdateRotation();
 
-        if (!isChasing && !isFollowingLastPositions && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+        if (!isChasing && !isFollowingLastPositions && !isWandering && !isLookingAround && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
         {
             GetNextWaypoint();
         }
@@ -122,7 +135,7 @@ public class Mafia : MonoBehaviour
         }
 
         // Проверка застревания
-        if (Vector2.Distance(transform.position, lastPosition) < 0.1f && rb.velocity.magnitude > 0.1f)
+        if (!isLookingAround && Vector2.Distance(transform.position, lastPosition) < 0.1f && rb.velocity.magnitude > 0.1f)
         {
             stuckTimer += Time.fixedDeltaTime;
             if (stuckTimer >= stuckTimeThreshold)
@@ -178,7 +191,17 @@ public class Mafia : MonoBehaviour
         if (!CanSeePlayer())
         {
             isInvestigatingSound = false;
-            currentTarget = GetClosestWaypoint();
+            Vector2 closestWaypoint = GetClosestWaypoint();
+            if (CanMoveDirectlyTo(closestWaypoint))
+            {
+                currentTarget = closestWaypoint;
+                Debug.Log($"{gameObject.name} returning to patrol waypoint: {currentTarget}");
+            }
+            else
+            {
+                Debug.Log($"{gameObject.name} cannot reach patrol waypoint {closestWaypoint}, starting to wander");
+                StartWandering();
+            }
         }
     }
 
@@ -205,6 +228,8 @@ public class Mafia : MonoBehaviour
     {
         isChasing = true;
         isFollowingLastPositions = false;
+        isWandering = false;
+        isLookingAround = false;
         if (isMafia)
         {
             if (!isSpotted)
@@ -251,11 +276,13 @@ public class Mafia : MonoBehaviour
         }
     }
 
-    private void StopMoving()
+    private void StartWandering()
     {
         isChasing = false;
         isInCombat = false;
         isFollowingLastPositions = false;
+        isWandering = true;
+        isLookingAround = false;
         playerLastPositions.Clear();
         if (isMafia)
         {
@@ -266,8 +293,8 @@ public class Mafia : MonoBehaviour
             animator.SetBool("Gun", false);
             animator.SetBool("GunTaking", false);
         }
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f;
+        Debug.Log($"{gameObject.name} started wandering at position: {transform.position}");
+        ChooseNewWanderPoint();
 
         if (shootingCoroutine != null)
         {
@@ -354,7 +381,7 @@ public class Mafia : MonoBehaviour
         lastPositionRecordTime = Time.time;
     }
 
-    private void FollowLastKnownPositions()
+    private void FollowLastKnownPositionsOrWander()
     {
         if (!isFollowingLastPositions)
         {
@@ -363,42 +390,125 @@ public class Mafia : MonoBehaviour
             if (playerLastPositions.Count > 0)
             {
                 currentTarget = playerLastPositions.Peek();
+                Debug.Log($"{gameObject.name} following last player position: {currentTarget}");
             }
             else
             {
-                StopMoving();
-            }
-        }
-        else
-        {
-            if (Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
-            {
-                if (playerLastPositions.Count > 0)
-                {
-                    playerLastPositions.Dequeue();
-                }
-
-                if (playerLastPositions.Count > 0)
-                {
-                    currentTarget = playerLastPositions.Peek();
-                }
-                else
-                {
-                    StopMoving();
-                }
+                Debug.Log($"{gameObject.name} no player positions, starting to wander");
+                StartCoroutine(MoveForwardAndRotate());
             }
         }
     }
 
+    private IEnumerator MoveForwardAndRotate()
+    {
+        isLookingAround = true;
+        isFollowingLastPositions = false;
+        rb.velocity = Vector2.zero;
+
+        // Движение вперёд
+        Vector2 forwardTarget = (Vector2)transform.position + lookDirection * forwardMoveDistance;
+        Debug.Log($"{gameObject.name} moving forward to: {forwardTarget}");
+        float moveTime = 0f;
+        Vector2 startPosition = transform.position;
+
+        while (moveTime < forwardMoveDistance / forwardMoveSpeed)
+        {
+            moveTime += Time.deltaTime;
+            float t = moveTime / (forwardMoveDistance / forwardMoveSpeed);
+            Vector2 newPosition = Vector2.Lerp(startPosition, forwardTarget, t);
+            rb.MovePosition(newPosition);
+            UpdateAnimation();
+            yield return null;
+        }
+
+        rb.MovePosition(forwardTarget);
+        rb.velocity = Vector2.zero;
+
+        // Вращение на 360 градусов с проверкой игрока
+        Debug.Log($"{gameObject.name} starting 360-degree rotation");
+        float startAngle = transform.eulerAngles.z;
+        float targetAngle = startAngle + 360f;
+        float rotationTime = 0f;
+
+        while (rotationTime < rotationDuration)
+        {
+            if (CanSeePlayer())
+            {
+                Debug.Log($"{gameObject.name} spotted player during rotation, interrupting to chase");
+                isLookingAround = false;
+                HandlePlayerDetection();
+                yield break;
+            }
+
+            rotationTime += Time.deltaTime;
+            float t = rotationTime / rotationDuration;
+            float currentAngle = Mathf.Lerp(startAngle, targetAngle, t);
+            transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+            UpdateAnimation();
+            yield return null;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, targetAngle % 360f);
+        Debug.Log($"{gameObject.name} completed 360-degree rotation");
+
+        // Переход к блужданию
+        StartWandering();
+    }
+
+    private void ChooseNewWanderPoint()
+    {
+        if (Time.time - lastWanderTime < wanderInterval && !isAvoidingObstacle) return;
+
+        Vector2 wanderPoint;
+        int attempts = 0;
+        const int maxAttempts = 5;
+
+        do
+        {
+            Vector2 randomDirection = Random.insideUnitCircle.normalized;
+            wanderPoint = (Vector2)transform.position + randomDirection * wanderRadius;
+            attempts++;
+        } while (!CanMoveDirectlyTo(wanderPoint) && attempts < maxAttempts);
+
+        if (CanMoveDirectlyTo(wanderPoint))
+        {
+            currentTarget = wanderPoint;
+        }
+        else
+        {
+            Vector2[] directions = { Vector2.right, Vector2.left, Vector2.up, Vector2.down };
+            foreach (Vector2 dir in directions)
+            {
+                wanderPoint = (Vector2)transform.position + dir * wanderRadius;
+                if (CanMoveDirectlyTo(wanderPoint))
+                {
+                    currentTarget = wanderPoint;
+                    break;
+                }
+            }
+        }
+        Debug.Log($"{gameObject.name} chose new wander point: {currentTarget}");
+        lastWanderTime = Time.time;
+    }
+
+    private bool CanMoveDirectlyTo(Vector2 target)
+    {
+        Vector2 direction = (target - (Vector2)transform.position).normalized;
+        float distance = Vector2.Distance(transform.position, target);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, obstacleLayer);
+        return hit.collider == null;
+    }
+
     private void HandleObstacleAvoidance()
     {
-        if (isAvoidingObstacle) return;
+        if (isAvoidingObstacle || isLookingAround) return;
 
         isAvoidingObstacle = true;
         stuckTimer = 0f;
 
         Vector2 directionToTarget = (currentTarget - (Vector2)transform.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, collisionCheckDistance, ~playerLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, collisionCheckDistance, obstacleLayer);
 
         if (hit.collider != null)
         {
@@ -409,7 +519,7 @@ public class Mafia : MonoBehaviour
 
             foreach (Vector2 avoidanceDir in avoidanceDirections)
             {
-                RaycastHit2D checkHit = Physics2D.Raycast(transform.position, avoidanceDir, collisionCheckDistance, ~playerLayer);
+                RaycastHit2D checkHit = Physics2D.Raycast(transform.position, avoidanceDir, collisionCheckDistance, obstacleLayer);
                 if (checkHit.collider == null)
                 {
                     avoidanceTarget = (Vector2)transform.position + avoidanceDir * obstacleAvoidanceDistance;
@@ -419,22 +529,53 @@ public class Mafia : MonoBehaviour
             }
 
             Vector2 oppositeDir = -directionToTarget;
-            RaycastHit2D oppositeHit = Physics2D.Raycast(transform.position, oppositeDir, collisionCheckDistance, ~playerLayer);
+            RaycastHit2D oppositeHit = Physics2D.Raycast(transform.position, oppositeDir, collisionCheckDistance, obstacleLayer);
             if (oppositeHit.collider == null)
             {
                 avoidanceTarget = (Vector2)transform.position + oppositeDir * obstacleAvoidanceDistance;
                 currentTarget = avoidanceTarget;
                 return;
             }
+
+            // Если все направления заблокированы
+            if (isFollowingLastPositions && playerLastPositions.Count > 0)
+            {
+                Debug.Log($"{gameObject.name} cannot reach last player position {currentTarget}, removing it");
+                playerLastPositions.Dequeue();
+                if (playerLastPositions.Count > 0)
+                {
+                    currentTarget = playerLastPositions.Peek();
+                    Debug.Log($"{gameObject.name} moving to next player position: {currentTarget}");
+                }
+                else
+                {
+                    Debug.Log($"{gameObject.name} no more player positions, starting look around");
+                    StartCoroutine(MoveForwardAndRotate());
+                }
+                isAvoidingObstacle = false;
+                return;
+            }
+            else if (!isChasing && !isFollowingLastPositions && !isWandering)
+            {
+                Debug.Log($"{gameObject.name} cannot reach patrol waypoint {currentTarget}, skipping to next");
+                GetNextWaypoint();
+                isAvoidingObstacle = false;
+                return;
+            }
         }
 
         isAvoidingObstacle = false;
+
+        if (isWandering)
+        {
+            ChooseNewWanderPoint();
+        }
     }
 
     private void MoveToTarget()
     {
-        if (isInvestigatingSound) return;
-        float speed = isChasing || isFollowingLastPositions ? chaseSpeed : patrolSpeed;
+        if (isInvestigatingSound || isLookingAround) return;
+        float speed = isChasing || isFollowingLastPositions || isWandering ? chaseSpeed : patrolSpeed;
         Vector2 direction = (currentTarget - (Vector2)transform.position).normalized;
 
         if (direction.magnitude > 0.1f && !isInCombat)
@@ -461,18 +602,47 @@ public class Mafia : MonoBehaviour
             else if (isFollowingLastPositions && playerLastPositions.Count > 0)
             {
                 currentTarget = playerLastPositions.Peek();
+                Debug.Log($"{gameObject.name} resuming to player position: {currentTarget}");
+            }
+            else if (isWandering)
+            {
+                ChooseNewWanderPoint();
             }
             else
             {
-                StopMoving();
+                currentTarget = GetClosestWaypoint();
             }
+        }
+
+        if (isFollowingLastPositions && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+        {
+            if (playerLastPositions.Count > 0)
+            {
+                Debug.Log($"{gameObject.name} reached player position: {currentTarget}, removing it");
+                playerLastPositions.Dequeue();
+                if (playerLastPositions.Count > 0)
+                {
+                    currentTarget = playerLastPositions.Peek();
+                    Debug.Log($"{gameObject.name} moving to next player position: {currentTarget}");
+                }
+                else
+                {
+                    Debug.Log($"{gameObject.name} no more player positions, starting look around");
+                    StartCoroutine(MoveForwardAndRotate());
+                }
+            }
+        }
+        else if (isWandering && Vector2.Distance(transform.position, currentTarget) < waypointReachedThreshold)
+        {
+            Debug.Log($"{gameObject.name} reached wander point: {currentTarget}");
+            ChooseNewWanderPoint();
         }
     }
 
     private void UpdateAnimation()
     {
         animator.SetFloat("Speed", rb.velocity.magnitude);
-        if (isInvestigatingSound)
+        if (isInvestigatingSound || isLookingAround)
         {
             animator.SetFloat("Speed", 0);
         }
@@ -480,6 +650,8 @@ public class Mafia : MonoBehaviour
 
     private void UpdateRotation()
     {
+        if (isLookingAround) return;
+
         Vector2 targetDirection;
 
         if (isInCombat && player != null)
@@ -508,6 +680,7 @@ public class Mafia : MonoBehaviour
 
         currentWaypointIndex = (currentWaypointIndex + 1) % patrolWaypoints.Count;
         currentTarget = patrolWaypoints[currentWaypointIndex].position;
+        Debug.Log($"{gameObject.name} moving to next patrol waypoint: {currentTarget}");
     }
 
     private Vector2 GetClosestWaypoint()
@@ -630,6 +803,12 @@ public class Mafia : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(avoidanceTarget, 0.3f);
+        }
+
+        if (isWandering)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(currentTarget, 0.3f);
         }
     }
 }
