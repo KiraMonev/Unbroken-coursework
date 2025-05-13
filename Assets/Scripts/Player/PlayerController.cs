@@ -206,6 +206,15 @@ public class PlayerController : MonoBehaviour
                     {
                         // Одиночная атака
                         _animator.SetTrigger("Attack");
+                        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(transform.position, 3);
+                        foreach (Collider2D col in hitPlayer)
+                        {
+                            if (col.CompareTag("Enemy"))
+                            {
+                                Debug.Log("Hit!");
+                                StartCoroutine(col.gameObject.GetComponent<Mafia>().InvestigateSound());
+                            }
+                        }
                     }
                 }
             }

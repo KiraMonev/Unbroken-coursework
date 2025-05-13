@@ -115,7 +115,7 @@ public class Mafia : MonoBehaviour
         }
     }
 
-    private IEnumerator InvestigateSound()
+    public IEnumerator InvestigateSound()
     {
         isInvestigatingSound = true;
         rb.velocity = Vector2.zero;
