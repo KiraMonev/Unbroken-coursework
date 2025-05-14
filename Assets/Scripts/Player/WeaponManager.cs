@@ -141,20 +141,29 @@ public class WeaponManager : MonoBehaviour
     public void TryPickUpWeapon()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _pickupRadius);
-        foreach (Collider2D collider in colliders)
+        WeaponPickup nearest = null;
+        float bestDistSqr = float.MaxValue;
+
+        foreach (var col in colliders)
         {
-            WeaponPickup pickup = collider.GetComponent<WeaponPickup>();
-            if (pickup != null)
+            var pickup = col.GetComponent<WeaponPickup>();
+            if (pickup == null) continue;
+
+            float distSqr = (pickup.transform.position - transform.position).sqrMagnitude;
+            if (distSqr < bestDistSqr)
             {
-                if (_currentWeaponType == WeaponType.NoWeapon)
-                {
-                    PickUpWeapon(pickup);
-                    AchievementManager.instance.Unlock("Example");  // ѕроверка работы достижений
-                }
-                return;
+                bestDistSqr = distSqr;
+                nearest = pickup;
             }
         }
+
+        if (nearest != null && _currentWeaponType == WeaponType.NoWeapon)
+        {
+            PickUpWeapon(nearest);
+            AchievementManager.instance.Unlock("Example");
+        }
     }
+
 
     private void PickUpWeapon(WeaponPickup pickup)
     {
@@ -223,8 +232,11 @@ public class WeaponManager : MonoBehaviour
 
     private Vector2 GetThrowDirection()
     {
-        Vector2 playerInput = _playerController.GetMoveInput();
-        return playerInput.magnitude > 0.1f ? playerInput.normalized : (Vector2)transform.right;
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mouseWorld - transform.position);
+        if (dir.sqrMagnitude < 0.01f)
+            return transform.right;     //если слишком близко
+        return dir.normalized;
     }
 
     private void ChangeWeaponAnimator(WeaponType weaponType)

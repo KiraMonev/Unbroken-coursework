@@ -53633,51 +53633,6 @@ Transform:
   - {fileID: 640297350}
   m_Father: {fileID: 1751295202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1946439458
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1946439460}
-  - component: {fileID: 1946439459}
-  m_Layer: 0
-  m_Name: DiamondManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1946439459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946439458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51775bd7a89b54dc291cd5cf63877e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalText: {fileID: 0}
---- !u!4 &1946439460
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946439458}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.106474, y: 2.284993, z: -0.24917655}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1958041279
 GameObject:
   m_ObjectHideFlags: 0
@@ -57889,7 +57844,6 @@ SceneRoots:
   - {fileID: 67558050}
   - {fileID: 1373481901}
   - {fileID: 1751295202}
-  - {fileID: 1946439460}
   - {fileID: 141009412}
   - {fileID: 651188674}
   - {fileID: 590040564}
