@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CrystalManager : MonoBehaviour
@@ -12,20 +13,51 @@ public class CrystalManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 
     private void Start() => UpdateUI();
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var textGO = GameObject.Find("CrystalAmount");
+        if (textGO != null)
+            crystalText = textGO.GetComponent<Text>();
+
+        UpdateUI(); 
+    }
+
     public void AddCrystal(int amount)
     {
         crystalCount += amount;
+        Debug.Log($"Кристалов у персонажа: {crystalCount}");
         UpdateUI();
     }
 
     public bool SpendCrystal(int amount)
     {
+        Debug.Log($"Кристалов у персонажа: {crystalCount}. Покупка за: {amount}");
+
+
         if (crystalCount >= amount)
         {
             crystalCount -= amount;

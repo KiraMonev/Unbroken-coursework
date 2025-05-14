@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
@@ -28,10 +29,13 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         gameUI = GameObject.FindGameObjectWithTag("GameUI");
-        _crystalManager = FindObjectOfType<CrystalManager>();
+        _crystalManager = CrystalManager.Instance;
         _playerController = FindObjectOfType<PlayerController>();
         _weaponManager = FindObjectOfType<WeaponManager>();
         _playerHealth = FindObjectOfType<PlayerHealth>();
+
+        Debug.Log($"Shop: playerController = {_playerController}, weaponManager = {_weaponManager}, playerHealth = {_playerHealth}");
+
 
         if (_dashPriceText != null)
             _dashPriceText.text = $"÷ена: {_dashPrice}";
@@ -43,6 +47,30 @@ public class Shop : MonoBehaviour
             _armorPriceText.text = $"÷ена: {_armorPrice}";
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var uiRoot = GameObject.Find("GameManager")?.transform.Find("UI");
+        if (uiRoot != null)
+            gameUI = uiRoot.Find("GameStats").gameObject;
+
+        _playerController = FindObjectOfType<PlayerController>();
+        _weaponManager = FindObjectOfType<WeaponManager>();
+        _playerHealth = FindObjectOfType<PlayerHealth>();
+
+        Debug.Log($"Shop: playerController = {_playerController}, weaponManager = {_weaponManager}, playerHealth = {_playerHealth}");
+
+    }
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -88,10 +116,23 @@ public class Shop : MonoBehaviour
 
     public void BuyArmor()
     {
-        Debug.Log("ѕытаемс€ купить броню 1шт.");
-        if (_crystalManager.SpendCrystal(_armorPrice) && _playerHealth.armor < _playerHealth.maxArmor)
-            _playerHealth.IncreaseArmor(1);
-        else
+        Debug.Log("ѕытаемс€ купить бронюЕ");
+
+        if (!_crystalManager.SpendCrystal(_armorPrice))
+        {
+            Debug.Log("Ц недостаточно кристаллов");
             return;
+        }
+
+        if (_playerHealth.armor < _playerHealth.maxArmor)
+        {
+            _playerHealth.IncreaseArmor(1);
+            Debug.Log($"Ц брон€ добавлена, сейчас: {_playerHealth.armor}");
+        }
+        else
+        {
+            Debug.Log("Ц брон€ уже полна€, покупка отменена");
+        }
     }
+
 }
