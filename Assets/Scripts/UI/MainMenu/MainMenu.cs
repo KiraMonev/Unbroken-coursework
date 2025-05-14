@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         GameManager.instance.ResetProgress();
-        SceneManager.LoadScene("SceneUI"); 
+        SceneManager.LoadScene("Level 1"); 
     }
 
     public void ContinueGame()
