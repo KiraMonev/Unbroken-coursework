@@ -446,6 +446,12 @@ public class Mafia : MonoBehaviour
             gameObject.transform.localScale = Vector3.one * 2;
         }
         rb.simulated = false;
+
+        ManagerLevel2 mgr2 = FindObjectOfType<ManagerLevel2>();
+        if (mgr2 != null)
+        {
+            mgr2.RegisterEnemyKilled();
+        }
     }
 
     private void OnDrawGizmos()

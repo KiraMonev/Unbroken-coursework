@@ -14,42 +14,40 @@ public class Exit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Проверяем, что в триггер вошёл игрок
-        if (!other.CompareTag("Player"))
-            return;
+        if (!other.CompareTag("Player")) return;
 
-        if (SceneManager.GetActiveScene().name == "Level 1")
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Level 1")
         {
-            ManagerLevel1 mgr = FindObjectOfType<ManagerLevel1>();
-            if (mgr.CanProceed()) { 
-                if (!string.IsNullOrEmpty(nextSceneName))
-                {
-                    SceneManager.LoadScene(nextSceneName);
-                }
-                else
-                {
-                    int currentIndex = SceneManager.GetActiveScene().buildIndex;
-                    SceneManager.LoadScene(currentIndex + 1);
-                }
+            ManagerLevel1 mgr1 = FindObjectOfType<ManagerLevel1>();
+            if (mgr1.CanProceed()) LoadNext();
+            else Debug.Log("Need more digits");
+        }
+        else if (sceneName == "Level 2")
+        {
+            ManagerLevel2 mgr2 = FindObjectOfType<ManagerLevel2>();
+            if (mgr2.CanProceed())
+            {
+                mgr2.StopTimer();
+                Debug.LogFormat("[Exit] Level 2 complete in {0:F2} sec.", mgr2.LastTotalTime);
+                LoadNext();
             }
             else
             {
-                Debug.Log("Нужно собрать ещё монеты, выйти нельзя");
+                Debug.Log("[Exit] Cannot exit: some enemies remain.");
             }
         }
-        else if (SceneManager.GetActiveScene().name == "Level 2")
+        else if (sceneName == "Level 3")
         {
-            if (!string.IsNullOrEmpty(nextSceneName))
-            {
-                SceneManager.LoadScene(nextSceneName);
-            }
-            else
-            {
-                int currentIndex = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(currentIndex + 1);
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Level 3") 
             _finishManager.ShowFinish();
+        }
+    }
+
+    private void LoadNext()
+    {
+        if (!string.IsNullOrEmpty(nextSceneName))
+            SceneManager.LoadScene(nextSceneName);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
