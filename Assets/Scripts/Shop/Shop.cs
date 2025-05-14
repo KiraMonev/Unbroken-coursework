@@ -12,16 +12,16 @@ public class Shop : MonoBehaviour
     private PlayerHealth _playerHealth;
 
     [Header("Рывок")]
-    [SerializeField] private int _dashPrice;
-    [SerializeField] private Text _dashPriceText;
+    [SerializeField] private int _dashPrice = 0;
+    [SerializeField] private Text _dashPriceText = null;
 
     [Header("2х Урон")]
-    [SerializeField] private int _damagePrice;
-    [SerializeField] private Text _damagePriceText;
+    [SerializeField] private int _damagePrice = 0;
+    [SerializeField] private Text _damagePriceText = null;
 
     [Header("Броня")]
-    [SerializeField] private int _armorPrice;
-    [SerializeField] private Text _armorPriceText;
+    [SerializeField] private int _armorPrice = 0;
+    [SerializeField] private Text _armorPriceText = null;
 
 
 
@@ -31,10 +31,16 @@ public class Shop : MonoBehaviour
         _crystalManager = FindObjectOfType<CrystalManager>();
         _playerController = FindObjectOfType<PlayerController>();
         _weaponManager = FindObjectOfType<WeaponManager>();
-        _dashPriceText.text = "Цена: " + _dashPrice.ToString();
-        _damagePriceText.text = "Цена: " + _damagePrice.ToString();
         _playerHealth = FindObjectOfType<PlayerHealth>();
-        _armorPriceText.text = "Цена: " + _armorPrice.ToString();
+
+        if (_dashPriceText != null)
+            _dashPriceText.text = $"Цена: {_dashPrice}";
+
+        if (_damagePriceText != null)
+            _damagePriceText.text = $"Цена: {_damagePrice}";
+
+        if (_armorPriceText != null)
+            _armorPriceText.text = $"Цена: {_armorPrice}";
     }
 
 
