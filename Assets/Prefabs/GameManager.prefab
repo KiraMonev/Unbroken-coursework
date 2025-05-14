@@ -3649,7 +3649,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 7f54eb196ce598f458bb01316c6b7e9e, type: 3}
     - target: {fileID: 5869893064832991960, guid: 31c71d95d8fbeb7479842253d3964958, type: 3}
       propertyPath: stackLocation
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5869893064832991960, guid: 31c71d95d8fbeb7479842253d3964958, type: 3}
       propertyPath: NumberOnScreen
