@@ -18,7 +18,7 @@ public class ManagerLevel3 : MonoBehaviour
 
     private float lastTotalTime;
 
-    // Возвращает время последнего прохождения (в секундах)
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     public float LastTotalTime => lastTotalTime;
 
     private void Start()
@@ -64,7 +64,7 @@ public class ManagerLevel3 : MonoBehaviour
             hasDocument = true;
             collectedDocs = 1;
             UpdateDocsUI();
-            Debug.Log("[ManagerLevel3] Документ подобран.");
+            Debug.Log("[ManagerLevel3] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
         }
     }
 
@@ -74,7 +74,7 @@ public class ManagerLevel3 : MonoBehaviour
         {
             timing = true;
             startTime = Time.time;
-            Debug.Log("[ManagerLevel3] Таймер запущен.");
+            Debug.Log("[ManagerLevel3] пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
         }
     }
 
@@ -87,6 +87,6 @@ public class ManagerLevel3 : MonoBehaviour
 
         timing = false;
         lastTotalTime = Time.time - startTime;
-        Debug.LogFormat("[ManagerLevel3] Таймер остановлен: {0:F2} сек.", lastTotalTime);
+        Debug.LogFormat("[ManagerLevel3] пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {0:F2} пїЅпїЅпїЅ.", lastTotalTime);
     }
 }

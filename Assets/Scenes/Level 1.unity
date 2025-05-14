@@ -10726,6 +10726,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2031522775783732209, guid: 9a2a41fb73c6844b29ed88ec67590119, type: 3}
   m_PrefabInstance: {fileID: 634406226}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639471355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639471356}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639471356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639471355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4533048, y: 5.2385635, z: -0.15855896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &642924722
 GameObject:
   m_ObjectHideFlags: 0
@@ -22751,8 +22782,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4362309346045747630, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1405345506}
   m_SourcePrefab: {fileID: 100100000, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
+--- !u!1 &1405345505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4362309346045747630, guid: 5602e7fe9316e3843b3145d15d78abe0, type: 3}
+  m_PrefabInstance: {fileID: 1405345504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1405345506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405345505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c5a71bbffd34ef3851c3576e03d0d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  deathScreen: {fileID: 0}
 --- !u!1 &1406063692
 GameObject:
   m_ObjectHideFlags: 0
@@ -39376,3 +39429,4 @@ SceneRoots:
   - {fileID: 1751079633}
   - {fileID: 1840248280}
   - {fileID: 1841464714}
+  - {fileID: 639471356}
