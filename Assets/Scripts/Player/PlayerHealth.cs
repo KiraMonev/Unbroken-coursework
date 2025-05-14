@@ -13,9 +13,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int numOfHearts;
 
     [Header("Armor Settings")]
-    [Tooltip("Текущее количество единиц брони")]
+    [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")]
     [SerializeField] public int armor;
-    [Tooltip("Максимум брони, который можно купить")]
+    [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ")]
     [SerializeField] public int maxArmor = 1;
 
     [Header("UI Settings")]
@@ -131,7 +131,7 @@ public class PlayerHealth : MonoBehaviour
         SoundManager.Instance.PlayPlayer(PlayerSoundType.TakeDamage);
         StartCoroutine(FlashRed());
 
-        // Сначала расходуем броню
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         int remainingDamage = damage;
         if (Armor > 0)
         {
@@ -141,7 +141,7 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
-        // Если броня не полностью погасила урон
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (remainingDamage > 0)
         {
             Health -= remainingDamage;
@@ -150,6 +150,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 isDead = true;
                 SoundManager.Instance.PlayPlayer(PlayerSoundType.Death);
+                DeathScreenUI.Instance.ShowDeathScreen();
                 _deathMenu.ShowDeathMenu();
             }
         }
