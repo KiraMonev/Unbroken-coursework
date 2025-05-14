@@ -11,6 +11,7 @@ TagManager:
   - GameUI
   - PauseMenu
   - ArmorImage
+  - GoldenRoom
   layers:
   - Default
   - TransparentFX

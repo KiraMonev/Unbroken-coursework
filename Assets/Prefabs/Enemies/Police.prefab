@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7806856686686567454}
   - component: {fileID: 265977460814617810}
   - component: {fileID: 3903546674998448339}
+  - component: {fileID: 3950789515070273060}
   m_Layer: 0
   m_Name: Police
   m_TagString: Enemy
@@ -143,6 +144,8 @@ MonoBehaviour:
   attackPoint: {fileID: 449876144831052260}
   attackRange: 1.5
   attackAngle: 120
+  soundDetectionRadius: 10
+  flashDuration: 0.2
   animator: {fileID: 2671058303472390032}
   rb: {fileID: 265977460814617810}
   patrolWaypoints:
@@ -228,6 +231,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14, y: 0.27}
   m_EdgeRadius: 0
+--- !u!114 &3950789515070273060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3939756425189765856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e593f1774d734b6fbad2051553fcbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 40
 --- !u!1 &6578908460153116372
 GameObject:
   m_ObjectHideFlags: 0
