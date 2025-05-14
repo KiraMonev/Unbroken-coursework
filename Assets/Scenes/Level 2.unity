@@ -7435,8 +7435,8 @@ MonoBehaviour:
   _target: {fileID: 0}
   _offset: {x: 0, y: 0, z: -10}
   _smoothTime: 0
-  _clampX: {x: -10, y: 10}
-  _clampY: {x: -10, y: 10}
+  _clampX: {x: -50, y: 50}
+  _clampY: {x: -50, y: 50}
   _maxRotationAngle: 10
   _rotationSmoothTime: 0.2
 --- !u!114 &456673821
