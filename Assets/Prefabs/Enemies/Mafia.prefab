@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7034497342669608600}
   - component: {fileID: 8745863088904342423}
   - component: {fileID: 5848736667058281257}
-  - component: {fileID: 6577470292703035919}
   m_Layer: 0
   m_Name: Mafia
   m_TagString: Enemy
@@ -229,19 +228,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &6577470292703035919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293761219693538530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e593f1774d734b6fbad2051553fcbc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 40
 --- !u!1 &5040673366138994210
 GameObject:
   m_ObjectHideFlags: 0
