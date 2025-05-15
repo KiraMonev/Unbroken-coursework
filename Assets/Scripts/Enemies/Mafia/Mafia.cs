@@ -33,7 +33,7 @@ public class Mafia : MonoBehaviour
 
 
     [Header("Visual Effects")]
-    [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения при уроне
+    [SerializeField] private float flashDuration = 0.2f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
     [Header("References")]
     private Transform player;
@@ -41,7 +41,7 @@ public class Mafia : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private List<Transform> patrolWaypoints = new List<Transform>();
     [SerializeField] private LayerMask playerLayer;
-    private SpriteRenderer spriteRenderer; // Для эффекта покраснения
+    private SpriteRenderer spriteRenderer; // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     private bool isSpotted=false;
     private Color originalColor;
@@ -55,10 +55,11 @@ public class Mafia : MonoBehaviour
     private Coroutine shootingCoroutine;
     private Vector2 m_Velocity = Vector2.zero;
 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Инициализация SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ SpriteRenderer
         originalColor = spriteRenderer.color;
         if (patrolWaypoints.Count == 0)
         {
@@ -107,7 +108,7 @@ public class Mafia : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, soundDetectionRadius);
         foreach (Collider2D hit in hits)
         {
-            if (hit.CompareTag("Bullet")) // Убедись, что у пули стоит тег "Bullet"
+            if (hit.CompareTag("Bullet")) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ "Bullet"
             {
                 StartCoroutine(InvestigateSound());
                 break;
@@ -130,8 +131,8 @@ public class Mafia : MonoBehaviour
         {
             if (CanSeePlayer())
             {
-                isInvestigatingSound = false; // Прерываем расследование
-                HandlePlayerDetection();      // Сразу начинаем преследовать
+                isInvestigatingSound = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                HandlePlayerDetection();      // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 yield break;
             }
 
@@ -302,13 +303,13 @@ public class Mafia : MonoBehaviour
         {
             SoundManager.Instance.PlayEnemies(EnemiesSoundType.Hitted);
             player.GetComponent<PlayerHealth>().TakeDamage(1);
-            Debug.Log($"Удар дубинкой!");
+            Debug.Log($"пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
     private void MoveToTarget()
     {
-        if (isInvestigatingSound) return; // <<< ОСТАНАВЛИВАЕМСЯ во время расследования
+        if (isInvestigatingSound) return; // <<< пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         float speed = isChasing ? chaseSpeed : patrolSpeed;
         Vector2 direction = (currentTarget - (Vector2)transform.position).normalized;
 
@@ -424,14 +425,14 @@ public class Mafia : MonoBehaviour
         SoundManager.Instance.PlayEnemies(EnemiesSoundType.TakeDamage);
         health -= damage;
         Debug.Log("Damage = " + damage);
-        StartCoroutine(FlashRed()); // Запускаем эффект покраснения
+        StartCoroutine(FlashRed()); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     private IEnumerator FlashRed()
     {
-        spriteRenderer.color = Color.red; // Устанавливаем красный цвет
-        yield return new WaitForSeconds(flashDuration); // Ждем
-        spriteRenderer.color = originalColor; // Возвращаем исходный цвет
+        spriteRenderer.color = Color.red; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+        yield return new WaitForSeconds(flashDuration); // пїЅпїЅпїЅпїЅ
+        spriteRenderer.color = originalColor; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     }
 
     private void Death()
@@ -441,6 +442,8 @@ public class Mafia : MonoBehaviour
         animator.SetBool("GunTaking", false);
         animator.SetBool("Gun", false);
         isDead = true;
+        ScoreManager.Instance.AddScore(30);
+        
         if (isMafia)
         {
             gameObject.transform.localScale = Vector3.one * 2;

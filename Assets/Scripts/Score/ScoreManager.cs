@@ -4,14 +4,14 @@ using System.Collections.Generic;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
-    
+
     public int TotalScore { get; private set; }
     public int CurrentLevelScore { get; private set; }
     public int Diamonds { get; private set; }
-    
+
     private Dictionary<int, bool> levelTasks = new Dictionary<int, bool>();
     private bool[] levelsCompleted = new bool[3];
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -24,36 +24,36 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public void AddKillScore()
     {
         AddScore(30);
     }
-    
+
     public void AddDiamond()
     {
         Diamonds++;
         AddScore(10);
     }
-    
+
     public void SpendDiamond(int amount)
     {
         Diamonds -= amount;
         SubtractScore(amount * 10);
     }
-    
+
     public void CompleteLevelTask(int levelIndex)
     {
         if (!levelTasks.ContainsKey(levelIndex))
         {
             levelTasks[levelIndex] = true;
             AddScore(50);
-            
+
             // Отмечаем уровень как пройденный
             if (levelIndex >= 0 && levelIndex < levelsCompleted.Length)
             {
                 levelsCompleted[levelIndex] = true;
-                
+
                 // Проверяем все ли уровни пройдены
                 if (CheckAllLevelsCompleted())
                 {
@@ -62,13 +62,13 @@ public class ScoreManager : MonoBehaviour
             }
         }
     }
-    
+
     public void AddScore(int amount)
     {
         TotalScore += amount;
         CurrentLevelScore += amount;
     }
-    
+
     public void SubtractScore(int amount)
     {
         TotalScore -= amount;
@@ -76,12 +76,12 @@ public class ScoreManager : MonoBehaviour
         if (TotalScore < 0) TotalScore = 0;
         if (CurrentLevelScore < 0) CurrentLevelScore = 0;
     }
-    
+
     public void ResetCurrentLevelScore()
     {
         CurrentLevelScore = 0;
     }
-    
+
     private bool CheckAllLevelsCompleted()
     {
         foreach (bool completed in levelsCompleted)
@@ -90,7 +90,7 @@ public class ScoreManager : MonoBehaviour
         }
         return true;
     }
-    
+
     public int GetCurrentLevelIndex()
     {
         // Здесь должна быть логика определения текущего уровня
