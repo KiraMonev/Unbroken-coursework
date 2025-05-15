@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
@@ -11,15 +12,15 @@ public class Shop : MonoBehaviour
     private WeaponManager _weaponManager;
     private PlayerHealth _playerHealth;
 
-    [Header("Рывок")]
+    [Header("пїЅпїЅпїЅпїЅпїЅ")]
     [SerializeField] private int _dashPrice = 0;
     [SerializeField] private Text _dashPriceText = null;
 
-    [Header("2х Урон")]
+    [Header("2пїЅ пїЅпїЅпїЅпїЅ")]
     [SerializeField] private int _damagePrice = 0;
     [SerializeField] private Text _damagePriceText = null;
 
-    [Header("Броня")]
+    [Header("пїЅпїЅпїЅпїЅпїЅ")]
     [SerializeField] private int _armorPrice = 0;
     [SerializeField] private Text _armorPriceText = null;
 
@@ -28,21 +29,48 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         gameUI = GameObject.FindGameObjectWithTag("GameUI");
-        _crystalManager = FindObjectOfType<CrystalManager>();
+        _crystalManager = CrystalManager.Instance;
         _playerController = FindObjectOfType<PlayerController>();
         _weaponManager = FindObjectOfType<WeaponManager>();
         _playerHealth = FindObjectOfType<PlayerHealth>();
 
+        Debug.Log($"Shop: playerController = {_playerController}, weaponManager = {_weaponManager}, playerHealth = {_playerHealth}");
+
+
         if (_dashPriceText != null)
-            _dashPriceText.text = $"Цена: {_dashPrice}";
+            _dashPriceText.text = $"пїЅпїЅпїЅпїЅ: {_dashPrice}";
 
         if (_damagePriceText != null)
-            _damagePriceText.text = $"Цена: {_damagePrice}";
+            _damagePriceText.text = $"пїЅпїЅпїЅпїЅ: {_damagePrice}";
 
         if (_armorPriceText != null)
-            _armorPriceText.text = $"Цена: {_armorPrice}";
+            _armorPriceText.text = $"пїЅпїЅпїЅпїЅ: {_armorPrice}";
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var uiRoot = GameObject.Find("GameManager")?.transform.Find("UI");
+        if (uiRoot != null)
+            gameUI = uiRoot.Find("GameStats").gameObject;
+
+        _playerController = FindObjectOfType<PlayerController>();
+        _weaponManager = FindObjectOfType<WeaponManager>();
+        _playerHealth = FindObjectOfType<PlayerHealth>();
+
+        Debug.Log($"Shop: playerController = {_playerController}, weaponManager = {_weaponManager}, playerHealth = {_playerHealth}");
+
+    }
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -54,7 +82,7 @@ public class Shop : MonoBehaviour
 
     private void OpenShop()
     {
-        Debug.Log("Открываем магазин");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         Time.timeScale = 0f;
         gameUI.SetActive(false);
         _shopCanvas.SetActive(true);
@@ -62,7 +90,7 @@ public class Shop : MonoBehaviour
 
     public void CloseShop()
     {
-        Debug.Log("Закрываем магазин");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         Time.timeScale = 1f;
         gameUI.SetActive(true);
         _shopCanvas.SetActive(false);
@@ -70,7 +98,7 @@ public class Shop : MonoBehaviour
 
     public void BuyDash()
     {
-        Debug.Log("Пытаемся купить рывок");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
         if (_crystalManager.SpendCrystal(_dashPrice))
             _playerController.UnlockDash();
         else
@@ -79,7 +107,7 @@ public class Shop : MonoBehaviour
 
     public void BuyDamage()
     {
-        Debug.Log("Пытаемся купить двойной урон");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
         if (_crystalManager.SpendCrystal(_damagePrice))
             _weaponManager.UnlockDoubleDamage();
         else
@@ -88,10 +116,23 @@ public class Shop : MonoBehaviour
 
     public void BuyArmor()
     {
-        Debug.Log("Пытаемся купить броню 1шт.");
-        if (_crystalManager.SpendCrystal(_armorPrice) && _playerHealth.armor < _playerHealth.maxArmor)
-            _playerHealth.IncreaseArmor(1);
-        else
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
+
+        if (!_crystalManager.SpendCrystal(_armorPrice))
+        {
+            Debug.Log("пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
             return;
+        }
+
+        if (_playerHealth.armor < _playerHealth.maxArmor)
+        {
+            _playerHealth.IncreaseArmor(1);
+            Debug.Log($"пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ: {_playerHealth.armor}");
+        }
+        else
+        {
+            Debug.Log("пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        }
     }
+
 }

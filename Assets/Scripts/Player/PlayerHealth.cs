@@ -163,8 +163,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void IncreaseArmor(int amount)
     {
+        Debug.Log($"[PlayerHealth] До: {Armor}, добавляем: {amount}");
         Armor += amount;
+        Debug.Log($"[PlayerHealth] После: {Armor}");
     }
+
 
     public void SetFullHealth()
     {
