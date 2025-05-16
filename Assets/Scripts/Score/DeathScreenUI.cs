@@ -63,6 +63,5 @@ public class DeathScreenUI : MonoBehaviour
     public void OnOKButtonClicked()
     {
         deathScreen.SetActive(false);
-        Time.timeScale = 1f;
     }
 }

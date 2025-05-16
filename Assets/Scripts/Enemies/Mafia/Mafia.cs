@@ -445,6 +445,7 @@ public class Mafia : MonoBehaviour
         animator.SetBool("Gun", false);
         isDead = true;
         ScoreManager.Instance.AddScore(30);
+        AchievementManager.instance.AddAchievementProgress("killer", 1);
         
         if (isMafia)
         {
