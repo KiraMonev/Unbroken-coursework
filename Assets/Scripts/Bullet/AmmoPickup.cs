@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AmmoPickup : MonoBehaviour
 {
-    [Tooltip("Время в секундах до появления ящика после подбора")]
+    [Tooltip("пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
     public float respawnTime = 15f;
 
     private SpriteRenderer _spriteRenderer;
@@ -25,7 +25,7 @@ public class AmmoPickup : MonoBehaviour
             if (wm != null)
             {
                 wm.RefillAmmo();
-                // Отключаем визуальное отображение и коллайдер
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 _spriteRenderer.enabled = false;
                 _collider.enabled = false;
                 StartCoroutine(Respawn());
@@ -36,7 +36,7 @@ public class AmmoPickup : MonoBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawnTime);
-        transform.position = _initialPosition; // Если позиция могла измениться
+        transform.position = _initialPosition; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _spriteRenderer.enabled = true;
         _collider.enabled = true;
     }
