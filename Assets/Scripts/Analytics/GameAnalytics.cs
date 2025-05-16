@@ -1,59 +1,71 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameAnalytics : MonoBehaviour
 {
-    public static GameAnalytics Instance;
-    
-    private string sessionStartTime;
-    private string analyticsPath;
+    private static GameAnalytics _instance;
+    public static GameAnalytics Instance => _instance;
+
+    private string filePath;
+    private DateTime sessionStartTime;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            analyticsPath = Application.dataPath + "/Scripts/Analytics/game_stats.txt";
-        }
-        else
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
+            return;
+        }
+        
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        filePath = Path.Combine(Application.dataPath, "Scripts/Analytics/game_sessions.csv");
+        InitializeFile();
+    }
+
+    private void InitializeFile()
+    {
+        if (!File.Exists(filePath))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            File.WriteAllText(filePath, "SessionStart,PlayTime\n");
         }
     }
 
     public void StartNewSession()
     {
-        sessionStartTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        sessionStartTime = DateTime.Now;
     }
 
-    public void SaveSessionData(string deathReason)
+    public void SaveSessionData(float playTime)
     {
-        TimeSpan playTime = DateTime.Now - DateTime.Parse(sessionStartTime);
-        
-        string data = $"{sessionStartTime},{playTime.TotalSeconds:F1},{deathReason}\n";
-        
-        File.AppendAllText(analyticsPath, data);
+        string data = $"{sessionStartTime:yyyy-MM-dd HH:mm:ss},{playTime:F1}\n";
+        File.AppendAllText(filePath, data);
     }
 
-    public float GetAveragePlayTime()
+    public float CalculateAveragePlayTime()
     {
-        if (!File.Exists(analyticsPath)) return 0;
+        if (!File.Exists(filePath)) return 0f;
 
-        string[] allLines = File.ReadAllLines(analyticsPath);
-        if (allLines.Length == 0) return 0;
+        string[] lines = File.ReadAllLines(filePath);
+        if (lines.Length <= 1) return 0f; // Пропускаем заголовок
 
-        float totalTime = 0;
-        foreach (string line in allLines)
+        float totalTime = 0f;
+        int validSessions = 0;
+
+        for (int i = 1; i < lines.Length; i++)
         {
-            string[] parts = line.Split(',');
+            string[] parts = lines[i].Split(',');
             if (parts.Length >= 2 && float.TryParse(parts[1], out float time))
             {
                 totalTime += time;
+                validSessions++;
             }
         }
 
-        return totalTime / allLines.Length;
+        return validSessions > 0 ? totalTime / validSessions : 0f;
     }
 }
