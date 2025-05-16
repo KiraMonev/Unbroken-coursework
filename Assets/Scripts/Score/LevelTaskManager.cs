@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class LevelTaskManager : MonoBehaviour
 {
+    public static LevelTaskManager Instance { get; private set; }
     [Header("Level 1 Task")]
-    public bool usedGun = false;
+    public bool usedBullets = false;
+    private bool level1BonusAwarded = false;
     
     [Header("Level 2 Task")]
-    public float timeLimit = 120f; // 2 минуты в секундах
+    public float timeLimit = 120f;
     private float level2TimeElapsed = 0f;
     private int totalEnemies;
     private int killedEnemies;
@@ -14,8 +16,8 @@ public class LevelTaskManager : MonoBehaviour
     [Header("Level 3 Task")]
     public GameObject documents;
     public Transform goldenRoom;
-    public float timeForMaxBonus = 120f; // 2 минуты
-    public float timeForPartialBonus = 300f; // 5 минут
+    public float timeForMaxBonus = 120f;
+    public float timeForPartialBonus = 300f;
     private bool documentsDelivered = false;
     private float level3TimeElapsed = 0f;
     
@@ -23,30 +25,51 @@ public class LevelTaskManager : MonoBehaviour
     {
         int currentLevel = ScoreManager.Instance.GetCurrentLevelIndex();
         
-        if (currentLevel == 1) // Уровень 2 (индекс 1)
+        if (currentLevel == 0) // Level 1 initialization
+        {
+            usedBullets = false;
+            level1BonusAwarded = false;
+        }
+        else if (currentLevel == 1) // Level 2
         {
             totalEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
             InvokeRepeating("CheckLevel2Task", 1f, 1f);
         }
-        else if (currentLevel == 2) // Уровень 3 (индекс 2)
+        else if (currentLevel == 2) // Level 3
         {
             InvokeRepeating("UpdateLevel3Timer", 1f, 1f);
         }
     }
     
-    public void OnGunUsed()
+    // Call this when enemy is killed by bullet
+    public void RegisterBulletKill()
     {
-        if (ScoreManager.Instance.GetCurrentLevelIndex() == 0) // Уровень 1
+        if (ScoreManager.Instance.GetCurrentLevelIndex() == 0 && !level1BonusAwarded)
         {
-            usedGun = true;
+            usedBullets = true;
         }
     }
     
     public void OnEnemyKilled()
     {
-        if (ScoreManager.Instance.GetCurrentLevelIndex() == 1) // Уровень 2
+        int currentLevel = ScoreManager.Instance.GetCurrentLevelIndex();
+        
+        if (currentLevel == 1) // Level 2
         {
             killedEnemies++;
+        }
+    }
+    
+    public void OnLevelCompleted()
+    {
+        int currentLevel = ScoreManager.Instance.GetCurrentLevelIndex();
+        
+        if (currentLevel == 0 && !usedBullets && !level1BonusAwarded)
+        {
+            ScoreManager.Instance.AddScore(50);
+            ScoreManager.Instance.CompleteLevelTask(0);
+            level1BonusAwarded = true;
+            Debug.Log("Awarded 50 points for no bullet kills");
         }
     }
     
@@ -56,7 +79,7 @@ public class LevelTaskManager : MonoBehaviour
         
         if (killedEnemies >= totalEnemies && level2TimeElapsed <= timeLimit)
         {
-            ScoreManager.Instance.CompleteLevelTask(1); // Уровень 2
+            ScoreManager.Instance.CompleteLevelTask(1);
             CancelInvoke("CheckLevel2Task");
         }
         else if (level2TimeElapsed > timeLimit)
@@ -80,7 +103,7 @@ public class LevelTaskManager : MonoBehaviour
                 ScoreManager.Instance.AddScore(30);
             }
             
-            ScoreManager.Instance.CompleteLevelTask(2); // Уровень 3
+            ScoreManager.Instance.CompleteLevelTask(2);
             CancelInvoke("UpdateLevel3Timer");
         }
     }
@@ -88,16 +111,5 @@ public class LevelTaskManager : MonoBehaviour
     private void UpdateLevel3Timer()
     {
         level3TimeElapsed++;
-    }
-    
-    // Вызывается при завершении уровня
-    public void OnLevelCompleted()
-    {
-        int currentLevel = ScoreManager.Instance.GetCurrentLevelIndex();
-        
-        if (currentLevel == 0 && !usedGun) // Уровень 1 - не использовал пистолет
-        {
-            ScoreManager.Instance.CompleteLevelTask(0);
-        }
     }
 }
