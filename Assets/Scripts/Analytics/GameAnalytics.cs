@@ -4,56 +4,86 @@ using UnityEngine;
 
 public class GameAnalytics : MonoBehaviour
 {
-    public static GameAnalytics Instance;
-    
-    private string sessionStartTime;
-    private string analyticsPath;
+    private static GameAnalytics _instance;
+    public static GameAnalytics Instance => _instance;
+
+    private string filePath;
+    private DateTime sessionStartTime;
+    private int enemiesKilledThisSession;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            analyticsPath = Application.dataPath + "/Scripts/Analytics/game_stats.txt";
-        }
-        else
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
+            return;
+        }
+        
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        filePath = Path.Combine(Application.dataPath, "Scripts/Analytics/game_sessions.csv");
+        InitializeFile();
+    }
+
+    private void InitializeFile()
+    {
+        if (!File.Exists(filePath))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            File.WriteAllText(filePath, "SessionStart,PlayTime,EnemiesKilled\n");
         }
     }
 
     public void StartNewSession()
     {
-        sessionStartTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        sessionStartTime = DateTime.Now;
+        enemiesKilledThisSession = 0;
     }
 
-    public void SaveSessionData(string deathReason)
+    public void RegisterEnemyKill()
     {
-        TimeSpan playTime = DateTime.Now - DateTime.Parse(sessionStartTime);
-        
-        string data = $"{sessionStartTime},{playTime.TotalSeconds:F1},{deathReason}\n";
-        
-        File.AppendAllText(analyticsPath, data);
+        enemiesKilledThisSession++;
     }
 
-    public float GetAveragePlayTime()
+    public int GetCurrentKills()
     {
-        if (!File.Exists(analyticsPath)) return 0;
+        return enemiesKilledThisSession;
+    }
 
-        string[] allLines = File.ReadAllLines(analyticsPath);
-        if (allLines.Length == 0) return 0;
+    public void SaveSessionData(float playTime)
+    {
+        string data = $"{sessionStartTime:yyyy-MM-dd HH:mm:ss},{playTime:F1},{enemiesKilledThisSession}\n";
+        File.AppendAllText(filePath, data);
+    }
 
-        float totalTime = 0;
-        foreach (string line in allLines)
+    // Изменили название метода для согласованности
+    public (float avgTime, float avgKills) GetAverages()
+    {
+        if (!File.Exists(filePath)) return (0f, 0f);
+
+        string[] lines = File.ReadAllLines(filePath);
+        if (lines.Length <= 1) return (0f, 0f);
+
+        float totalTime = 0f;
+        int totalKills = 0;
+        int validSessions = 0;
+
+        for (int i = 1; i < lines.Length; i++)
         {
-            string[] parts = line.Split(',');
-            if (parts.Length >= 2 && float.TryParse(parts[1], out float time))
+            string[] parts = lines[i].Split(',');
+            if (parts.Length >= 3 && 
+                float.TryParse(parts[1], out float time) && 
+                int.TryParse(parts[2], out int kills))
             {
                 totalTime += time;
+                totalKills += kills;
+                validSessions++;
             }
         }
 
-        return totalTime / allLines.Length;
+        return validSessions > 0 
+            ? (totalTime / validSessions, totalKills / (float)validSessions) 
+            : (0f, 0f);
     }
 }

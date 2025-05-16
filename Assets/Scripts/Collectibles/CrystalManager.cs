@@ -15,6 +15,7 @@ public class CrystalManager : MonoBehaviour
     {
         if (Instance == null)
         {
+            GameAnalytics.Instance.StartNewSession();
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
