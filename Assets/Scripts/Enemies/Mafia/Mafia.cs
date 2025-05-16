@@ -437,6 +437,8 @@ public class Mafia : MonoBehaviour
 
     private void Death()
     {
+        GameAnalytics.Instance.RegisterEnemyKill();
+        
         spriteRenderer.color = originalColor;
         animator.SetBool("isDead", true);
         animator.SetBool("GunTaking", false);

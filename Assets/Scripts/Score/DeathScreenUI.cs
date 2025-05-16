@@ -11,6 +11,7 @@ public class DeathScreenUI : MonoBehaviour
     public GameObject deathScreen;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI killsText;
 
     private void Awake()
     {
@@ -30,29 +31,33 @@ public class DeathScreenUI : MonoBehaviour
         deathScreen.SetActive(false);
     }
 
-    public void ShowDeathScreen(float currentTime)
+    public void ShowDeathScreen(float currentTime, int currentKills)
     {
-        float averageTime = GameAnalytics.Instance.CalculateAveragePlayTime();
-        string comparison = GetComparisonText(currentTime, averageTime);
+        var (avgTime, avgKills) = GameAnalytics.Instance.GetAverages();
         
-        timeText.text = $"Ваше время: {currentTime:F1} сек\n" +
-                       $"Среднее время: {averageTime:F1} сек\n" +
-                       $"{comparison}";
+        string timeComparison = GetComparisonText(currentTime, avgTime, "время");
+        string killsComparison = GetComparisonText(currentKills, avgKills, "убийства");
+
+        timeText.text = $"Время игры: {currentTime:F1} сек ({timeComparison})\n" +
+                       $"Среднее время: {avgTime:F1} сек\n\n";
+
+        killsText.text = $"Убито врагов: {currentKills} ({killsComparison})\n" +
+                         $"Среднее количество: {avgKills:F1}";
 
         scoreText.text = "Score: " + ScoreManager.Instance.CurrentLevelScore;
         deathScreen.SetActive(true);
         Time.timeScale = 0f;
     }
 
-    private string GetComparisonText(float current, float average)
+    private string GetComparisonText(float current, float average, string statName)
     {
-        if (average == 0) return "Это ваша первая игра!";
+        if (average == 0) return $"первый раз ({statName})";
         
         float difference = current / average;
         
-        if (difference > 1.1f) return "Дольше среднего!";
-        if (difference < 0.9f) return "Быстрее среднего!";
-        return "Как в среднем!";
+        if (difference > 1.1f) return $"больше среднего ({statName})";
+        if (difference < 0.9f) return $"меньше среднего ({statName})";
+        return $"как в среднем ({statName})";
     }
 
     public void OnOKButtonClicked()

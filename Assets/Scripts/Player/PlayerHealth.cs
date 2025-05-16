@@ -151,12 +151,13 @@ public class PlayerHealth : MonoBehaviour
                 isDead = true;
                 SoundManager.Instance.PlayPlayer(PlayerSoundType.Death);
                 float playTime = Time.timeSinceLevelLoad;
+                int kills = GameAnalytics.Instance.GetCurrentKills();
 
                 // Сохраняем данные
                 GameAnalytics.Instance.SaveSessionData(playTime);
 
                 // Показываем экран смерти
-                DeathScreenUI.Instance.ShowDeathScreen(playTime);
+                DeathScreenUI.Instance.ShowDeathScreen(playTime, kills);
 
                 _deathMenu.ShowDeathMenu();
             }
