@@ -1,25 +1,13 @@
-using UnityEngine;
-using System.Collections.Generic;
+using System;
 using System.IO;
+using UnityEngine;
 
 public class GameAnalytics : MonoBehaviour
 {
-    public static GameAnalytics Instance { get; private set; }
-
-    // Данные для хранения
-    public class SessionData
-    {
-        public Dictionary<KeyCode, int> keyPresses = new Dictionary<KeyCode, int>();
-        public Dictionary<int, float> levelTimes = new Dictionary<int, float>();
-        public int mouseClicks;
-        public int sessionNumber;
-        public string deathLevel;
-    }
-
-    private SessionData currentSession;
-    private List<SessionData> allSessions = new List<SessionData>();
-    private float levelStartTime;
-    private int currentLevelIndex;
+    public static GameAnalytics Instance;
+    
+    private string sessionStartTime;
+    private string analyticsPath;
 
     private void Awake()
     {
@@ -27,7 +15,7 @@ public class GameAnalytics : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadData();
+            analyticsPath = Application.dataPath + "/Scripts/Analytics/game_stats.txt";
         }
         else
         {
@@ -35,62 +23,37 @@ public class GameAnalytics : MonoBehaviour
         }
     }
 
-    public void StartNewSession(int levelIndex)
+    public void StartNewSession()
     {
-        currentSession = new SessionData();
-        currentLevelIndex = levelIndex;
-        levelStartTime = Time.time;
+        sessionStartTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
     }
 
-    public void RecordKeyPress(KeyCode key)
+    public void SaveSessionData(string deathReason)
     {
-        if (!currentSession.keyPresses.ContainsKey(key))
-            currentSession.keyPresses[key] = 0;
+        TimeSpan playTime = DateTime.Now - DateTime.Parse(sessionStartTime);
         
-        currentSession.keyPresses[key]++;
+        string data = $"{sessionStartTime},{playTime.TotalSeconds:F1},{deathReason}\n";
+        
+        File.AppendAllText(analyticsPath, data);
     }
 
-    public void RecordMouseClick()
+    public float GetAveragePlayTime()
     {
-        currentSession.mouseClicks++;
-    }
+        if (!File.Exists(analyticsPath)) return 0;
 
-    public void CompleteLevel(int levelIndex)
-    {
-        float time = Time.time - levelStartTime;
-        currentSession.levelTimes[levelIndex] = time;
-        levelStartTime = Time.time;
-    }
+        string[] allLines = File.ReadAllLines(analyticsPath);
+        if (allLines.Length == 0) return 0;
 
-    public void EndSession(string deathLevel)
-    {
-        currentSession.deathLevel = deathLevel;
-        currentSession.sessionNumber = allSessions.Count + 1;
-        allSessions.Add(currentSession);
-        SaveData();
-    }
-
-    private void SaveData()
-    {
-        string path = Application.persistentDataPath + "/analytics.json";
-        string json = JsonUtility.ToJson(new SessionCollection(allSessions));
-        File.WriteAllText(path, json);
-    }
-
-    private void LoadData()
-    {
-        string path = Application.persistentDataPath + "/analytics.json";
-        if (File.Exists(path))
+        float totalTime = 0;
+        foreach (string line in allLines)
         {
-            string json = File.ReadAllText(path);
-            allSessions = JsonUtility.FromJson<SessionCollection>(json).sessions;
+            string[] parts = line.Split(',');
+            if (parts.Length >= 2 && float.TryParse(parts[1], out float time))
+            {
+                totalTime += time;
+            }
         }
-    }
 
-    [System.Serializable]
-    private class SessionCollection
-    {
-        public List<SessionData> sessions;
-        public SessionCollection(List<SessionData> data) => sessions = data;
+        return totalTime / allLines.Length;
     }
 }
