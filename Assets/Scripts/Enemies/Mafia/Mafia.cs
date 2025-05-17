@@ -1251,10 +1251,14 @@ public class Mafia : MonoBehaviour
         animator.SetBool("Gun", false);
         isDead = true;
         ScoreManager.Instance.AddScore(30);
-        if (isMafia)
+        if (GameAnalytics.Instance != null)
         {
-            transform.localScale = Vector3.one * 2;
+            GameAnalytics.Instance.RegisterEnemyKill();
         }
+        if (isMafia)
+            {
+                transform.localScale = Vector3.one * 2;
+            }
         rb.simulated = false;
     }
 
