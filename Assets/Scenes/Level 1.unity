@@ -8747,10 +8747,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929165533bf9a469c860e54e8c4a07e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 523302775}
+  deathPanel: {fileID: 523302775}
+  timeText: {fileID: 845264087}
+  killsText: {fileID: 2044897865}
   scoreText: {fileID: 1023799338}
-  timeText: {fileID: 0}
-  killsText: {fileID: 0}
 --- !u!1 &539783141
 GameObject:
   m_ObjectHideFlags: 0
@@ -15194,7 +15194,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 523302779}
         m_TargetAssemblyTypeName: DeathScreenUI, Assembly-CSharp
-        m_MethodName: OnOKButtonClicked
+        m_MethodName: HideDeathScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -40431,6 +40431,6 @@ SceneRoots:
   - {fileID: 1841464714}
   - {fileID: 639471356}
   - {fileID: 1841399794}
-  - {fileID: 539783145}
-  - {fileID: 909622149}
   - {fileID: 371983504}
+  - {fileID: 909622149}
+  - {fileID: 539783145}

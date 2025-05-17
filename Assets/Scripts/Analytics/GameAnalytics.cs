@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameAnalytics : MonoBehaviour
 {
     public static GameAnalytics Instance { get; private set; }
-    
+
     private string filePath;
     private DateTime sessionStartTime;
     private int enemiesKilledThisSession;
@@ -17,10 +17,10 @@ public class GameAnalytics : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        
+
         filePath = Path.Combine(Application.dataPath, "Scripts/Analytics/game_sessions.csv");
         InitializeFile();
     }
@@ -56,32 +56,49 @@ public class GameAnalytics : MonoBehaviour
         File.AppendAllText(filePath, data);
     }
 
-    public (float avgTime, float avgKills) GetAverages()
+    public float GetAveragePlayTime()
     {
-        if (!File.Exists(filePath)) return (0f, 0f);
+        if (!File.Exists(filePath)) return 0f;
 
         string[] lines = File.ReadAllLines(filePath);
-        if (lines.Length <= 1) return (0f, 0f);
+        if (lines.Length <= 1) return 0f;
 
         float totalTime = 0f;
-        int totalKills = 0;
         int validSessions = 0;
 
         for (int i = 1; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split(',');
-            if (parts.Length >= 3 && 
-                float.TryParse(parts[1], out float time) && 
-                int.TryParse(parts[2], out int kills))
+            if (parts.Length >= 2 && float.TryParse(parts[1], out float time))
             {
                 totalTime += time;
+                validSessions++;
+            }
+        }
+
+        return validSessions > 0 ? totalTime / validSessions : 0f;
+    }
+
+    public float GetAverageKills()
+    {
+        if (!File.Exists(filePath)) return 0f;
+
+        string[] lines = File.ReadAllLines(filePath);
+        if (lines.Length <= 1) return 0f;
+
+        float totalKills = 0f;
+        int validSessions = 0;
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string[] parts = lines[i].Split(',');
+            if (parts.Length >= 3 && int.TryParse(parts[2], out int kills))
+            {
                 totalKills += kills;
                 validSessions++;
             }
         }
 
-        return validSessions > 0 
-            ? (totalTime / validSessions, totalKills / (float)validSessions) 
-            : (0f, 0f);
+        return validSessions > 0 ? totalKills / validSessions : 0f;
     }
 }

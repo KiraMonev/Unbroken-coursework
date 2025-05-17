@@ -153,8 +153,11 @@ public class PlayerHealth : MonoBehaviour
                 float playTime = Time.timeSinceLevelLoad;
                 int kills = GameAnalytics.Instance.GetCurrentKills();
 
-                // Сохраняем данные
-                GameAnalytics.Instance.SaveSessionData(playTime);
+                if (GameAnalytics.Instance != null)
+                {
+                    GameAnalytics.Instance.SaveSessionData(playTime);
+
+                }
 
                 if (DeathScreenUI.Instance != null)
                 {
@@ -164,8 +167,6 @@ public class PlayerHealth : MonoBehaviour
                 {
                     Debug.LogError("DeathScreenUI instance not found!");
                 }
-                // Показываем экран смерти
-                DeathScreenUI.Instance.ShowDeathScreen(playTime, kills);
 
                 _deathMenu.ShowDeathMenu();
             }
