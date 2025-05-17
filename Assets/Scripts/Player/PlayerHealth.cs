@@ -156,6 +156,14 @@ public class PlayerHealth : MonoBehaviour
                 // Сохраняем данные
                 GameAnalytics.Instance.SaveSessionData(playTime);
 
+                if (DeathScreenUI.Instance != null)
+                {
+                    DeathScreenUI.Instance.ShowDeathScreen(playTime, kills);
+                }
+                else
+                {
+                    Debug.LogError("DeathScreenUI instance not found!");
+                }
                 // Показываем экран смерти
                 DeathScreenUI.Instance.ShowDeathScreen(playTime, kills);
 
