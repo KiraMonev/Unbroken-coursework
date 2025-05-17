@@ -15,15 +15,14 @@ public class DeathScreenUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Опционально, если экран должен сохраняться между сценами
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Destroy(gameObject); // Удаляем дубликат
-        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

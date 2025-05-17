@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class GameAnalytics : MonoBehaviour
 {
-    private static GameAnalytics _instance;
-    public static GameAnalytics Instance => _instance;
-
+    public static GameAnalytics Instance { get; private set; }
+    
     private string filePath;
     private DateTime sessionStartTime;
     private int enemiesKilledThisSession;
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         
-        _instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
         
         filePath = Path.Combine(Application.dataPath, "Scripts/Analytics/game_sessions.csv");
@@ -28,9 +27,9 @@ public class GameAnalytics : MonoBehaviour
 
     private void InitializeFile()
     {
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
         if (!File.Exists(filePath))
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             File.WriteAllText(filePath, "SessionStart,PlayTime,EnemiesKilled\n");
         }
     }
@@ -57,7 +56,6 @@ public class GameAnalytics : MonoBehaviour
         File.AppendAllText(filePath, data);
     }
 
-    // Изменили название метода для согласованности
     public (float avgTime, float avgKills) GetAverages()
     {
         if (!File.Exists(filePath)) return (0f, 0f);
