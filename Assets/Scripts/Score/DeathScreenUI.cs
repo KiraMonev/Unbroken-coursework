@@ -61,7 +61,12 @@ public class DeathScreenUI : MonoBehaviour
         if (deathPanel != null && deathPanel.activeSelf)
         {
             deathPanel.SetActive(false);
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
         }
+    }
+
+    public void OnOKButtonClicked()
+    {
+        deathPanel.SetActive(false);
     }
 }

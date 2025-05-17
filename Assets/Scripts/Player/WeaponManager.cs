@@ -160,7 +160,7 @@ public class WeaponManager : MonoBehaviour
         if (nearest != null && _currentWeaponType == WeaponType.NoWeapon)
         {
             PickUpWeapon(nearest);
-            AchievementManager.instance.Unlock("Example");
+            AchievementManager.instance.Unlock("firstWeapon");
         }
     }
 

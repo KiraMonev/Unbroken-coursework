@@ -12,15 +12,15 @@ public class Shop : MonoBehaviour
     private WeaponManager _weaponManager;
     private PlayerHealth _playerHealth;
 
-    [Header("�����")]
+    [Header("Рывок")]
     [SerializeField] private int _dashPrice = 0;
     [SerializeField] private Text _dashPriceText = null;
 
-    [Header("2� ����")]
+    [Header("2х урон")]
     [SerializeField] private int _damagePrice = 0;
     [SerializeField] private Text _damagePriceText = null;
 
-    [Header("�����")]
+    [Header("Броня")]
     [SerializeField] private int _armorPrice = 0;
     [SerializeField] private Text _armorPriceText = null;
 
@@ -34,17 +34,14 @@ public class Shop : MonoBehaviour
         _weaponManager = FindObjectOfType<WeaponManager>();
         _playerHealth = FindObjectOfType<PlayerHealth>();
 
-        Debug.Log($"Shop: playerController = {_playerController}, weaponManager = {_weaponManager}, playerHealth = {_playerHealth}");
-
-
         if (_dashPriceText != null)
-            _dashPriceText.text = $"����: {_dashPrice}";
+            _dashPriceText.text = $"Цена: {_dashPrice}";
 
         if (_damagePriceText != null)
-            _damagePriceText.text = $"����: {_damagePrice}";
+            _damagePriceText.text = $"Цена: {_damagePrice}";
 
         if (_armorPriceText != null)
-            _armorPriceText.text = $"����: {_armorPrice}";
+            _armorPriceText.text = $"Цена: {_armorPrice}";
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -56,9 +53,6 @@ public class Shop : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         _weaponManager = FindObjectOfType<WeaponManager>();
         _playerHealth = FindObjectOfType<PlayerHealth>();
-
-        Debug.Log($"Shop: playerController = {_playerController}, weaponManager = {_weaponManager}, playerHealth = {_playerHealth}");
-
     }
 
 
@@ -82,7 +76,6 @@ public class Shop : MonoBehaviour
 
     private void OpenShop()
     {
-        Debug.Log("��������� �������");
         Time.timeScale = 0f;
         gameUI.SetActive(false);
         _shopCanvas.SetActive(true);
@@ -90,7 +83,6 @@ public class Shop : MonoBehaviour
 
     public void CloseShop()
     {
-        Debug.Log("��������� �������");
         Time.timeScale = 1f;
         gameUI.SetActive(true);
         _shopCanvas.SetActive(false);
@@ -98,40 +90,36 @@ public class Shop : MonoBehaviour
 
     public void BuyDash()
     {
-        Debug.Log("�������� ������ �����");
-        if (_crystalManager.SpendCrystal(_dashPrice))
+        if (_crystalManager.SpendCrystal(_dashPrice)) { 
             _playerController.UnlockDash();
+            AchievementManager.instance.Unlock("shop");
+        }
         else
             return;
     }
 
     public void BuyDamage()
     {
-        Debug.Log("�������� ������ ������� ����");
-        if (_crystalManager.SpendCrystal(_damagePrice))
+        if (_crystalManager.SpendCrystal(_damagePrice)) { 
             _weaponManager.UnlockDoubleDamage();
+            AchievementManager.instance.Unlock("shop");
+        }
+
         else
             return;
     }
 
     public void BuyArmor()
     {
-        Debug.Log("�������� ������ ������");
-
         if (!_crystalManager.SpendCrystal(_armorPrice))
         {
-            Debug.Log("� ������������ ����������");
             return;
         }
 
         if (_playerHealth.armor < _playerHealth.maxArmor)
         {
             _playerHealth.IncreaseArmor(1);
-            Debug.Log($"� ����� ���������, ������: {_playerHealth.armor}");
-        }
-        else
-        {
-            Debug.Log("� ����� ��� ������, ������� ��������");
+            AchievementManager.instance.Unlock("shop");
         }
     }
 

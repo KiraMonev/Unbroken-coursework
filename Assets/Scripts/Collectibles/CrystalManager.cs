@@ -49,15 +49,12 @@ public class CrystalManager : MonoBehaviour
     public void AddCrystal(int amount)
     {
         crystalCount += amount;
-        Debug.Log($"Кристалов у персонажа: {crystalCount}");
         UpdateUI();
+        AchievementManager.instance.Unlock("crystal");
     }
 
     public bool SpendCrystal(int amount)
     {
-        Debug.Log($"Кристалов у персонажа: {crystalCount}. Покупка за: {amount}");
-
-
         if (crystalCount >= amount)
         {
             crystalCount -= amount;
@@ -66,7 +63,6 @@ public class CrystalManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Недостаточно кристаллов для покупки");
             return false;
         }
     }
