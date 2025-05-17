@@ -97,4 +97,15 @@ public class ScoreManager : MonoBehaviour
         // Это может быть через GameManager или SceneManager
         return 0; // Заглушка, нужно реализовать
     }
+
+    public void ResetScore()
+    {
+        TotalScore = 0;
+        CurrentLevelScore = 0;
+        Diamonds = 0;
+        for (int i = 0; i < levelsCompleted.Length; i++) {
+            levelsCompleted[i] = false;
+            levelTasks[i] = false;
+        }
+    }
 }

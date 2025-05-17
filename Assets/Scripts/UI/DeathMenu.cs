@@ -74,7 +74,10 @@ public class DeathMenu : MonoBehaviour
     public void LoadLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ScoreManager.Instance.ResetScore();
+        PlayerController.Instance.ResetPlayer();
+        AchievementManager.instance.ResetAchievementState();
+        SceneManager.LoadScene("Level 1");
     }
 
     public void MainMenu()

@@ -221,12 +221,7 @@ public class WeaponManager : MonoBehaviour
         {
             Debug.LogError($"Оружие типа {_currentWeaponType} не найдено в списке префабов.");
         }
-        _currentAmmo = 0;
-        _totalAmmo = 0;
-        _currentWeaponType = WeaponType.NoWeapon;
-        ChangeWeaponAnimator(WeaponType.NoWeapon);
-        ActivateFirePoint(WeaponType.NoWeapon);
-
+        ResetWeapon();
         Debug.Log("Сбросили оружие");
     }
 
@@ -544,4 +539,12 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    public void ResetWeapon()
+    {
+        _currentAmmo = 0;
+        _totalAmmo = 0;
+        _currentWeaponType = WeaponType.NoWeapon;
+        ChangeWeaponAnimator(WeaponType.NoWeapon);
+        ActivateFirePoint(WeaponType.NoWeapon);
+    }
 }

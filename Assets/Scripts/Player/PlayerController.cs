@@ -256,4 +256,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Activate dash");
         }
     }
+
+    public void ResetPlayer()
+    {
+        _playerHealth.SetFullHealth();
+        _playerHealth.Armor = 0;
+        canDash = false;
+        _velocity.x = 0;
+        _velocity.y = 0;
+        _weaponManager.ResetWeapon();        
+    }
 }

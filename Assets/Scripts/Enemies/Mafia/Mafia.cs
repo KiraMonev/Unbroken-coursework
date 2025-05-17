@@ -477,6 +477,8 @@ public class Mafia : MonoBehaviour
         float timer = 0f;
         while (timer < 3f)
         {
+            if (this == null) yield break;
+
             if (CanSeePlayer())
             {
                 isInvestigatingSound = false;
