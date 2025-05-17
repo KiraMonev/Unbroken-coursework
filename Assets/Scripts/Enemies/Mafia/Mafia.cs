@@ -1253,10 +1253,14 @@ public class Mafia : MonoBehaviour
         ScoreManager.Instance.AddScore(30);
         AchievementManager.instance.AddAchievementProgress("killer", 1);
         
-        if (isMafia)
+        if (GameAnalytics.Instance != null)
         {
-            transform.localScale = Vector3.one * 2;
+            GameAnalytics.Instance.RegisterEnemyKill();
         }
+        if (isMafia)
+            {
+                transform.localScale = Vector3.one * 2;
+            }
         rb.simulated = false;
     }
 

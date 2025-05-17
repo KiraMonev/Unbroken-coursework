@@ -1,67 +1,72 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System.Linq;
 
 public class DeathScreenUI : MonoBehaviour
 {
-    public static DeathScreenUI Instance { get; private set; } // Добавьте эту строку
-    [Header("Analytics UI")]
+    public static DeathScreenUI Instance;
 
-    public GameObject deathScreen;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI killsText;
+    [Header("UI References")]
+    [SerializeField] private GameObject deathPanel;
+    [SerializeField] private TMP_Text timeText;
+    [SerializeField] private TMP_Text killsText;
+    [SerializeField] private TMP_Text scoreText;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Опционально, если экран должен сохраняться между сценами
+            // Важное изменение - сразу отключаем панель
+            if (deathPanel != null)
+            {
+                deathPanel.SetActive(false);
+            }
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Удаляем дубликат
+            Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        deathScreen.SetActive(false);
     }
 
     public void ShowDeathScreen(float currentTime, int currentKills)
     {
-        var (avgTime, avgKills) = GameAnalytics.Instance.GetAverages();
-        
-        string timeComparison = GetComparisonText(currentTime, avgTime, "время");
-        string killsComparison = GetComparisonText(currentKills, avgKills, "убийства");
+        // Дополнительная проверка на null
+        if (deathPanel == null || timeText == null || killsText == null)
+        {
+            Debug.LogError("UI references not assigned in DeathScreenUI");
+            return;
+        }
 
-        timeText.text = $"Время игры: {currentTime:F1} сек ({timeComparison})\n" +
-                       $"Среднее время: {avgTime:F1} сек\n\n";
+        if (!deathPanel.activeSelf)
+        {
+            float avgTime = GameAnalytics.Instance.GetAveragePlayTime();
+            float avgKills = GameAnalytics.Instance.GetAverageKills();
 
-        killsText.text = $"Убито врагов: {currentKills} ({killsComparison})\n" +
-                         $"Среднее количество: {avgKills:F1}";
+            timeText.text = $"Время игры: {currentTime:F1} сек\n" +
+                           $"Среднее: {avgTime:F1} сек";
 
-        scoreText.text = "Score: " + ScoreManager.Instance.CurrentLevelScore;
-        deathScreen.SetActive(true);
-        Time.timeScale = 0f;
+            killsText.text = $"Убито врагов: {currentKills}\n" +
+                             $"Среднее: {avgKills:F1}";
+            
+            scoreText.text = "Score: " + ScoreManager.Instance.CurrentLevelScore;
+
+            deathPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 
-    private string GetComparisonText(float current, float average, string statName)
+    public void HideDeathScreen()
     {
-        if (average == 0) return $"первый раз ({statName})";
-        
-        float difference = current / average;
-        
-        if (difference > 1.1f) return $"больше среднего ({statName})";
-        if (difference < 0.9f) return $"меньше среднего ({statName})";
-        return $"как в среднем ({statName})";
+        if (deathPanel != null && deathPanel.activeSelf)
+        {
+            deathPanel.SetActive(false);
+            Time.timeScale = 0f;
+        }
     }
 
     public void OnOKButtonClicked()
     {
-        deathScreen.SetActive(false);
+        deathPanel.SetActive(false);
     }
 }
