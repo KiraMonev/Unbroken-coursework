@@ -1261,6 +1261,12 @@ public class Mafia : MonoBehaviour
             {
                 transform.localScale = Vector3.one * 2;
             }
+
+        ManagerLevel2 mgr2 = FindObjectOfType<ManagerLevel2>();
+        if (mgr2 != null)
+        {
+            mgr2.RegisterEnemyKilled();
+        }
         rb.simulated = false;
     }
 

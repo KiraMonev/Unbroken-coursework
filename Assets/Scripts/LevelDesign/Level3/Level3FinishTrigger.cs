@@ -5,6 +5,11 @@ public class Level3FinishTrigger : MonoBehaviour
 {
     private ManagerLevel3 mgr;
 
+    [SerializeField] private float shortTime = 50f;
+    [SerializeField] private int scoreForLongTime = 30;
+    [SerializeField] private int scoreForShortTime = 50;
+
+
     private void Awake()
     {
         Collider2D collider = GetComponent<Collider2D>();
@@ -22,6 +27,11 @@ public class Level3FinishTrigger : MonoBehaviour
             if (mgr.HasDocument)
             {
                 mgr.StopTimerAndCheck();
+
+                if (mgr.LastTotalTime <= shortTime)
+                    ScoreManager.Instance.AddScore(scoreForShortTime);
+                else
+                    ScoreManager.Instance.AddScore(scoreForLongTime);
             }
             else
             {

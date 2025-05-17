@@ -13,6 +13,8 @@ public class ManagerLevel1 : MonoBehaviour
     public bool PistolUsed => isPistolUsed;
     public int CollectedDigits => collectedDigits;
 
+    [SerializeField] private int addScoreForPistol = 50;
+
 
     public void RegisterPistolShot()
     {
@@ -34,6 +36,9 @@ public class ManagerLevel1 : MonoBehaviour
     {
         if (collectedDigits < totalDigits)
             return false;
+
+        int additionalLevelScore = isPistolUsed ? 0 : addScoreForPistol;
+        ScoreManager.Instance.AddScore(additionalLevelScore);
         return true;
     }
 

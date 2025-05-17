@@ -7,6 +7,10 @@ public class Exit : MonoBehaviour
     [SerializeField] private string nextSceneName;
     private Finish _finishManager;
 
+    [SerializeField] private float shortTime = 50f;
+    [SerializeField] private int scoreForLongTime = 30;
+    [SerializeField] private int scoreForShortTime = 50;
+
     private void Awake()
     {
         _finishManager = FindObjectOfType<Finish>();
@@ -29,6 +33,12 @@ public class Exit : MonoBehaviour
             if (mgr2.CanProceed())
             {
                 mgr2.StopTimer();
+
+                if (mgr2.LastTotalTime <= shortTime)
+                    ScoreManager.Instance.AddScore(scoreForShortTime);
+                else
+                    ScoreManager.Instance.AddScore(scoreForLongTime);
+
                 Debug.LogFormat("[Exit] Level 2 complete in {0:F2} sec.", mgr2.LastTotalTime);
                 LoadNext();
             }
