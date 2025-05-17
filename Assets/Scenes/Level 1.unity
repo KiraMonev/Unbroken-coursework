@@ -3658,6 +3658,14 @@ PrefabInstance:
       value: Police (9)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -3748,7 +3756,7 @@ Transform:
   m_GameObject: {fileID: 258632174}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.87, y: -11.34, z: 9.853435}
+  m_LocalPosition: {x: -17.58, y: -5.14, z: 9.853435}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5990,6 +5998,14 @@ PrefabInstance:
     - target: {fileID: 4435788238881555846, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
@@ -8400,6 +8416,14 @@ PrefabInstance:
       value: Police (10)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -8794,7 +8818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &539783142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9133,7 +9157,7 @@ Transform:
   m_GameObject: {fileID: 560252015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.65, y: -11.32, z: 9.853435}
+  m_LocalPosition: {x: 2.47, y: -5.97, z: 9.853435}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13635,7 +13659,7 @@ Transform:
   m_GameObject: {fileID: 809959334}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.13, y: -11.39, z: 9.853435}
+  m_LocalPosition: {x: -15.74, y: -1.13, z: 9.853435}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13947,6 +13971,14 @@ PrefabInstance:
     - target: {fileID: 3939756425189765856, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: m_Name
       value: Police (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
@@ -19867,7 +19899,7 @@ Transform:
   m_GameObject: {fileID: 1180255548}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.41, y: -11.42, z: 9.853435}
+  m_LocalPosition: {x: 4.32, y: 0.9, z: 9.853435}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21108,6 +21140,14 @@ PrefabInstance:
       value: Police (8)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -21187,6 +21227,14 @@ PrefabInstance:
     - target: {fileID: 3939756425189765856, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: m_Name
       value: Police (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
@@ -26261,6 +26309,14 @@ PrefabInstance:
       value: Police (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -28804,6 +28860,14 @@ PrefabInstance:
     - target: {fileID: 3939756425189765856, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: m_Name
       value: Police (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.data[0]
@@ -33168,6 +33232,14 @@ PrefabInstance:
       value: Police (11)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -33273,6 +33345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Level 2
+  shortTime: 50
+  scoreForLongTime: 30
+  scoreForShortTime: 50
 --- !u!61 &1778054345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34895,6 +34970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalDigits: 5
   _digitsText: {fileID: 588429143}
+  addScoreForPistol: 50
 --- !u!1 &1838438574
 GameObject:
   m_ObjectHideFlags: 0
@@ -37680,6 +37756,14 @@ PrefabInstance:
       value: Police
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -39294,6 +39378,14 @@ PrefabInstance:
       value: Police (4)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -40066,6 +40158,14 @@ PrefabInstance:
       value: Police (7)
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: shootingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
+      propertyPath: stoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: patrolWaypoints.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -40458,7 +40558,7 @@ Transform:
   m_GameObject: {fileID: 5121948014101770214}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.49, y: -11.37, z: 9.853435}
+  m_LocalPosition: {x: -6.62, y: 3.57, z: 9.853435}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40626,5 +40726,3 @@ SceneRoots:
   - {fileID: 909622149}
   - {fileID: 1520068419}
   - {fileID: 371983504}
-  - {fileID: 909622149}
-  - {fileID: 539783145}
