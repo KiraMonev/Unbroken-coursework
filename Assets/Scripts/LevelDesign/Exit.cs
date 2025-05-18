@@ -34,8 +34,10 @@ public class Exit : MonoBehaviour
             {
                 mgr2.StopTimer();
 
-                if (mgr2.LastTotalTime <= shortTime)
+                if (mgr2.LastTotalTime <= shortTime) { 
                     ScoreManager.Instance.AddScore(scoreForShortTime);
+                    AchievementManager.instance.Unlock("level2");
+                }
                 else
                     ScoreManager.Instance.AddScore(scoreForLongTime);
 

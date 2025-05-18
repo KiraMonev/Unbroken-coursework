@@ -29,7 +29,10 @@ public class Level3FinishTrigger : MonoBehaviour
                 mgr.StopTimerAndCheck();
 
                 if (mgr.LastTotalTime <= shortTime)
+                {
                     ScoreManager.Instance.AddScore(scoreForShortTime);
+                    AchievementManager.instance.Unlock("level3");
+                }               
                 else
                     ScoreManager.Instance.AddScore(scoreForLongTime);
             }
