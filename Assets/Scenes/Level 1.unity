@@ -3659,7 +3659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -6001,7 +6001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -8417,7 +8417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -13974,7 +13974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -21141,7 +21141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -21230,7 +21230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -26310,7 +26310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -28863,7 +28863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -33233,7 +33233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -37757,7 +37757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -39379,7 +39379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
@@ -40159,7 +40159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: shootingDistance
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7806856686686567454, guid: b46d8b6b46f733e4db2abea1204c7d90, type: 3}
       propertyPath: stoppingDistance
