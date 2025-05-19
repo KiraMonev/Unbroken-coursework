@@ -12350,6 +12350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Level 3
+  shortTime: 50
+  scoreForLongTime: 30
+  scoreForShortTime: 50
 --- !u!61 &532695640
 BoxCollider2D:
   m_ObjectHideFlags: 0

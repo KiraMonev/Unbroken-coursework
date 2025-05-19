@@ -3,7 +3,6 @@ using System.Collections;
 
 public class AmmoPickup : MonoBehaviour
 {
-    [Tooltip("����� � �������� �� ��������� ����� ����� �������")]
     public float respawnTime = 15f;
 
     private SpriteRenderer _spriteRenderer;
@@ -25,7 +24,7 @@ public class AmmoPickup : MonoBehaviour
             if (wm != null)
             {
                 wm.RefillAmmo();
-                // ��������� ���������� ����������� � ���������
+
                 _spriteRenderer.enabled = false;
                 _collider.enabled = false;
                 StartCoroutine(Respawn());
@@ -36,7 +35,7 @@ public class AmmoPickup : MonoBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawnTime);
-        transform.position = _initialPosition; // ���� ������� ����� ����������
+        transform.position = _initialPosition;
         _spriteRenderer.enabled = true;
         _collider.enabled = true;
     }

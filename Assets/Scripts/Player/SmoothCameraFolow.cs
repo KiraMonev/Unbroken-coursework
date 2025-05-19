@@ -3,17 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class SmoothCameraFollow : MonoBehaviour
 {
-    [Header("Target")]
+    [Header("Настройки цели")]
     [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _offset = new Vector3(0, 0, -10);
 
-    [Header("Position Smoothing")]
+    [Header("Сглаживание позиции")]
     [SerializeField] private float _smoothTime = 0.3f;
     [SerializeField] private Vector2 _clampX = new Vector2(-10f, 10f);
     [SerializeField] private Vector2 _clampY = new Vector2(-10f, 10f);
     private Vector3 _currentVelocity = Vector3.zero;
 
-    [Header("Rotation Smoothing")]
+    [Header("Сглаживание поворота")]
     [SerializeField] private float _maxRotationAngle = 10f;
     [SerializeField] private float _rotationSmoothTime = 0.2f;
     private float _currentRotation = 0f;
@@ -55,7 +55,6 @@ public class SmoothCameraFollow : MonoBehaviour
         }
     }
 
-    // LateUpdate, чтобы подстроиться под все движения и анимации игрока
     private void LateUpdate()
     {
         if (_target == null) return;
@@ -67,7 +66,6 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         Vector3 desiredPos = _target.position + _offset;
 
-        // 2) сглаженно двигаем из текущей позиции в нужную
         Vector3 smoothed = Vector3.SmoothDamp(
             transform.position,
             desiredPos,
@@ -75,7 +73,6 @@ public class SmoothCameraFollow : MonoBehaviour
             _smoothTime
         );
 
-        // 3) жёсткое ограничение по краям
         smoothed.x = Mathf.Clamp(smoothed.x, _clampX.x, _clampX.y);
         smoothed.y = Mathf.Clamp(smoothed.y, _clampY.x, _clampY.y);
 
@@ -104,7 +101,6 @@ public class SmoothCameraFollow : MonoBehaviour
         if (float.IsNaN(_currentRotation) || float.IsInfinity(_currentRotation))
             _currentRotation = 0f;
 
-        // устанавливаем только ось Z
         Vector3 e = transform.rotation.eulerAngles;
         e.z = _currentRotation;
         transform.rotation = Quaternion.Euler(e);

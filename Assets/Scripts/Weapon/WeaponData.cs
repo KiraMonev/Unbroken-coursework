@@ -6,22 +6,22 @@ public class WeaponData : ScriptableObject
     public WeaponType weaponType;
 
     [Header("Основные параметры")]
-    public float damage;            // Урон оружия
-    public float attackSpeed;       // Скорость атаки (часто = скорость анимации, но можно иначе)
-    public float attackDelay;       // Задержка между ударами/выстрелами
-    public int ammoCapacity;        // Лимит патрон (0, если melee)
+    public float damage;            
+    public float attackSpeed;       
+    public float attackDelay;       
+    public int ammoCapacity;        
 
     [Header("Параметры ближнего боя")]
-    public float meleeRadius;       // Радиус поражения (OverlapCircle)
+    public float meleeRadius;       
 
     [Header("Параметры дальнего боя")]
-    public GameObject projectilePrefab; // Префаб снаряда
-    public float projectileSpeed;       // Скорость снаряда
-    public int projectileCount = 1;     // Количество снарядов (дробовик = 3+)
-    public float spreadAngle;           // Угол разброса для дробовика (в градусах)
+    public GameObject projectilePrefab; 
+    public float projectileSpeed;       
+    public int projectileCount = 1;     
+    public float spreadAngle;           // Угол разброса для дробовика в градусах
 
     [Header("Параметры пули")]
-    public Vector3 bulletScale; // размер пули (например, (1,1,1))
+    public Vector3 bulletScale;
     public Color bulletColor;
 
 }

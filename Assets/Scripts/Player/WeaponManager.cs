@@ -30,7 +30,6 @@ public class WeaponManager : MonoBehaviour
     [Header("Данные оружия (ScriptableObject)")]
     [SerializeField] private List<WeaponData> _weaponDataList;
 
-    // Базовый контроллер для состояния "Без оружия"
     [SerializeField] private RuntimeAnimatorController _baseAnimatorController;
 
     [Header("Fire Points")]
@@ -95,7 +94,7 @@ public class WeaponManager : MonoBehaviour
     private void InitializeWeaponAnimatorDictionary()
     {
         _weaponAnimatorDict = new Dictionary<WeaponType, RuntimeAnimatorController>();
-        // Для "без оружия"
+        // Для без оружия
         _weaponAnimatorDict[WeaponType.NoWeapon] = _baseAnimatorController;
 
         foreach (var pair in _weaponAnimatorPairs)
@@ -122,7 +121,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    // Свойство для доступа к текущему запасу патронов оружия
+    // Доступ к патронам
     private int CurrentAmmo
     {
         get
@@ -198,29 +197,31 @@ public class WeaponManager : MonoBehaviour
     {
         if (_currentWeaponType == WeaponType.NoWeapon)
             return;
+        
+        StopAutoFire();
 
-        if (_weaponPrefabDict.TryGetValue(_currentWeaponType, out GameObject weaponPrefab))
+        if (!_weaponPrefabDict.TryGetValue(_currentWeaponType, out GameObject weaponPrefab))
         {
-            Vector2 throwDirection = GetThrowDirection();
-            Vector2 spawnPosition = (Vector2)transform.position + throwDirection * 1f;
+            Debug.LogError($"Оружие типа {_currentWeaponType} не найдено в списке префабов");
+            return;
+        }
 
-            GameObject droppedWeapon = Instantiate(weaponPrefab, spawnPosition, Quaternion.identity);
-            WeaponPickup pickup = droppedWeapon.GetComponent<WeaponPickup>();
-            if (pickup != null)
-            {
-                Vector2 throwVector = throwDirection + Vector2.up * 0.5f;
-                pickup.CurrentAmmo = _currentAmmo;
-                pickup.Throw(throwVector.normalized, _throwForce);
-                // Звук броска
-                SoundManager.Instance.PlayWeapon(WeaponSoundType.Throw);
-                _uiAmmo.SetTotalAmmo(0);
-                _uiAmmo.SetCurrentAmmo(0);
-            }
-        }
-        else
+        Vector2 throwDirection = GetThrowDirection();
+        Vector2 spawnPosition = (Vector2)transform.position + throwDirection * 1f;
+
+        GameObject droppedWeapon = Instantiate(weaponPrefab, spawnPosition, Quaternion.identity);
+        WeaponPickup pickup = droppedWeapon.GetComponent<WeaponPickup>();
+        if (pickup != null)
         {
-            Debug.LogError($"Оружие типа {_currentWeaponType} не найдено в списке префабов.");
+            Vector2 throwVector = throwDirection + Vector2.up * 0.5f;
+            pickup.CurrentAmmo = _currentAmmo;
+            pickup.Throw(throwVector.normalized, _throwForce);
+
+            SoundManager.Instance.PlayWeapon(WeaponSoundType.Throw);
+            _uiAmmo.SetTotalAmmo(0);
+            _uiAmmo.SetCurrentAmmo(0);
         }
+
         ResetWeapon();
         Debug.Log("Сбросили оружие");
     }
@@ -230,7 +231,7 @@ public class WeaponManager : MonoBehaviour
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mouseWorld - transform.position);
         if (dir.sqrMagnitude < 0.01f)
-            return transform.right;     //если слишком близко
+            return transform.right;     // если слишком близко
         return dir.normalized;
     }
 
@@ -242,7 +243,7 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Animator controller для оружия {weaponType} не найден.");
+            Debug.LogError($"Animator controller для оружия {weaponType} не найден");
         }
     }
 
@@ -257,18 +258,14 @@ public class WeaponManager : MonoBehaviour
 
     public WeaponType GetCurrentWeaponType() => _currentWeaponType;
 
-    // Метод для запуска автоматической стрельбы (для Uzi и Rifle)
     public void StartAutoFire()
     {
-        // Если уже запущено, выходим
         if (_autoFireCoroutine != null)
             return;
 
-        // Запускаем корутину автострельбы
         _autoFireCoroutine = StartCoroutine(AutoFireCoroutine());
     }
 
-    // Метод для остановки автоматической стрельбы
     public void StopAutoFire()
     {
         if (_autoFireCoroutine != null)
@@ -297,33 +294,29 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    // === ВАЖНО ===
-    // Этот метод вызывается из Animation Event (в анимации атаки).
+    // Вызывается из Animation Event
     public void Attack()
     {
-        // Если оружие не выбрано, выходим
         if (_currentWeaponType == WeaponType.NoWeapon)
             return;
 
-        // Достаём данные (ScriptableObject) для текущего оружия
+        // Достаём данные ScriptableObject для текущего оружия
         if (!_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
         {
             Debug.LogError($"Нет WeaponData для {_currentWeaponType}");
             return;
         }
 
-        // Для стрелкового оружия сначала проверяем наличие патронов
         if (data.ammoCapacity > 0)
         {
             int ammoCost = (_currentWeaponType == WeaponType.Shotgun) ? data.projectileCount : 1;
             if (CurrentAmmo < ammoCost)
             {
-                Debug.Log("Нет патронов!");
+                Debug.Log("Нет патронов");
                 SoundManager.Instance.PlayWeapon(WeaponSoundType.EmptyAmmo);
                 return;
             }
             CurrentAmmo -= ammoCost;
-            //Debug.Log($"Выстрел из {_currentWeaponType}. Осталось патронов: {CurrentAmmo}");
         }
 
         // Выбор логики атаки
@@ -367,11 +360,10 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    // ==== Ближний бой ====
+    /*
     // Временная функция для дебага
     private void DrawAttackRectangle(Vector2 center, Vector2 size, float angle, Color color, float duration = 0.5f)
     {
-        // Вычисляем половины размеров
         Vector2 halfSize = size * 0.5f;
 
         // Локальные координаты углов прямоугольника
@@ -380,10 +372,8 @@ public class WeaponManager : MonoBehaviour
         Vector2 bottomLeft = new Vector2(-halfSize.x, -halfSize.y);
         Vector2 bottomRight = new Vector2(halfSize.x, -halfSize.y);
 
-        // Преобразуем угол из градусов в радианы
         float rad = angle * Mathf.Deg2Rad;
 
-        // Функция поворота локальной точки вокруг (0,0)
         Vector2 Rotate(Vector2 v)
         {
             return new Vector2(
@@ -392,7 +382,7 @@ public class WeaponManager : MonoBehaviour
             );
         }
 
-        // Вычисляем мировые координаты углов, поворачивая их и прибавляя центр
+
         topRight = Rotate(topRight) + center;
         topLeft = Rotate(topLeft) + center;
         bottomLeft = Rotate(bottomLeft) + center;
@@ -404,24 +394,22 @@ public class WeaponManager : MonoBehaviour
         Debug.DrawLine(bottomLeft, bottomRight, color, duration);
         Debug.DrawLine(bottomRight, topRight, color, duration);
     }
-
+    */
     private void MeleeAttack(WeaponData data)
     {
-        // Определяем направление атаки (вперёд от игрока)
         Vector2 attackDirection = transform.right;
-        // Задаём смещение центра атаки: немного спереди от игрока
+        // Cмещение центра атаки: немного спереди от игрока
         float offsetDistance = data.meleeRadius * 1f;
         Vector2 attackCenter = (Vector2)transform.position + attackDirection * offsetDistance;
 
-        // Определяем размеры прямоугольной области атаки
+        // Размеры прямоугольной области атаки
         Vector2 boxSize = new Vector2(data.meleeRadius, data.meleeRadius * 1f);
 
-        // Рассчитываем угол поворота области (в градусах)
         float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
-        // Отрисовываем прямоугольник для отладки
-        DrawAttackRectangle(attackCenter, boxSize, angle, Color.green, 0.5f);
 
-        // Получаем все коллайдеры, попадающие в прямоугольную область
+        // Отрисовываем прямоугольник для отладки
+        //DrawAttackRectangle(attackCenter, boxSize, angle, Color.green, 0.5f);
+
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackCenter, boxSize, angle);
 
         foreach (Collider2D hit in hits)
@@ -430,7 +418,7 @@ public class WeaponManager : MonoBehaviour
                 continue;
             float multiplier = _doubleDamageUnlocked ? 2f : 1f;
             int dmg = Mathf.RoundToInt(data.damage * multiplier);
-            Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона.");
+            Debug.Log($"Melee hit: {hit.name}, наносим {data.damage} урона");
             var mafia = hit.GetComponent<Mafia>();
             if (mafia != null)
             {
@@ -440,7 +428,7 @@ public class WeaponManager : MonoBehaviour
     }
 
 
-    // ==== Одиночный выстрел (Pistol) ====
+    // Одиночный выстрел (Pistol)
     private void RangeAttackSingle(WeaponData data)
     {
 
@@ -461,75 +449,69 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    // ==== Выстрел дробовика (несколько снарядов с разбросом) ====
     private void RangeAttackShotgun(WeaponData data)
     {
-
-        if (_weaponFirePointDict.TryGetValue(_currentWeaponType, out GameObject fp) && data.projectilePrefab != null)
+        if (!_weaponFirePointDict.TryGetValue(_currentWeaponType, out GameObject fp)
+            || data.projectilePrefab == null)
         {
-            int count = data.projectileCount;
-            float spread = data.spreadAngle;
-            float startAngle = -spread / 2f;
-            float step = (count > 1) ? spread / (count - 1) : 0;
+            return;
+        }
 
-            // Базовое направление выстрела (от fire point)
-            Vector2 attackDir = fp.transform.right;
-            // Перпендикулярное направление (в плоскости XY)
-            Vector2 perpendicular = new Vector2(-attackDir.y, attackDir.x);
+        int count = data.projectileCount;
+        float spread = data.spreadAngle;
+        float startAngle = -spread / 2f;
+        float step = (count > 1) ? spread / (count - 1) : 0;
 
-            // Коэффициент смещения (подберите экспериментально)
-            float offsetFactor = 0.1f;
-            float multiplier = _doubleDamageUnlocked ? 2f : 1f;
-            for (int i = 0; i < count; i++)
+        // Базовое направление выстрела (от fire point)
+        Vector2 attackDir = fp.transform.right;
+        Vector2 perpendicular = new Vector2(-attackDir.y, attackDir.x);
+
+        // Коэффициент смещения 
+        float offsetFactor = 0.1f;
+        float multiplier = _doubleDamageUnlocked ? 2f : 1f;
+        for (int i = 0; i < count; i++)
+        {
+            float angleOffset = startAngle + step * i;
+            Quaternion rotation = fp.transform.rotation * Quaternion.Euler(0, 0, angleOffset);
+
+            // Вычисление смещения для пуль
+            float indexOffset = ((float)i - (count - 1) / 2f) * offsetFactor;
+            Vector2 spawnPos = (Vector2)fp.transform.position + perpendicular * indexOffset;
+
+            GameObject proj = Instantiate(data.projectilePrefab, spawnPos, rotation);
+            Bullet bullet = proj.GetComponent<Bullet>();
+            if (bullet != null)
             {
-                float angleOffset = startAngle + step * i;
-                Quaternion rotation = fp.transform.rotation * Quaternion.Euler(0, 0, angleOffset);
-
-                // Вычисляем смещение для этой пули:
-                // Вычисляем смещение так, чтобы пули равномерно расходились по перпендикулярной оси.
-                float indexOffset = ((float)i - (count - 1) / 2f) * offsetFactor;
-                Vector2 spawnPos = (Vector2)fp.transform.position + perpendicular * indexOffset;
-
-
-                GameObject proj = Instantiate(data.projectilePrefab, spawnPos, rotation);
-                Bullet bullet = proj.GetComponent<Bullet>();
-                if (bullet != null)
-                {
-                    bullet.SetParameters(data.damage * multiplier, data.projectileSpeed, data.bulletScale, data.bulletColor);
-                }
+                bullet.SetParameters(data.damage * multiplier, data.projectileSpeed, data.bulletScale, data.bulletColor);
             }
-            Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
         }
-        else
-        {
-            Debug.LogError($"Fire point или префаб снаряда не назначен для {_currentWeaponType}");
-        }
+        Debug.Log($"Дробовик: {count} снарядов, урон: {data.damage}. Осталось патронов: {CurrentAmmo}");
+
+
     }
 
-    // Метод, вызываемый при подборе боеприпасов (AmmoPickup).
+    // Вызывается при подборе боеприпасов (AmmoPickup)
     public void RefillAmmo()
     {
         if (_currentWeaponType == WeaponType.NoWeapon)
             return;
 
-        if (_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
+        if (!_weaponDataDict.TryGetValue(_currentWeaponType, out WeaponData data))
         {
-            // Только для огнестрела
-            if (data.ammoCapacity > 0)
-            {
-                CurrentAmmo = data.ammoCapacity;
-                _totalAmmo = data.ammoCapacity;
+            Debug.LogError($"Нет данных WeaponData для {_currentWeaponType} при попытке пополнить патроны");
+            return;
+        }
 
-                Debug.Log($"Боезапас для {_currentWeaponType} пополнен до {_currentAmmo}.");
-            }
-        }
-        else
-        {
-            Debug.LogError($"Нет данных WeaponData для {_currentWeaponType} при попытке пополнить патроны.");
-        }
+        if (data.ammoCapacity <= 0)
+            return;
+
+        CurrentAmmo = data.ammoCapacity;
+        _totalAmmo = data.ammoCapacity;
+
+        Debug.Log($"Боезапас для {_currentWeaponType} пополнен до {_currentAmmo}");
     }
 
-    //Activate damage X2 in the SHOP
+
     public void UnlockDoubleDamage()
     {
         if (_doubleDamageUnlocked == false)

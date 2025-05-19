@@ -88,6 +88,9 @@ public class Shop : MonoBehaviour
         isShopping = false;
         gameUI.SetActive(true);
         _shopCanvas.SetActive(false);
+
+        if (_weaponManager != null)
+            _weaponManager.StopAutoFire();
     }
 
     public void BuyDash()

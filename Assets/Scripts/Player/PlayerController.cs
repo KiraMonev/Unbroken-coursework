@@ -1,30 +1,29 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    // Синглтон для сохранения между сценами
     public static PlayerController Instance { get; private set; }
 
-    [Header("Movement Settings")]
+    [Header("Настройки движения")]
     [SerializeField] private float _maxSpeed = 5f;
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private float _acceleration = 50f;
     [SerializeField] private float _deceleration = 50f;
 
-    [Header("Dash Settings")]
+    [Header("Настройки рывка")]
     [SerializeField] private float dashSpeed = 15f;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
 
-    // Dash state
     private bool isDashing;
     private float dashTimeLeft;
     private float dashCooldownTimer;
     private Vector2 dashDirection;
-    [SerializeField] private bool canDash = true; // unlocked via shop =================== REPLACE ON FALSE ===================
+    [SerializeField] private bool canDash = false; 
 
     private Vector2 _moveInput;
     private Rigidbody2D _rigidbody;
@@ -43,7 +42,6 @@ public class PlayerController : MonoBehaviour
     private string _currentScene;
 
     private Shop _shop;
-    private bool isShopping = false;
 
     private void Awake()
     {
@@ -54,28 +52,21 @@ public class PlayerController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
 
-            // Инициализация ссылок
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _weaponManager = GetComponent<WeaponManager>();
             _playerHealth = GetComponent<PlayerHealth>();
             _pauseMenu = FindObjectOfType<PauseMenu>();
             _shop = FindObjectOfType<Shop>();
-            if (_shop != null)
-                isShopping = _shop.isShopping;
-            else
-                isShopping = false;
         }
         else
         {
-            // Удаляем дубликат
             Destroy(gameObject);
         }
     }
 
     private void OnDestroy()
     {
-        // Отписка от события при уничтожении
         if (Instance == this)
             SceneManager.sceneLoaded -= OnSceneLoaded;
     }
@@ -96,11 +87,6 @@ public class PlayerController : MonoBehaviour
         // Если в новой сцене PauseMenu создаётся позже, можно повторно найти его здесь:
         _pauseMenu = FindObjectOfType<PauseMenu>();
         _shop = FindObjectOfType<Shop>();
-        if (_shop != null)
-            isShopping = _shop.isShopping;
-        else
-            isShopping = false;
-
 
         _castFilter = new ContactFilter2D();
         _castFilter.useLayerMask = true;
@@ -109,7 +95,6 @@ public class PlayerController : MonoBehaviour
         _currentScene = SceneManager.GetActiveScene().name;
     }
 
-    // Перемещает игрока к объекту с тэгом "SpawnPoint"
     private void MoveToSpawnPoint()
     {
         GameObject spawn = GameObject.FindWithTag("Spawnpoint");
@@ -121,7 +106,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerHealth.isDead || isConversation) return;
 
-        // Update cooldown
         if (dashCooldownTimer > 0)
             dashCooldownTimer -= Time.fixedDeltaTime;
 
@@ -148,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
         _velocity = Vector2.MoveTowards(_velocity, targetVelocity, accelRate * delta);
 
-        // Проверяем столкновения по каждой оси и обнуляем компоненту скорости
+        // Проверка столкновений по каждой оси
         if (Mathf.Abs(_velocity.x) > 0.001f)
         {
             Vector2 dirX = new Vector2(Mathf.Sign(_velocity.x), 0f);
@@ -157,7 +141,6 @@ public class PlayerController : MonoBehaviour
                 _velocity.x = 0;
         }
 
-        // вертикаль
         if (Mathf.Abs(_velocity.y) > 0.001f)
         {
             Vector2 dirY = new Vector2(0f, Mathf.Sign(_velocity.y));
@@ -198,51 +181,57 @@ public class PlayerController : MonoBehaviour
     }
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!_playerHealth.isDead && canDash && context.performed && !isDashing && dashCooldownTimer <= 0)
-        {
-            dashDirection = _moveInput.sqrMagnitude > 0.1f ? _moveInput.normalized : Vector2.right;
-            isDashing = true;
-            dashTimeLeft = dashDuration;
-        }
+        if (_playerHealth.isDead) return;
+        if (!canDash || isDashing || dashCooldownTimer > 0f) return;
+        if (!context.performed) return;
+
+        dashDirection = _moveInput.sqrMagnitude > 0.1f ? _moveInput.normalized : Vector2.right;
+        isDashing = true;
+        dashTimeLeft = dashDuration;
+
     }
 
-    // Обработка левого клика мыши: подобрать оружие или атаковать
+    // Обработка ЛКМ. Подбор оружия или атака
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        if (!_pauseMenu.isPaused && !_playerHealth.isDead && !isConversation && _currentScene != "MainMenu" && !isShopping)
+        if (_shop != null && _shop.isShopping)
+            return;
+
+        if (_pauseMenu.isPaused || _playerHealth.isDead || isConversation || _currentScene == "MainMenu")
+            return;
+
+        if (context.started)
         {
-            if (context.started)
+            if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
             {
-                if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
+                _weaponManager.TryPickUpWeapon();
+                Debug.Log("Схвачено оружие");
+            }
+            else
+            {
+                WeaponType current = _weaponManager.GetCurrentWeaponType();
+                // Запуск автоматической стрельбы для автоматического оружия
+                if (current == WeaponType.Uzi || current == WeaponType.Rifle)
                 {
-                    _weaponManager.TryPickUpWeapon();
-                    Debug.Log("Схвачено оружие");
+                    _weaponManager.StartAutoFire();
                 }
                 else
                 {
-                    WeaponType current = _weaponManager.GetCurrentWeaponType();
-                    // Для автоматического оружия запускаем автострельбу
-                    if (current == WeaponType.Uzi || current == WeaponType.Rifle)
+                    // Одиночная атака
+                    _animator.SetTrigger("Attack");
+                    Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(transform.position, 3);
+                    foreach (Collider2D col in hitPlayer)
                     {
-                        _weaponManager.StartAutoFire();
-                    }
-                    else
-                    {
-                        // Одиночная атака
-                        _animator.SetTrigger("Attack");
-                        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(transform.position, 3);
-                        foreach (Collider2D col in hitPlayer)
+                        if (col.CompareTag("Enemy"))
                         {
-                            if (col.CompareTag("Enemy"))
-                            {
-                                Debug.Log("Hit!");
-                                StartCoroutine(col.gameObject.GetComponent<Mafia>().InvestigateSound());
-                            }
+                            Debug.Log("Hit!");
+                            StartCoroutine(col.gameObject.GetComponent<Mafia>().InvestigateSound());
                         }
                     }
                 }
             }
         }
+
         if (context.canceled)
         {
             WeaponType current = _weaponManager.GetCurrentWeaponType();
@@ -255,16 +244,20 @@ public class PlayerController : MonoBehaviour
 
     public void OnRightMouse(InputAction.CallbackContext context)
     {
-        if (!_pauseMenu.isPaused && !_playerHealth.isDead)
+        if (_shop != null && _shop.isShopping)
+            return;
+
+        if (_pauseMenu.isPaused || _playerHealth.isDead)
+            return;
+
+        if (context.performed)
         {
-            if (context.performed)
+            if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
             {
-                if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
-                {
-                    _weaponManager.DropWeapon();
-                }
+                _weaponManager.DropWeapon();
             }
         }
+
     }
 
     public Vector2 GetMoveInput()
@@ -272,7 +265,6 @@ public class PlayerController : MonoBehaviour
         return _moveInput;
     }
 
-    // Activate dash in the SHOP
     public void UnlockDash()
     {
         if (canDash == false) { 
@@ -285,8 +277,9 @@ public class PlayerController : MonoBehaviour
         _playerHealth.SetFullHealth();
         _playerHealth.Armor = 0;
         canDash = false;
-        _velocity.x = 0;
-        _velocity.y = 0;
+        _moveInput = Vector2.zero;
+        _velocity = Vector2.zero;
+        _rigidbody.velocity = Vector2.zero;
         _weaponManager.ResetWeapon();        
     }
 }
