@@ -13,7 +13,6 @@ public class Bullet : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // ����� ��� ��������� ���������� ���� (����, ��������, � ����� ����� �������� ���� � �������)
     public void SetParameters(float damage, float speed, Vector3 scale, Color color)
     {
         _damage = damage;
@@ -25,9 +24,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        // ��������������, ��� "�����" - ��� local right
         _rb.velocity = transform.right * _speed;
-        // ���������� ������ ����� 3 �������, ���� �� �� � ��� �� ����������
         Destroy(gameObject, 3f);
     }
 
@@ -35,7 +32,6 @@ public class Bullet : MonoBehaviour
     {
         var other = collision.gameObject;
 
-        // ���� ��������� ������ � ������� ��� ����
         if (other.CompareTag("Enemy"))
         {
             var mafiaEnemy = other.GetComponent<Mafia>();
@@ -43,18 +39,16 @@ public class Bullet : MonoBehaviour
             {
                 int dmg = Mathf.RoundToInt(_damage);
                 mafiaEnemy.TakeDamage(dmg);
-                Debug.Log($"Damage of bullet = {dmg}");
+                Debug.Log($"Пуля нанесла урон: {dmg}");
             }
 
             Destroy(gameObject);
             return;
         }
 
-        // ���� ������������ �� � �����, �� � ������� � ������ ���������� ����
         if (!other.CompareTag("Bullet") && !other.CompareTag("Player"))
         {
             Destroy(gameObject);
-            Debug.Log($"���� ���������� ��� ������������ � {other.name}");
         }
     }
 }

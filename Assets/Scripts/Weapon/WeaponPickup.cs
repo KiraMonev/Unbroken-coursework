@@ -43,7 +43,7 @@ public class WeaponPickup : MonoBehaviour
 
     private void Start()
     {
-        // Сохраняем стартовую позицию для FixedUpdate
+        // Стартовая позиция
         _prevPosition = _rigidBody.position;
 
         // Отключаем коллизию с игроком сразу после броска
@@ -72,7 +72,6 @@ public class WeaponPickup : MonoBehaviour
         if (_rigidBody.velocity.sqrMagnitude > 0.01f)
         {
             Vector2 currentPos = _rigidBody.position;
-            // Линией проверяем путь между старой и новой позицией
             RaycastHit2D hit = Physics2D.Linecast(
                 _prevPosition,
                 currentPos,

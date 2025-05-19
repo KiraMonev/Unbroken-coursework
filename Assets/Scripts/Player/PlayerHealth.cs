@@ -8,18 +8,18 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Health Settings")]
+    [Header("Настройки здоровья")]
     [SerializeField] private int health;
     [SerializeField] private int numOfHearts;
 
-    [Header("Armor Settings")]
-    [Tooltip("������� ���������� ������ �����")]
+    [Header("Настройки брони")]
+    [Tooltip("Начальное количество брони у игрока")]
     [SerializeField] public int armor;
-    [Tooltip("�������� �����, ������� ����� ������")]
+    [Tooltip("Максимальное количество брони")]
     [SerializeField] public int maxArmor = 1;
 
-    [Header("UI Settings")]
-    [Tooltip("Tag for heart UI images in the scene.")]
+    [Header("Настройки UI")]
+    [Tooltip("Тег для UI-изображений здоровья")]
     [SerializeField] private string heartTag = "HeartImage";
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
@@ -76,13 +76,13 @@ public class PlayerHealth : MonoBehaviour
     private void FindHearts()
     {
         var heartObjects = GameObject.FindGameObjectsWithTag(heartTag);
-        Debug.Log($"Found {heartObjects.Length} heart objects");
+        Debug.Log($"Найдено {heartObjects.Length} объектов с сердцами");
         hearts = heartObjects
             .OrderBy(go => go.name)
             .Select(go => go.GetComponent<Image>())
             .Where(img => img != null)
             .ToArray();
-        Debug.Log($"Hearts array length: {hearts.Length}");
+        Debug.Log($"Количество элементов в массиве сердечек: {hearts.Length}");
     }
 
     private void FindArmors()
@@ -126,12 +126,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (isDead) return;
+        if (isDead || damage <= 0) return;
 
         SoundManager.Instance.PlayPlayer(PlayerSoundType.TakeDamage);
         StartCoroutine(FlashRed());
 
-        // ������� ��������� �����
+        // Сначала урон уходит в броню
         int remainingDamage = damage;
         if (Armor > 0)
         {
@@ -141,7 +141,7 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
-        // ���� ����� �� ��������� �������� ����
+        // Если остался урон, он уходит в здоровье
         if (remainingDamage > 0)
         {
             Health -= remainingDamage;
@@ -165,7 +165,7 @@ public class PlayerHealth : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("DeathScreenUI instance not found!");
+                    Debug.LogError("Объект DeathScreenUI не найден!");
                 }
 
                 _deathMenu.ShowDeathMenu();
