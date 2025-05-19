@@ -77,6 +77,7 @@ public class Shop : MonoBehaviour
     private void OpenShop()
     {
         Time.timeScale = 0f;
+        isShopping = true;
         gameUI.SetActive(false);
         _shopCanvas.SetActive(true);
     }
@@ -84,6 +85,7 @@ public class Shop : MonoBehaviour
     public void CloseShop()
     {
         Time.timeScale = 1f;
+        isShopping = false;
         gameUI.SetActive(true);
         _shopCanvas.SetActive(false);
     }

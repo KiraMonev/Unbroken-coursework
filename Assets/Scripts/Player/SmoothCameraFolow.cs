@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SmoothCameraFollow : MonoBehaviour
 {
@@ -18,13 +19,39 @@ public class SmoothCameraFollow : MonoBehaviour
     private float _currentRotation = 0f;
     private float _rotationVelocity = 0f;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
+    {
+        EnsureTarget();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        EnsureTarget();
+    }
+
+    private void EnsureTarget()
     {
         if (_target == null)
         {
             var player = GameObject.FindWithTag("Player");
-            if (player != null) _target = player.transform;
-            else Debug.LogError("SmoothCameraFollow: target not set and no Player tag found.");
+            if (player != null)
+            {
+                _target = player.transform;
+            }
+            else
+            {
+                Debug.LogWarning($"[SmoothCameraFollow] Не найден объект с тегом \"Player\" в сцене \"{SceneManager.GetActiveScene().name}\"");
+            }
         }
     }
 

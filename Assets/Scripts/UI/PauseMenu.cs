@@ -34,6 +34,12 @@ public class PauseMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "MainMenu")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         FindUIElements();
         if (isPaused)
         {
@@ -99,6 +105,7 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1f;
+        gameUI.SetActive(false);
         SceneManager.LoadScene("MainMenu");
     }
 }

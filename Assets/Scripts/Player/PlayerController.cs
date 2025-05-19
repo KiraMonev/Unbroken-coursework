@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
     private PauseMenu _pauseMenu;
     public bool isConversation = false;
 
+    private string _currentScene;
+
+    private Shop _shop;
+    private bool isShopping = false;
+
     private void Awake()
     {
         // Если это первый экземпляр — сохраняем и инициализируем
@@ -55,6 +60,11 @@ public class PlayerController : MonoBehaviour
             _weaponManager = GetComponent<WeaponManager>();
             _playerHealth = GetComponent<PlayerHealth>();
             _pauseMenu = FindObjectOfType<PauseMenu>();
+            _shop = FindObjectOfType<Shop>();
+            if (_shop != null)
+                isShopping = _shop.isShopping;
+            else
+                isShopping = false;
         }
         else
         {
@@ -73,16 +83,30 @@ public class PlayerController : MonoBehaviour
     // Вызывается после загрузки каждой новой сцены
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+        if (scene.name == "MainMenu")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         MoveToSpawnPoint();
         _velocity.x = 0;
         _velocity.y = 0;
         // Если в новой сцене PauseMenu создаётся позже, можно повторно найти его здесь:
         _pauseMenu = FindObjectOfType<PauseMenu>();
+        _shop = FindObjectOfType<Shop>();
+        if (_shop != null)
+            isShopping = _shop.isShopping;
+        else
+            isShopping = false;
+
 
         _castFilter = new ContactFilter2D();
         _castFilter.useLayerMask = true;
         _castFilter.layerMask = _wallLayer;
         _castFilter.useTriggers = false;
+        _currentScene = SceneManager.GetActiveScene().name;
     }
 
     // Перемещает игрока к объекту с тэгом "SpawnPoint"
@@ -185,7 +209,7 @@ public class PlayerController : MonoBehaviour
     // Обработка левого клика мыши: подобрать оружие или атаковать
     public void OnLeftMouse(InputAction.CallbackContext context)
     {
-        if (!_pauseMenu.isPaused && !_playerHealth.isDead && !isConversation)
+        if (!_pauseMenu.isPaused && !_playerHealth.isDead && !isConversation && _currentScene != "MainMenu" && !isShopping)
         {
             if (context.started)
             {
@@ -253,7 +277,6 @@ public class PlayerController : MonoBehaviour
     {
         if (canDash == false) { 
             canDash = true;
-            Debug.Log("Activate dash");
         }
     }
 
