@@ -21,6 +21,7 @@ public enum PlayerSoundType
     TakeDamage,
     Death
 }
+
 public enum EnemiesSoundType
 {
     TakeDamage,
@@ -28,6 +29,13 @@ public enum EnemiesSoundType
     SpottedMaf,
     Hitted,
     Shot
+}
+
+public enum PickupSoundType
+{
+    PickupCrystal,
+    PickupDocument,
+    PickupAmmo
 }
 
 // Структура для звуков оружия
@@ -59,6 +67,16 @@ public struct EnemiesSoundEntry
     public float volume;
 }
 
+[System.Serializable]
+public struct PickupSoundEntry
+{
+    public PickupSoundType type;
+    public AudioClip clip;
+    [Range(0f, 1f)]
+    public float volume;
+}
+
+
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -66,21 +84,28 @@ public class SoundManager : MonoBehaviour
     [Header("Источники звука")]
     [Tooltip("Звуки при выстрелах и атаках")]
     [SerializeField] private AudioSource weaponSource;
-    [Tooltip("Звуки действий игрока (рывок, урон, смерть)")]
+    [Tooltip("Звуки действий игрока")]
     [SerializeField] private AudioSource playerSource;
     [Tooltip("Фоновая музыка")]
     [SerializeField] private AudioSource musicSource;
+    [Tooltip("Звуки врагов")]
     [SerializeField] private AudioSource enemiesSource;
+    [Tooltip("Звуки подбора предметов")]
+    [SerializeField] private AudioSource pickupSource;
+
     [Header("Список звуков для оружия")]
     [SerializeField] private List<WeaponSoundEntry> weaponSoundEntries;
     [Header("Список звуков для игрока")]
     [SerializeField] private List<PlayerSoundEntry> playerSoundEntries;
     [Header("Список звуков для врагов")]
     [SerializeField] private List<EnemiesSoundEntry> enemiesSoundEntries;
+    [Header("Список звуков для подбора предметов")]
+    [SerializeField] private List<PickupSoundEntry> pickupSoundEntries;
 
     private Dictionary<WeaponSoundType, WeaponSoundEntry> _weaponSounds;
     private Dictionary<PlayerSoundType, PlayerSoundEntry> _playerSounds;
     private Dictionary<EnemiesSoundType, EnemiesSoundEntry> _enemiesSounds;
+    private Dictionary<PickupSoundType, PickupSoundEntry> _pickupSounds;
 
     private void Awake()
     {
@@ -117,6 +142,13 @@ public class SoundManager : MonoBehaviour
             if (!_enemiesSounds.ContainsKey(entry.type))
                 _enemiesSounds[entry.type] = entry;
         }
+
+        _pickupSounds = new Dictionary<PickupSoundType, PickupSoundEntry>();
+        foreach (var entry in pickupSoundEntries)
+        {
+            if (!_pickupSounds.ContainsKey(entry.type))
+                _pickupSounds[entry.type] = entry;
+        }
     }
 
     // Воспроизвести звук, связанный с оружием
@@ -136,11 +168,20 @@ public class SoundManager : MonoBehaviour
             playerSource.PlayOneShot(entry.clip, entry.volume);
         }
     }
+
     public void PlayEnemies(EnemiesSoundType type)
     {
         if (_enemiesSounds.TryGetValue(type, out var entry) && entry.clip != null)
         {
             enemiesSource.PlayOneShot(entry.clip, entry.volume);
+        }
+    }
+
+    public void PlayPickup(PickupSoundType type)
+    {
+        if (_pickupSounds.TryGetValue(type, out var entry) && entry.clip != null)
+        {
+            pickupSource.PlayOneShot(entry.clip, entry.volume);
         }
     }
 
