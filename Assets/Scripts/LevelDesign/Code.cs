@@ -16,6 +16,7 @@ public class Code : MonoBehaviour
             if (mgr != null)
             {
                 mgr.RegisterDigitCollected();
+                SoundManager.Instance.PlayPickup(PickupSoundType.PickupDocument);
             }
             Destroy(gameObject);
         }
