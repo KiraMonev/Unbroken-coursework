@@ -51,6 +51,18 @@ public class Exit : MonoBehaviour
         }
         else if (sceneName == "Level 3")
         {
+            float playTime = Time.timeSinceLevelLoad;
+            int kills = GameAnalytics.Instance.GetCurrentKills();
+            if (GameAnalytics.Instance != null)
+            {
+                GameAnalytics.Instance.SaveSessionData(playTime);
+
+            }
+
+            if (DeathScreenUI.Instance != null)
+            {
+                DeathScreenUI.Instance.ShowDeathScreen(playTime, kills);
+            }
             _finishManager.ShowFinish();
         }
     }
