@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameAnalytics : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameAnalytics : MonoBehaviour
     private string filePath;
     private DateTime sessionStartTime;
     private int enemiesKilledThisSession;
+    private Dictionary<string, int> buttonPresses;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class GameAnalytics : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        buttonPresses = new Dictionary<string, int>();
 
         filePath = Path.Combine(Application.dataPath, "Scripts/Analytics/game_sessions.csv");
         InitializeFile();
@@ -27,10 +30,17 @@ public class GameAnalytics : MonoBehaviour
 
     private void InitializeFile()
     {
-        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+        // Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+        // if (!File.Exists(filePath))
+        // {
+        //     File.WriteAllText(filePath, "SessionStart,PlayTime,EnemiesKilled\n");
+        // }
         if (!File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "SessionStart,PlayTime,EnemiesKilled\n");
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine("SessionStartTime, PlayTime, EnemiesKilled, ButtonPresses");
+            }
         }
     }
 
@@ -38,6 +48,24 @@ public class GameAnalytics : MonoBehaviour
     {
         sessionStartTime = DateTime.Now;
         enemiesKilledThisSession = 0;
+        buttonPresses.Clear();
+    }
+
+    public void RegisterButtonPress(string buttonName)
+    {
+        if (buttonPresses.ContainsKey(buttonName))
+        {
+            buttonPresses[buttonName]++;
+        }
+        else
+        {
+            buttonPresses[buttonName] = 1;
+        }
+    }
+
+    public Dictionary<string, int> GetButtonPresses()
+    {
+        return buttonPresses;
     }
 
     public void RegisterEnemyKill()
@@ -52,7 +80,12 @@ public class GameAnalytics : MonoBehaviour
 
     public void SaveSessionData(float playTime)
     {
-        string data = $"{sessionStartTime:yyyy-MM-dd HH:mm:ss},{playTime:F1},{enemiesKilledThisSession}\n";
+        string data = $"{sessionStartTime:yyyy-MM-dd HH:mm:ss},{playTime:F1},{enemiesKilledThisSession}";
+        foreach (var entry in buttonPresses)
+        {
+            data += $", {entry.Key}:{entry.Value}";
+        }
+        data += "\n";
         File.AppendAllText(filePath, data);
     }
 

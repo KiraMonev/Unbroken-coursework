@@ -178,6 +178,22 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerHealth.isDead) return;
         _moveInput = context.ReadValue<Vector2>();
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            GameAnalytics.Instance.RegisterButtonPress("W");
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GameAnalytics.Instance.RegisterButtonPress("A");
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            GameAnalytics.Instance.RegisterButtonPress("S");
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            GameAnalytics.Instance.RegisterButtonPress("D");
+        }
     }
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -202,6 +218,8 @@ public class PlayerController : MonoBehaviour
 
         if (context.started)
         {
+            GameAnalytics.Instance.RegisterButtonPress("LeftMouseButton");
+
             if (_weaponManager.GetCurrentWeaponType() == WeaponType.NoWeapon)
             {
                 _weaponManager.TryPickUpWeapon();
@@ -252,6 +270,8 @@ public class PlayerController : MonoBehaviour
 
         if (context.performed)
         {
+            GameAnalytics.Instance.RegisterButtonPress("RightMouseButton");
+
             if (_weaponManager.GetCurrentWeaponType() != WeaponType.NoWeapon)
             {
                 _weaponManager.DropWeapon();

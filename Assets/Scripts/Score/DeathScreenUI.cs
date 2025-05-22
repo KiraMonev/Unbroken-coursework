@@ -42,14 +42,29 @@ public class DeathScreenUI : MonoBehaviour
         {
             float avgTime = GameAnalytics.Instance.GetAveragePlayTime();
             float avgKills = GameAnalytics.Instance.GetAverageKills();
+            var buttonPresses = GameAnalytics.Instance.GetButtonPresses();
+            string timeComparison = currentTime > avgTime ? "больше" : (currentTime < avgTime ? "меньше" : "равно");
+            string killsComparison = currentKills > avgKills ? "больше" : (currentKills < avgKills ? "меньше" : "равно");
+            string buttonPressText = "Нажатия кнопок:\n";
+            foreach (var entry in buttonPresses)
+            {
+                buttonPressText += $"{entry.Key}: {entry.Value}\n";
+            }
+
+            // Оценка понимания управления
+            string controlUnderstanding = buttonPresses.Count > 5 ? "Игрок понимает управление." : "Игроку нужно больше практики.";
 
             timeText.text = $"Время игры: {currentTime:F1} сек\n" +
-                           $"Среднее: {avgTime:F1} сек";
+                           $"Среднее: {avgTime:F1} сек\n" +
+                           $"{timeComparison} среднего\n";
 
             killsText.text = $"Убито врагов: {currentKills}\n" +
-                             $"Среднее: {avgKills:F1}";
-            
-            scoreText.text = "Score: " + ScoreManager.Instance.CurrentLevelScore;
+                             $"Среднее: {avgKills:F1}\n" +
+                             $"{killsComparison} среднего\n";
+
+            scoreText.text = $"Score: {ScoreManager.Instance.CurrentLevelScore}\n" +
+                            $"{buttonPressText}\n" +
+                            $"{controlUnderstanding}\n";
 
             deathPanel.SetActive(true);
             Time.timeScale = 0f;
