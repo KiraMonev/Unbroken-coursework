@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class DeathScreenUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DeathScreenUI : MonoBehaviour
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private TMP_Text killsText;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text keysText;
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class DeathScreenUI : MonoBehaviour
             float avgTime = GameAnalytics.Instance.GetAveragePlayTime();
             float avgKills = GameAnalytics.Instance.GetAverageKills();
             var buttonPresses = GameAnalytics.Instance.GetButtonPresses();
+            var averageButtonPresses = GameAnalytics.Instance.CalculateAverageButtonPresses();
             string timeComparison = currentTime > avgTime ? "больше" : (currentTime < avgTime ? "меньше" : "равно");
             string killsComparison = currentKills > avgKills ? "больше" : (currentKills < avgKills ? "меньше" : "равно");
             string buttonPressText = "Нажатия кнопок:\n";
@@ -52,7 +55,20 @@ public class DeathScreenUI : MonoBehaviour
             }
 
             // Оценка понимания управления
-            string controlUnderstanding = buttonPresses.Count > 5 ? "Игрок понимает управление." : "Игроку нужно больше практики.";
+            int closeToAverageCount = 0;
+            foreach (var entry in buttonPresses)
+            {
+                if (averageButtonPresses.ContainsKey(entry.Key))
+                {
+                    // Проверяем, приближено ли значение к среднему
+                    if (Math.Abs(entry.Value - averageButtonPresses[entry.Key]) <= 10) // Порог в 10
+                    {
+                        closeToAverageCount++;
+                    }
+                }
+            }
+
+            string controlUnderstanding = closeToAverageCount >= 3 ? "Игрок понимает управление." : "Игроку нужно больше практики.";
 
             timeText.text = $"Время игры: {currentTime:F1} сек\n" +
                            $"Среднее: {avgTime:F1} сек\n" +
@@ -62,8 +78,8 @@ public class DeathScreenUI : MonoBehaviour
                              $"Среднее: {avgKills:F1}\n" +
                              $"{killsComparison} среднего\n";
 
-            scoreText.text = $"Score: {ScoreManager.Instance.CurrentLevelScore}\n" +
-                            $"{buttonPressText}\n" +
+            scoreText.text = $"Score: {ScoreManager.Instance.CurrentLevelScore}\n";
+            keysText.text = $"{buttonPressText}\n" +
                             $"{controlUnderstanding}\n";
 
             deathPanel.SetActive(true);
