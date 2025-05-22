@@ -18,6 +18,7 @@ public class DocumentPickup : MonoBehaviour
         if (mgr != null)
         {
             mgr.OnDocumentPickedUp();
+            SoundManager.Instance.PlayPickup(PickupSoundType.PickupDocument);
         }
 
         Destroy(gameObject);

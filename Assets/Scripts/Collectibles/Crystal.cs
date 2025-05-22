@@ -10,6 +10,7 @@ public class Crystal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CrystalManager.Instance.AddCrystal(value);
+            SoundManager.Instance.PlayPickup(PickupSoundType.PickupCrystal);
             Destroy(gameObject);
         }
     }

@@ -18,18 +18,26 @@ public class AmmoPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            WeaponManager wm = other.GetComponent<WeaponManager>();
-            if (wm != null)
-            {
-                wm.RefillAmmo();
+        if (!other.CompareTag("Player"))
+            return;
 
-                _spriteRenderer.enabled = false;
-                _collider.enabled = false;
-                StartCoroutine(Respawn());
-            }
-        }
+        WeaponManager wm = other.GetComponent<WeaponManager>();
+        if (wm == null) return;
+
+        WeaponType current = wm.GetCurrentWeaponType();
+
+        wm.RefillAmmo();
+
+        if (current == WeaponType.Pistol
+            || current == WeaponType.Uzi
+            || current == WeaponType.Rifle
+            || current == WeaponType.Shotgun)
+        {
+            SoundManager.Instance.PlayPickup(PickupSoundType.PickupAmmo);
+            _spriteRenderer.enabled = false;
+            _collider.enabled = false;
+            StartCoroutine(Respawn());
+        }  
     }
 
     private IEnumerator Respawn()
