@@ -15257,7 +15257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 523302779}
         m_TargetAssemblyTypeName: DeathScreenUI, Assembly-CSharp
-        m_MethodName: HideDeathScreen
+        m_MethodName: OnOKButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

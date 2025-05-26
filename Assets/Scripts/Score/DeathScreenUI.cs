@@ -87,14 +87,14 @@ public class DeathScreenUI : MonoBehaviour
         }
     }
 
-    public void HideDeathScreen()
-    {
-        if (deathPanel != null && deathPanel.activeSelf)
-        {
-            deathPanel.SetActive(false);
-            Time.timeScale = 0f;
-        }
-    }
+    // public void HideDeathScreen()
+    // {
+    //     if (deathPanel != null && deathPanel.activeSelf)
+    //     {
+    //         deathPanel.SetActive(false);
+    //         Time.timeScale = 0f;
+    //     }
+    // }
 
     public void OnOKButtonClicked()
     {
